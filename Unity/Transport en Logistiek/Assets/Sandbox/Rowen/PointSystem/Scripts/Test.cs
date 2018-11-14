@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Systems.PointSystem
 {
@@ -11,18 +9,18 @@ namespace Systems.PointSystem
 
         private void Start()
         {
-            coins = PointSystem<int>.Data(coins, Action.Load, "coins");
-            fuel = PointSystem<float>.Data(fuel, Action.Load, "fuel");
+            coins = PointSystem<int>.Data(Action.Load, "coins", coins);
+            fuel = PointSystem<float>.Data(Action.Load, "fuel", fuel);
         }
 
         [ContextMenu("Test")]
         private void Add()
         {
             coins = PointSystem<int>.Add(coins, 1);
-            fuel = PointSystem<float>.Add(fuel, 0.421f);
+            fuel = PointSystem<float>.Add(fuel, 0.422f);
 
-            PointSystem<int>.Data(coins, Action.Save, "coins");
-            PointSystem<float>.Data(fuel, Action.Save, "fuel");
+            PointSystem<int>.Data(Action.Save, "coins", coins);
+            PointSystem<float>.Data(Action.Save, "fuel", fuel);
         }
     }
 }
