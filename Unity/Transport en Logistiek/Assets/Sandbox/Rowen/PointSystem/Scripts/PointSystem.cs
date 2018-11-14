@@ -10,73 +10,50 @@ namespace Systems.PointSystem
         Save, Load
     }
 
-    public class PointSystem<T> :MonoBehaviour
+    public class PointSystem<T> : MonoBehaviour
     {
-        public static T Data(T _variable, Action _dataAction, string _playerprefs)
+        public static T Data(Action _dataAction, string _playerpref, T _var)
         {
-            Debug.Log("Data");
-
-            object var = _variable;
+            object var = _var;
 
             if (typeof(T) == typeof(float))
             {
-                if (_dataAction == Action.Save)
-                {
-                    PlayerPrefs.SetFloat(_playerprefs, (float)var);
-                }
-                else if (_dataAction == Action.Load)
-                {
-                    var = PlayerPrefs.GetFloat(_playerprefs, 0f);
-                }
+                if (_dataAction == Action.Save) PlayerPrefs.SetFloat(_playerpref, (float)var);
+                else if (_dataAction == Action.Load) var = PlayerPrefs.GetFloat(_playerpref, 0f);
             }
             else if (typeof(T) == typeof(int))
             {
-                if (_dataAction == Action.Save)
-                {
-                    PlayerPrefs.SetInt(_playerprefs, (int)var);
-                }
-                else if (_dataAction == Action.Load)
-                {
-                    var = PlayerPrefs.GetInt(_playerprefs, 0);
-                }
+                if (_dataAction == Action.Save) PlayerPrefs.SetInt(_playerpref, (int)var);
+                else if (_dataAction == Action.Load) var = PlayerPrefs.GetInt(_playerpref, 0);
             }
             else if (typeof(T) == typeof(string))
             {
-                if (_dataAction == Action.Save)
-                {
-                    PlayerPrefs.SetString(_playerprefs, (string)var);
-                }
-                else if (_dataAction == Action.Load)
-                {
-                    var = PlayerPrefs.GetString(_playerprefs, "");
-                }
+                if (_dataAction == Action.Save) PlayerPrefs.SetString(_playerpref, (string)var);
+                else if (_dataAction == Action.Load) var = PlayerPrefs.GetString(_playerpref, "");
             }
             else
             {
-                Debug.LogError("WRONG TYPE: " + var);
+                Debug.LogError("WRONG TYPE: " + var.GetType());
             }
 
             return (T)var;
         }
 
-        public static T Add(T _variable, T _amount)
+        public static T Add(T _var, T _amount)
         {
-            object var = _variable;
-            object amount = _amount;
-
-            object points = var;
+            object points = null;
 
             if (typeof(T) == typeof(float))
             {
-                points = (float)var + (float)amount;
+                points = (float)(object)_var + (float)(object)_amount;
             }
             else if (typeof(T) == typeof(int))
             {
-                points = (int)var + (int)amount;
+                points = (int)(object)_var + (int)(object)_amount;
             }
             else
             {
-                Debug.LogError("WRONG TYPE: " + var);
+                Debug.LogError("WRONG TYPE");
             }
 
             return (T)points;
