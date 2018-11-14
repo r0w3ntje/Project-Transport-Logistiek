@@ -13,7 +13,30 @@ namespace Systems.Singleton
         public static T Instance()
         {
             instance = FindObjectOfType<T>();
+
+            if (instance == null)
+            {
+                GameObject go = new GameObject(typeof(T).Name);
+                instance = go.AddComponent<T>();
+
+                SetParent(go);
+            }
+
             return instance;
+        }
+
+        private static void SetParent(GameObject go)
+        {
+            //check current parent
+            if (go.transform.parent != null)
+                return;
+
+            //find system
+            var singletonGO = GameObject.Find("Singletons");
+            if (singletonGO == null)
+                singletonGO = new GameObject("Singletons");
+
+            go.transform.SetParent(singletonGO.transform);
         }
     }
 }
