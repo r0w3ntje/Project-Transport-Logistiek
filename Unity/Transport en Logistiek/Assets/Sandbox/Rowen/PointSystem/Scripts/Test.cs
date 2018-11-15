@@ -6,21 +6,32 @@ namespace Systems.PointSystem
     {
         public int coins;
         public float fuel;
+        public string playerName;
 
         private void Start()
         {
-            coins = PointSystem<int>.Data(Action.Load, "coins", coins);
-            fuel = PointSystem<float>.Data(Action.Load, "fuel", fuel);
+            coins = PointSystem.Data(Action.Load, "coins", coins);
+            fuel = PointSystem.Data(Action.Load, "fuel", fuel);
+            playerName = PointSystem.Data(Action.Load, "playerName", playerName);
         }
 
         [ContextMenu("Test")]
         private void Add()
         {
-            coins = PointSystem<int>.Add(coins, 1);
-            fuel = PointSystem<float>.Add(fuel, 0.422f);
+            coins = PointSystem.Add(coins, 1);
+            fuel = PointSystem.Add(fuel, 0.422f);
 
-            PointSystem<int>.Data(Action.Save, "coins", coins);
-            PointSystem<float>.Data(Action.Save, "fuel", fuel);
+            PointSystem.Data(Action.Save, "coins", coins);
+            PointSystem.Data(Action.Save, "fuel", fuel);
+            PointSystem.Data(Action.Save, "playerName", playerName);
+        }
+
+        [ContextMenu("Delete")]
+        private void Delete()
+        {
+            coins = PointSystem.Data(Action.Delete, "coins", coins);
+            fuel = PointSystem.Data(Action.Delete, "fuel", fuel);
+            playerName = PointSystem.Data(Action.Delete, "playerName", playerName);
         }
     }
 }
