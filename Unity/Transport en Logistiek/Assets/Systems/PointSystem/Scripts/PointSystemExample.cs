@@ -26,12 +26,12 @@ namespace Systems.PointSystem
             PointSystem.Data(Action.Save, "playerName", playerName);
         }
 
-        [ContextMenu("Delete")]
+        [ContextMenu("Reset")]
         private void Delete()
         {
-            coins = PointSystem.Data(Action.Delete, "coins", coins);
-            fuel = PointSystem.Data(Action.Delete, "fuel", fuel);
-            playerName = PointSystem.Data(Action.Delete, "playerName", playerName);
+            coins = PointSystem.Data(Action.Reset, "coins", coins);
+            fuel = PointSystem.Data(Action.Reset, "fuel", fuel);
+            playerName = PointSystem.Data(Action.Reset, "playerName", playerName);
         }
     }
 }
