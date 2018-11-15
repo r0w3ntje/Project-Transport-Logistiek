@@ -2,11 +2,11 @@
 
 namespace Systems.PointSystem
 {
-    public class Test : MonoBehaviour
+    public class PointSystemExample : MonoBehaviour
     {
-        public int coins;
-        public float fuel;
-        public string playerName;
+        [SerializeField] private int coins;
+        [SerializeField] private float fuel;
+        [SerializeField] private string playerName;
 
         private void Start()
         {

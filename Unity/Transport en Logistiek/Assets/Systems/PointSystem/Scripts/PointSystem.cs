@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Systems.Singleton;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Systems.PointSystem
 {
@@ -10,7 +7,7 @@ namespace Systems.PointSystem
         Save, Load, Delete
     }
 
-    public class PointSystem : MonoBehaviour
+    public class PointSystem
     {
         public static T Data<T>(Action _dataAction, string _playerpref, T _var)
         {
