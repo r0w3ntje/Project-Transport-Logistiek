@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using Systems.PointSystem;
 using Systems.Singleton;
+using UnityEngine.UI;
 
 public class PlayerData : Singleton<PlayerData>
 {
     public float euro;
-    public int trash;
+    public int goods;
 
     private void Start()
     {
@@ -16,14 +17,12 @@ public class PlayerData : Singleton<PlayerData>
     private void LoadData()
     {
         euro = PointSystem.Data(Action.Load, "euro", euro);
-        trash = PointSystem.Data(Action.Load, "trash", trash);
-
-        SaveData();
+        goods = PointSystem.Data(Action.Load, "goods", goods);
     }
 
     private void SaveData()
     {
         euro = PointSystem.Data(Action.Save, "euro", euro);
-        trash = PointSystem.Data(Action.Save, "trash", trash);
+        goods = PointSystem.Data(Action.Save, "goods", goods);
     }
 }
