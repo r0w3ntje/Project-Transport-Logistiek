@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PlayerData : Singleton<PlayerData>
 {
     public float money;
-    public int goods;
+    public int supplies;
 
     [Header("UI Elements")]
 
@@ -23,7 +23,7 @@ public class PlayerData : Singleton<PlayerData>
     private void LoadData()
     {
         PointSystem.Data(Action.Load, "money", ref money);
-        PointSystem.Data(Action.Load, "goods", ref goods);
+        PointSystem.Data(Action.Load, "supplies", ref supplies);
 
         UpdateTexts();
     }
@@ -32,7 +32,7 @@ public class PlayerData : Singleton<PlayerData>
     private void SaveData()
     {
         PointSystem.Data(Action.Save, "money", ref money);
-        PointSystem.Data(Action.Save, "goods", ref goods);
+        PointSystem.Data(Action.Save, "supplies", ref supplies);
 
         UpdateTexts();
     }
@@ -47,6 +47,6 @@ public class PlayerData : Singleton<PlayerData>
     private void UpdateTexts()
     {
         moneyText.text = "$" + money.ToString("F2");
-        goodsText.text = "Supplies: " + goods;
+        goodsText.text = "Supplies: " + supplies;
     }
 }
