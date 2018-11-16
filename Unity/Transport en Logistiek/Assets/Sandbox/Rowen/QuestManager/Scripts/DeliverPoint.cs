@@ -26,9 +26,9 @@ public class DeliverPoint : MonoBehaviour
 
     private void DeliverTrash()
     {
-        var trash = PlayerData.Instance().trash;
+        var trash = PlayerData.Instance().goods;
 
-        PlayerData.Instance().trash -= trash;
+        PlayerData.Instance().goods -= trash;
 
         PlayerData.Instance().euro += trash * pricePerTrash;
 
