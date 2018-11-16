@@ -23,6 +23,12 @@ namespace Systems.QuestSystem
         [SerializeField] private List<SuppliesPoint> suppliesPoints;
         [SerializeField] private SuppliesPoint currentSuppliesPoint;
 
+        [Space(8)]
+        [SerializeField] private GameObject missionPassed;
+        [SerializeField] private GameObject deliver;
+
+        [SerializeField] private float popupTime;
+
         private void Awake()
         {
             DeliverEvent.OnDeliver += NewSuppliesPoint;
@@ -33,16 +39,23 @@ namespace Systems.QuestSystem
             suppliesPoints = FindObjectsOfType<SuppliesPoint>().ToList();
 
             NewSuppliesPoint();
+
+            StopAllCoroutines();
+
+            missionPassed.SetActive(false);
+            deliver.SetActive(false);
         }
 
         private void NewAction()
         {
             if (currentTask == Action.Pickup)
             {
+                StartCoroutine(MissionPassed(deliver));
                 currentTask = Action.Deliver;
             }
             else if (currentTask == Action.Deliver)
             {
+                StartCoroutine(MissionPassed(missionPassed));
                 currentTask = Action.Pickup;
             }
         }
@@ -68,6 +81,13 @@ namespace Systems.QuestSystem
             currentSuppliesPoint = newSuppliesPoint;
 
             currentSuppliesPoint.isActive = true;
+        }
+
+        private IEnumerator MissionPassed(GameObject _go)
+        {
+            _go.SetActive(true);
+            yield return new WaitForSeconds(popupTime);
+            _go.SetActive(false);
         }
     }
 }
