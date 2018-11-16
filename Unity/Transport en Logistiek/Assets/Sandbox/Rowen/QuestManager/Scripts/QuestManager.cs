@@ -10,6 +10,7 @@ namespace Systems.QuestSystem
     public class QuestManager : MonoBehaviour
     {
         [SerializeField] private List<DeliverPoint> deliverPoints;
+        [SerializeField] private DeliverPoint currentDeliverPoint;
 
         private void Awake()
         {
@@ -30,7 +31,8 @@ namespace Systems.QuestSystem
                 deliverPoint.isActive = false;
             }
 
-            deliverPoints[Random.Range(0, deliverPoints.Capacity)].isActive = true;
+            currentDeliverPoint = deliverPoints[Random.Range(0, deliverPoints.Capacity)];
+            currentDeliverPoint.isActive = true;
         }
     }
 }
