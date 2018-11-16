@@ -472,10 +472,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 1744341654000136, guid: 1710e3f60a7cf4a428babf6883f51f1a, type: 2}
-      propertyPath: m_Name
-      value: Supplies Point
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1710e3f60a7cf4a428babf6883f51f1a, type: 2}
   m_IsPrefabAsset: 0

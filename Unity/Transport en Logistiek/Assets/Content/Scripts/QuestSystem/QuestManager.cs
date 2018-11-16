@@ -15,7 +15,10 @@ namespace Systems.QuestSystem
 
     public class QuestManager : Singleton<QuestManager>
     {
+        [Header("Keep the current task on DELIVER! (it toggles at start)")]
         public Action currentTask = Action.Deliver;
+
+        [Space(8)]
 
         [SerializeField] private List<SuppliesPoint> suppliesPoints;
         [SerializeField] private SuppliesPoint currentSuppliesPoint;
@@ -42,8 +45,6 @@ namespace Systems.QuestSystem
             {
                 currentTask = Action.Pickup;
             }
-
-            Debug.Log("NEWACTION");
         }
 
         [ContextMenu("New Supplies Point")]

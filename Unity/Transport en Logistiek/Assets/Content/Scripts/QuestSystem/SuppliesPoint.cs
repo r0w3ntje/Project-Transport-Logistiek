@@ -56,7 +56,6 @@ public class SuppliesPoint : MonoBehaviour
     [ContextMenu("Trigger")]
     private void Trigger()
     {
-        Debug.Log("Trigger");
         if (isActive)
         {
             switch (QuestManager.Instance().currentTask)
