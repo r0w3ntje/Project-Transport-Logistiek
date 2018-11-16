@@ -5,33 +5,41 @@ using UnityEngine;
 
 public class DeliverPoint : MonoBehaviour
 {
-    [SerializeField] private float pricePerTrash;
+    [SerializeField] private float pricePerGood;
 
-    void Start()
+    [SerializeField] private Vector2 pricePerGoodRange = new Vector2(1, 10);
+
+    public bool isActive = false;
+
+    private void Awake()
     {
-
+        DeliverEvent.OnDeliver += NewPrice;
     }
 
-    void Update()
+    private void Start()
     {
-
+        NewPrice();
     }
 
-
-
-    private void Trigger()
+    private void NewPrice()
     {
-        DeliverTrash();
+        pricePerGood = Random.Range(pricePerGoodRange.x, pricePerGoodRange.y);
     }
 
-    private void DeliverTrash()
+    [ContextMenu("Deliver")]
+    private void DeliverGoods()
     {
-        var trash = PlayerData.Instance().goods;
+        var goods = PlayerData.Instance().goods;
 
-        PlayerData.Instance().goods -= trash;
+        PlayerData.Instance().Add(ref PlayerData.Instance().goods, -goods);
+        PlayerData.Instance().Add(ref PlayerData.Instance().money, goods * pricePerGood);
 
-        PlayerData.Instance().euro += trash * pricePerTrash;
+        DeliverEvent.CallEvent();
+    }
 
-        PointSystem.Add(PlayerData.Instance().euro, trash * pricePerTrash);
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+            if (isActive) DeliverGoods();
     }
 }
