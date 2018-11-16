@@ -12,15 +12,10 @@ namespace Systems.QuestSystem
 
         private void Awake()
         {
-            CollectEvent.OnCollect += ItemCollected;
+
         }
 
         private void Start()
-        {
-
-        }
-
-        private void ItemCollected()
         {
 
         }
