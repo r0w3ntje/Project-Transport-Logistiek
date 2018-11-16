@@ -10,28 +10,28 @@ namespace Systems.PointSystem
 
         private void Start()
         {
-            coins = PointSystem.Data(Action.Load, "coins", coins);
-            fuel = PointSystem.Data(Action.Load, "fuel", fuel);
-            playerName = PointSystem.Data(Action.Load, "playerName", playerName);
+            PointSystem.Data(Action.Load, "coins", ref coins);
+            PointSystem.Data(Action.Load, "fuel", ref fuel);
+            PointSystem.Data(Action.Load, "playerName", ref playerName);
         }
 
         [ContextMenu("Test")]
         private void Add()
         {
-            coins = PointSystem.Add(coins, 1);
-            fuel = PointSystem.Add(fuel, 0.422f);
+            PointSystem.Add(ref coins, 1);
+            PointSystem.Add(ref fuel, 0.422f);
 
-            PointSystem.Data(Action.Save, "coins", coins);
-            PointSystem.Data(Action.Save, "fuel", fuel);
-            PointSystem.Data(Action.Save, "playerName", playerName);
+            PointSystem.Data(Action.Save, "coins", ref coins);
+            PointSystem.Data(Action.Save, "fuel", ref fuel);
+            PointSystem.Data(Action.Save, "playerName", ref playerName);
         }
 
         [ContextMenu("Reset")]
         private void Delete()
         {
-            coins = PointSystem.Data(Action.Reset, "coins", coins);
-            fuel = PointSystem.Data(Action.Reset, "fuel", fuel);
-            playerName = PointSystem.Data(Action.Reset, "playerName", playerName);
+            PointSystem.Data(Action.Reset, "coins", ref coins);
+            PointSystem.Data(Action.Reset, "fuel", ref fuel);
+            PointSystem.Data(Action.Reset, "playerName", ref playerName);
         }
     }
 }

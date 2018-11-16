@@ -9,7 +9,7 @@ namespace Systems.PointSystem
 
     public class PointSystem
     {
-        public static T Data<T>(Action _dataAction, string _playerpref, T _var)
+        public static void Data<T>(Action _dataAction, string _playerpref, ref T _var)
         {
             object variable = _var;
 
@@ -48,10 +48,10 @@ namespace Systems.PointSystem
                 Debug.LogError("WRONG TYPE: " + variable.GetType());
             }
 
-            return (T)variable;
+            _var = (T)variable;
         }
 
-        public static T Add<T>(T _var, T _amount)
+        public static void Add<T>(ref T _var, T _amount)
         {
             object points = null;
 
@@ -68,7 +68,7 @@ namespace Systems.PointSystem
                 Debug.LogError("WRONG TYPE");
             }
 
-            return (T)points;
+            _var = (T)points;
         }
     }
 }
