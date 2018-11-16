@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26199633ec4eacc4ea1ddf0ccc10da4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTask: 0
+  currentTask: 1
   suppliesPoints: []
   currentSuppliesPoint: {fileID: 0}
 --- !u!4 &205840289

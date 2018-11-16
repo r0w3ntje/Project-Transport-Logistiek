@@ -15,7 +15,7 @@ namespace Systems.QuestSystem
 
     public class QuestManager : Singleton<QuestManager>
     {
-        public Action currentTask;
+        public Action currentTask = Action.Deliver;
 
         [SerializeField] private List<SuppliesPoint> suppliesPoints;
         [SerializeField] private SuppliesPoint currentSuppliesPoint;
@@ -42,16 +42,30 @@ namespace Systems.QuestSystem
             {
                 currentTask = Action.Pickup;
             }
+
+            Debug.Log("NEWACTION");
         }
 
+        [ContextMenu("New Supplies Point")]
         private void NewSuppliesPoint()
         {
+            NewAction();
+
             foreach (var suppliesPoint in suppliesPoints)
             {
                 suppliesPoint.isActive = false;
             }
 
-            currentSuppliesPoint = suppliesPoints[Random.Range(0, suppliesPoints.Capacity)];
+            SuppliesPoint newSuppliesPoint;
+
+            do
+            {
+                newSuppliesPoint = suppliesPoints[Random.Range(0, suppliesPoints.Capacity)];
+            }
+            while (newSuppliesPoint == currentSuppliesPoint);
+
+            currentSuppliesPoint = newSuppliesPoint;
+
             currentSuppliesPoint.isActive = true;
         }
     }
