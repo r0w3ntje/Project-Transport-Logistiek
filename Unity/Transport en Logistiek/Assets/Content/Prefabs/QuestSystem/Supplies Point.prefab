@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114881101807588826}
   - component: {fileID: 65196683950028778}
   m_Layer: 0
-  m_Name: Deliver Point
+  m_Name: Supplies Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,6 +64,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a1fcc6361043349b76f708c0256b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pricePerGood: 0
-  pricePerGoodRange: {x: 1, y: 10}
+  pricePerSupply: 0
+  PricePerSupplyRange: {x: 25, y: 100}
+  suppliesAmount: 0
+  suppliesAmountRange: {x: 1, y: 10}
   isActive: 0
