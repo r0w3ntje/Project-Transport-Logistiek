@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Systems.PointSystem;
+using Systems.QuestSystem;
 using UnityEngine;
 
 public class SuppliesPoint : MonoBehaviour
@@ -55,6 +56,20 @@ public class SuppliesPoint : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-            if (isActive) DeliverSupplies();
+        {
+            if (isActive)
+            {
+                switch (QuestManager.Instance().currentTask)
+                {
+                    case Systems.QuestSystem.Action.Pickup:
+                        PickupSupplies();
+                        break;
+
+                    case Systems.QuestSystem.Action.Deliver:
+                        DeliverSupplies();
+                        break;
+                }
+            }
+        }
     }
 }
