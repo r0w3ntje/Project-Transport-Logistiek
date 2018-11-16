@@ -41,6 +41,8 @@ public class PlayerData : Singleton<PlayerData>
     {
         PointSystem.Add(ref _var, _amount);
 
+        SaveData();
+
         UpdateTexts();
     }
 
