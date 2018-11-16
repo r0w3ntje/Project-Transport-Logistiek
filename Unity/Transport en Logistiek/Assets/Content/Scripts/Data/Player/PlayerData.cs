@@ -47,6 +47,6 @@ public class PlayerData : Singleton<PlayerData>
     private void UpdateTexts()
     {
         moneyText.text = "$" + money.ToString("F2");
-        goodsText.text = goods.ToString();
+        goodsText.text = "Supplies: " + goods;
     }
 }
