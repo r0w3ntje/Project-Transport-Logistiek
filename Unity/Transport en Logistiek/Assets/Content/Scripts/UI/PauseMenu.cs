@@ -1,21 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : UserInterfaceItem
 {
+    [Header("Pause Menu")]
+    [SerializeField] private bool isPaused;
 
-    public static bool GameIsPaused = false;
-
-    public GameObject pauseMenuUI;
-
-
-    void Update()
+    protected override void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GameIsPaused)
+            if (isPaused)
             {
                 Resume();
             }
@@ -28,22 +24,13 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
-        GameIsPaused = false;
+        isPaused = false;
     }
 
-    public void Pause()
+    private void Pause()
     {
-        pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
-        GameIsPaused = true;
-    }
-
-
-    public void ToMenu()
-    {
-        SceneManager.LoadScene("Title");
+        isPaused = true;
     }
 }
-
