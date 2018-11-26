@@ -156,7 +156,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitType: 1
-  rb: {fileID: 54614918248780446}
 --- !u!135 &135942733927397076
 SphereCollider:
   m_ObjectHideFlags: 1

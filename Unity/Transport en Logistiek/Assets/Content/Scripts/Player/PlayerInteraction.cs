@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerInteraction : Singleton<PlayerInteraction>
 {
-    [SerializeField] private KeyCode interactionKeyBind;
+    public KeyCode interactionKeyBind;
     [SerializeField] private KeyCode dropKeybind;
 
     [Space(8)]
@@ -62,6 +62,17 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
         unit = null;
 
         isHolding = false;
+    }
+
+    public void DestroyUnit()
+    {
+        isHolding = false;
+
+        Destroy(unit);
+
+        unit = null;
+
+        Debug.Log("Destroy Unit");
     }
 
     private void OnTriggerStay(Collider other)
