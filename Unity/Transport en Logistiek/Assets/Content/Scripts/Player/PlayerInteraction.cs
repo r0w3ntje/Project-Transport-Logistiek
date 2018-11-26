@@ -14,7 +14,7 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
 
     [Space(8)]
 
-    [SerializeField] private GameObject unit;
+    public GameObject unit;
 
 
     [SerializeField] private Transform unitParent;

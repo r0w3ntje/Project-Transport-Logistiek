@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    [SerializeField] private UnitEnum UnitType;
+    public UnitEnum UnitType;
 }
