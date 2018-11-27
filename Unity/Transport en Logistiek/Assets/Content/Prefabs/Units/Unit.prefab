@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1096486860187912}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 1.473, z: -1.37}
+  m_LocalPosition: {x: -0, y: 1.473, z: -1.562}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 4281202143402290}
@@ -156,6 +156,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitType: 1
+  iron: {fileID: 2100000, guid: feb1d8e7930690c4c9327dc0ce2cd4b5, type: 2}
+  food: {fileID: 2100000, guid: 87d111c1d450ec940a6da08004dab01c, type: 2}
 --- !u!135 &135942733927397076
 SphereCollider:
   m_ObjectHideFlags: 1
