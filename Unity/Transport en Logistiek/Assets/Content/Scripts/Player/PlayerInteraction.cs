@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Systems.Singleton;
 using UnityEngine;
 
@@ -14,6 +15,10 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
 
     [Space(8)]
 
+    [SerializeField] private float unitPickupDistance = 1f;
+
+    [Space(8)]
+
     public GameObject unit;
 
 
@@ -25,18 +30,34 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
         {
             DropUnit();
         }
+
+        Interact();
     }
 
-    private void Interact(GameObject _obj)
+    private void Interact()
     {
         if (Input.GetKeyDown(interactionKeyBind))
         {
-            switch (_obj.tag)
+            Debug.Log("Input");
+
+            List<Unit> units = FindObjectsOfType<Unit>().ToList();
+
+            Debug.Log(units.Count);
+
+            if (units == null) return;
+
+            GameObject unit = null;
+
+            for (int i = 0; i < units.Count; i++)
             {
-                case "Unit":
-                    PickupUnit(_obj);
-                    break;
+                if (Vector3.Distance(transform.position, units[i].transform.position) <= unitPickupDistance)
+                {
+                    unit = units[i].gameObject;
+                }
             }
+
+            if (unit != null)
+                PickupUnit(unit);
         }
     }
 
@@ -75,8 +96,8 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
         Debug.Log("Destroy Unit");
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        Interact(other.gameObject);
-    }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    Interact(other.gameObject);
+    //}
 }
