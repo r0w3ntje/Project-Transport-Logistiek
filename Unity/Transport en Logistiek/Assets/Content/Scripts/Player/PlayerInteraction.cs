@@ -19,8 +19,8 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
 
     [Space(8)]
 
-    public Unit unit;
-    public Machine machine;
+    private Unit unit;
+    private Machine machine;
 
     private void Start()
     {

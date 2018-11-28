@@ -15,11 +15,11 @@ public class Machine : MonoBehaviour
     [SerializeField] private Transform unitSpawnPoint;
 
     public Transform interactionObject;
-    public Text interactionText;
+    //public Text interactionText;
 
     private void Start()
     {
-        interactionText.enabled = false;
+        //interactionText.enabled = false;
     }
 
     public void Produce()
