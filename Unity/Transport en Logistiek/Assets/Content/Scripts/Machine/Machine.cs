@@ -1,38 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Machine : MonoBehaviour
 {
     [Header("Some need an unit to start with (can be none)")]
-    [SerializeField] private UnitEnum neededUnit;
-    [SerializeField] private UnitEnum producedUnit;
+    public UnitEnum neededUnit;
+    public UnitEnum producedUnit;
 
     [SerializeField] private float producingTime;
 
     [SerializeField] private GameObject unitPrefab;
     [SerializeField] private Transform unitSpawnPoint;
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            if (Input.GetKeyDown(other.GetComponent<PlayerInteraction>().interactionKeyBind))
-            {
-                var pi = other.GetComponent<PlayerInteraction>();
+    public Transform interactionObject;
+    //public Text interactionText;
 
-                if (neededUnit == UnitEnum.None || (pi.unit != null && neededUnit == pi.unit.GetComponent<Unit>().UnitType))
-                {
-                    pi.DestroyUnit();
-                    StartCoroutine(Producing());
-                }
-            }
-        }
+    //private void Start()
+    //{
+    //interactionText.enabled = false;
+    //}
+
+    public void Produce()
+    {
+        if (producedUnit != UnitEnum.None)
+            StartCoroutine(Producing());
     }
 
     public IEnumerator Producing()
     {
-        Debug.Log("Producing");
+        Debug.Log("Producing: " + producedUnit);
         yield return new WaitForSeconds(producingTime);
         SpawnUnit();
     }
