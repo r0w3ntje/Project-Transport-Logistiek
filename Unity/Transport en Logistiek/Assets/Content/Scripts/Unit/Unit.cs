@@ -10,10 +10,21 @@ public class Unit : MonoBehaviour
 
     private Renderer meshRenderer;
 
+    // Unit following
+    public Transform followTrans;
+    public bool follow;
+
     private void Start()
     {
+        followTrans = FindObjectOfType<PlayerInteraction>().transform;
+
         meshRenderer = GetComponent<MeshRenderer>();
 
+        ChangeMaterial();
+    }
+
+    private void ChangeMaterial()
+    {
         var mats = meshRenderer.materials;
 
         switch (UnitType)
@@ -28,5 +39,13 @@ public class Unit : MonoBehaviour
         }
 
         meshRenderer.materials = mats;
+    }
+
+    private void FixedUpdate()
+    {
+        if (follow)
+        {
+            transform.position = new Vector3(followTrans.position.x, followTrans.position.y + 2f, followTrans.position.z);
+        }
     }
 }
