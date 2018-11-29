@@ -29,6 +29,9 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
 
     private void Update()
     {
+        if (unit == null)
+            isHolding = false;
+
         if (Input.GetKeyDown(dropKeybind) && unit != null)
         {
             DropUnit();
