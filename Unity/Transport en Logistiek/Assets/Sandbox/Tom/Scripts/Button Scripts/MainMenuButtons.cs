@@ -1,29 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuButtons : MonoBehaviour
 {
-    public GameObject mainMenu, optiesMenu;
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("BlockOutMaan");
+        }
+    }
 
     public void StartGame()
     {
-        Debug.Log("Start");
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("BlockOutMaan");
     }
-
-    //public void OptiesMenu()
-    //{
-    //    mainMenu.SetActive(false);
-    //    optiesMenu.SetActive(true);
-    //    Debug.Log("Opties");
-    //}
 
     public void StopGame()
     {
-        Debug.Log("Stop");
         Application.Quit();
     }
 }
