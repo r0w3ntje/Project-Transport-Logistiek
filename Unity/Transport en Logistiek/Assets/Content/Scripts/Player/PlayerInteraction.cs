@@ -15,7 +15,7 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
 
     [Space(8)]
 
-    [SerializeField] private float interactDistance = 3f;
+    public float interactDistance = 3f;
 
     [Space(8)]
 
@@ -29,45 +29,30 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
 
     private void Update()
     {
-        if (Input.GetKeyDown(dropKeybind))
+        if (Input.GetKeyDown(dropKeybind) && unit != null)
         {
             DropUnit();
         }
 
-        if (isHolding || (machine != null && machine.neededUnit == UnitEnum.None) || machine == null)
-            UseMachine();
-        //else
-
-        if (!isHolding)
-            PickupUnit();
-
-        // Indicator text
-        if (machine != null)
-        {
-            if (Vector3.Distance(transform.position, machine.interactionObject.transform.position) <= interactDistance)
-            {
-                if (unit != null)
-                    machine.interactionText.enabled = isHolding && unit.UnitType == machine.neededUnit;
-                else
-                    machine.interactionText.enabled = !isHolding;
-            }
-            else machine.interactionText.enabled = false;
-        }
+        UseMachine();
+        PickupUnit();
     }
 
     private void UseMachine()
     {
         List<Machine> machines = FindObjectsOfType<Machine>().ToList();
 
+        if (machines == null) return;
+
         float shortestDistance = Vector3.Distance(transform.position, machines[0].interactionObject.transform.position);
-        if (machine != null) machine.interactionText.enabled = false;
+
         machine = null;
 
         for (int i = 0; i < machines.Count; i++)
         {
             float distance = Vector3.Distance(transform.position, machines[i].interactionObject.transform.position);
 
-            if (distance <= shortestDistance && distance <= interactDistance)
+            if (distance <= shortestDistance)
             {
                 shortestDistance = distance;
                 machine = machines[i];
@@ -76,14 +61,19 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
 
         if (machine == null) return;
 
-        if ((Input.GetKeyDown(interactionKeyBind) && shortestDistance <= interactDistance) || (Input.GetKeyDown(interactionKeyBind) && machine.neededUnit == UnitEnum.None))
+        if (isHolding || machine.neededUnit == UnitEnum.None)
         {
-            if (machine.neededUnit == UnitEnum.None || (unit != null && machine.neededUnit == unit.UnitType))
+            if ((Input.GetKeyDown(interactionKeyBind) && shortestDistance <= interactDistance))
             {
-                machine.Produce();
+                if (machine.neededUnit == UnitEnum.None || (unit != null && machine.neededUnit == unit.UnitType))
+                {
+                    machine.Produce();
 
-                if (machine.neededUnit != UnitEnum.None)
-                    DestroyUnit();
+                    if (unit != null && machine.neededUnit != UnitEnum.None)
+                    {
+                        DestroyUnit();
+                    }
+                }
             }
         }
     }
@@ -92,7 +82,15 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
     {
         if (Input.GetKeyDown(interactionKeyBind) && !isHolding)
         {
-            unit = GetUnit();
+            if (machine != null)
+            {
+                if (machine.producing != null)
+                {
+                    return;
+                }
+            }
+
+            GetUnit();
 
             if (unit != null)
             {
@@ -105,9 +103,11 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
         }
     }
 
-    private Unit GetUnit()
+    private void GetUnit()
     {
         List<Unit> units = FindObjectsOfType<Unit>().ToList();
+
+        if (units.Count == 0) return;
 
         float shortestDistance = Vector3.Distance(transform.position, units[0].transform.position);
         unit = null;
@@ -122,8 +122,6 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
                 unit = units[i];
             }
         }
-
-        return unit;
     }
 
     private void DropUnit()
@@ -148,10 +146,9 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
         isHolding = false;
 
         Destroy(unit.gameObject);
+
         unit = null;
 
-        machine.interactionText.enabled = false;
         machine = null;
-
     }
 }

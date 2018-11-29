@@ -17,15 +17,51 @@ public class Machine : MonoBehaviour
     public Transform interactionObject;
     public Text interactionText;
 
+    public Coroutine producing;
+
+    private PlayerInteraction pi;
+
     private void Start()
     {
-        interactionText.enabled = false;
+        pi = FindObjectOfType<PlayerInteraction>();
+    }
+
+    private void FixedUpdate()
+    {
+        ShowText();
+    }
+
+    private void ShowText()
+    {
+        if (Vector3.Distance(pi.transform.position, interactionObject.position) <= pi.interactDistance)
+        {
+            if (pi.unit == null && neededUnit != UnitEnum.None)
+            {
+                interactionText.enabled = false;
+            }
+            else if (neededUnit == UnitEnum.None)
+            {
+                interactionText.enabled = true;
+            }
+            else if (pi.unit != null && pi.unit.UnitType == neededUnit)
+            {
+                interactionText.enabled = true;
+            }
+            else interactionText.enabled = false;
+        }
+        else
+        {
+            interactionText.enabled = false;
+        }
     }
 
     public void Produce()
     {
         if (producedUnit != UnitEnum.None)
-            StartCoroutine(Producing());
+        {
+            if (producing == null)
+                producing = StartCoroutine(Producing());
+        }
     }
 
     public IEnumerator Producing()
@@ -33,6 +69,7 @@ public class Machine : MonoBehaviour
         Debug.Log("Producing: " + producedUnit);
         yield return new WaitForSeconds(producingTime);
         SpawnUnit();
+        producing = null;
     }
 
     private void SpawnUnit()
