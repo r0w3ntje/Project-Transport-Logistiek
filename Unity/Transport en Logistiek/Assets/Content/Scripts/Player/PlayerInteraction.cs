@@ -34,8 +34,8 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
             DropUnit();
         }
 
-        if (isHolding) UseMachine();
-        else PickupUnit();
+        UseMachine();
+        PickupUnit();
     }
 
     private void UseMachine()
@@ -43,7 +43,6 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
         List<Machine> machines = FindObjectsOfType<Machine>().ToList();
 
         if (machines == null) return;
-        if (unit == null) return;
 
         float shortestDistance = Vector3.Distance(transform.position, machines[0].interactionObject.transform.position);
 
@@ -62,15 +61,18 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
 
         if (machine == null) return;
 
-        if ((Input.GetKeyDown(interactionKeyBind) && shortestDistance <= interactDistance) || (Input.GetKeyDown(interactionKeyBind) && machine.neededUnit == UnitEnum.None))
+        if (isHolding || machine.neededUnit == UnitEnum.None)
         {
-            if (machine.neededUnit == UnitEnum.None || (unit != null && machine.neededUnit == unit.UnitType))
+            if ((Input.GetKeyDown(interactionKeyBind) && shortestDistance <= interactDistance))
             {
-                machine.Produce();
-
-                if (unit != null)
+                if (machine.neededUnit == UnitEnum.None || (unit != null && machine.neededUnit == unit.UnitType))
                 {
-                    DestroyUnit();
+                    machine.Produce();
+
+                    if (unit != null && machine.neededUnit != UnitEnum.None)
+                    {
+                        DestroyUnit();
+                    }
                 }
             }
         }
@@ -104,8 +106,6 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
     private void GetUnit()
     {
         List<Unit> units = FindObjectsOfType<Unit>().ToList();
-
-        Debug.Log("List " + units + ", " + units.Count);
 
         if (units.Count == 0) return;
 
