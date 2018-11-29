@@ -35,11 +35,15 @@ public class Machine : MonoBehaviour
     {
         if (Vector3.Distance(pi.transform.position, interactionObject.position) <= pi.interactDistance)
         {
-            if (pi.unit == null)
+            if (pi.unit == null && neededUnit != UnitEnum.None)
             {
                 interactionText.enabled = false;
             }
-            else if (pi.unit.UnitType == neededUnit || (pi.unit == null && neededUnit == UnitEnum.None))
+            else if (neededUnit == UnitEnum.None)
+            {
+                interactionText.enabled = true;
+            }
+            else if (pi.unit != null && pi.unit.UnitType == neededUnit)
             {
                 interactionText.enabled = true;
             }
