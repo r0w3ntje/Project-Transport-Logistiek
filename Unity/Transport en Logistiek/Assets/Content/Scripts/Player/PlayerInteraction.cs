@@ -29,6 +29,9 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
 
     private void Update()
     {
+        if (unit == null)
+            isHolding = false;
+
         if (Input.GetKeyDown(dropKeybind) && unit != null)
         {
             DropUnit();
@@ -61,7 +64,7 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
 
         if (machine == null) return;
 
-        if (isHolding || machine.neededUnit == UnitEnum.None)
+        if (isHolding || (isHolding || machine.neededUnit == UnitEnum.None) || (isHolding && machine.neededUnit == UnitEnum.None))
         {
             if ((Input.GetKeyDown(interactionKeyBind) && shortestDistance <= interactDistance))
             {
@@ -82,13 +85,13 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
     {
         if (Input.GetKeyDown(interactionKeyBind) && !isHolding)
         {
-            if (machine != null)
-            {
-                if (machine.producing != null)
-                {
-                    return;
-                }
-            }
+            //if (machine != null)
+            //{
+            //    if (machine.producing != null)
+            //    {
+            //        return;
+            //    }
+            //}
 
             GetUnit();
 

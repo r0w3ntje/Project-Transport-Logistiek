@@ -231,7 +231,7 @@ MonoBehaviour:
   interactionKeyBind: 101
   dropKeybind: 113
   isHolding: 0
-  interactDistance: 3
+  interactDistance: 2
   unit: {fileID: 0}
   machine: {fileID: 0}
 --- !u!114 &245907053
@@ -278,7 +278,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4009925928605708, guid: 1f9e1ee1a9e85814b8252084f2394420, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4009925928605708, guid: 1f9e1ee1a9e85814b8252084f2394420, type: 2}
       propertyPath: m_LocalRotation.y
@@ -286,11 +286,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4009925928605708, guid: 1f9e1ee1a9e85814b8252084f2394420, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4009925928605708, guid: 1f9e1ee1a9e85814b8252084f2394420, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4009925928605708, guid: 1f9e1ee1a9e85814b8252084f2394420, type: 2}
       propertyPath: m_RootOrder
@@ -422,7 +422,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 129653fcd01537f499b73a058511cd98, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
