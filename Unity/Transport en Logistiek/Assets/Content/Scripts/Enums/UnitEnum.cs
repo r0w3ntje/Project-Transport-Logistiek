@@ -1,6 +1,6 @@
 ﻿public enum UnitEnum
 {
-    None = 0,
-    Iron = 1,
-    Food = 2
+    Geen = 0,
+    Ijzer = 1,
+    Voedsel = 2
 }

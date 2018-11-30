@@ -64,15 +64,15 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
 
         if (machine == null) return;
 
-        if (isHolding || (isHolding || machine.neededUnit == UnitEnum.None) || (isHolding && machine.neededUnit == UnitEnum.None))
+        if (isHolding || (isHolding || machine.neededUnit == UnitEnum.Geen) || (isHolding && machine.neededUnit == UnitEnum.Geen))
         {
             if ((Input.GetKeyDown(interactionKeyBind) && shortestDistance <= interactDistance))
             {
-                if (machine.neededUnit == UnitEnum.None || (unit != null && machine.neededUnit == unit.UnitType))
+                if (machine.neededUnit == UnitEnum.Geen || (unit != null && machine.neededUnit == unit.UnitType))
                 {
                     machine.Produce();
 
-                    if (unit != null && machine.neededUnit != UnitEnum.None)
+                    if (unit != null && machine.neededUnit != UnitEnum.Geen)
                     {
                         DestroyUnit();
                     }
@@ -85,14 +85,6 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
     {
         if (Input.GetKeyDown(interactionKeyBind) && !isHolding)
         {
-            //if (machine != null)
-            //{
-            //    if (machine.producing != null)
-            //    {
-            //        return;
-            //    }
-            //}
-
             GetUnit();
 
             if (unit != null)

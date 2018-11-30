@@ -29,11 +29,11 @@ public class Unit : MonoBehaviour
 
         switch (UnitType)
         {
-            case UnitEnum.Iron:
+            case UnitEnum.Ijzer:
                 mats[0] = iron;
                 break;
 
-            case UnitEnum.Food:
+            case UnitEnum.Voedsel:
                 mats[0] = food;
                 break;
         }
