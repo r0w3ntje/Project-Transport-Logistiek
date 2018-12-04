@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Systems.PointSystem;
+using Systems.Singleton;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(MachineUpgrade))]
 public class Machine : MonoBehaviour
 {
     [Header("Some need an unit to start with (can be none)")]
@@ -21,9 +24,13 @@ public class Machine : MonoBehaviour
 
     private PlayerInteraction pi;
 
+    [SerializeField] private MachineUpgrade machineUpgrade;
+
     private void Start()
     {
         pi = FindObjectOfType<PlayerInteraction>();
+        machineUpgrade = GetComponent<MachineUpgrade>();
+
         SetText();
     }
 
@@ -36,19 +43,6 @@ public class Machine : MonoBehaviour
     {
         if (Vector3.Distance(pi.transform.position, interactionObject.position) <= pi.interactDistance)
         {
-            //if (pi.unit == null && neededUnit != UnitEnum.Geen)
-            //{
-            //    interactionText.enabled = false;
-            //}
-            //if (neededUnit == UnitEnum.Geen)
-            //{
-            //    interactionText.enabled = true;
-            //}
-            //else if (pi.unit != null && pi.unit.UnitType == neededUnit)
-            //{
-            //    interactionText.enabled = true;
-            //}
-            //else interactionText.enabled = false;
             interactionText.enabled = true;
         }
         else
@@ -68,10 +62,17 @@ public class Machine : MonoBehaviour
 
     public IEnumerator Producing()
     {
-        Debug.Log("Producing: " + producedUnit);
+        Debug.Log("Producing: " + producedUnit + ", in " + machineUpgrade.machineTimer + " seconds");
+
         interactionText.text = producedUnit + " is aan het produceren...";
-        yield return new WaitForSeconds(producingTime);
+
+        yield return new WaitForSeconds(machineUpgrade.machineTimer);
+
+        AddUnits();
         SpawnUnit();
+        machineUpgrade.GainExperience();
+        SetText();
+
         producing = null;
     }
 
@@ -82,7 +83,22 @@ public class Machine : MonoBehaviour
         a.transform.SetParent(null);
         a.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         a.GetComponent<Unit>().UnitType = producedUnit;
-        SetText();
+    }
+
+    private void AddUnits()
+    {
+        switch (producedUnit)
+        {
+            case UnitEnum.Ijzer:
+                PointSystem.Add(ref PlayerData.Instance().iron, 1);
+                break;
+            case UnitEnum.Voedsel:
+                PointSystem.Add(ref PlayerData.Instance().food, 1);
+                break;
+            case UnitEnum.Erts:
+                PointSystem.Add(ref PlayerData.Instance().ore, 1);
+                break;
+        }
     }
 
     private void SetText()
@@ -97,6 +113,9 @@ public class Machine : MonoBehaviour
                 break;
             case UnitEnum.Voedsel:
                 interactionText.text = "Gebruik 'E'\nHeeft een voedsel krat nodig!";
+                break;
+            case UnitEnum.Erts:
+                interactionText.text = "Gebruik 'E'\nHeeft een erts krat nodig!";
                 break;
         }
     }

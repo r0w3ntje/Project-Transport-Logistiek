@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 4940657681390842}
   - component: {fileID: 114911519787158576}
   - component: {fileID: 65063341240824078}
+  - component: {fileID: 114366765106444236}
   m_Layer: 0
   m_Name: Iron_Refinery
   m_TagString: Untagged
@@ -277,7 +278,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1287241274214360}
   m_LocalRotation: {x: 0.7071068, y: -0, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: -0.40149996, y: 17.15, z: -0.25400087}
+  m_LocalPosition: {x: -0.40149996, y: 17.15, z: 0.18899994}
   m_LocalScale: {x: 0.050000027, y: 5, z: 0.050000027}
   m_Children:
   - {fileID: 4460622437658558}
@@ -516,6 +517,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114366765106444236
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1287241274214360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a1b93760af37ef44a3b42849fcf9fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114911519787158576
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -534,6 +546,7 @@ MonoBehaviour:
   unitSpawnPoint: {fileID: 4162431700133920}
   interactionObject: {fileID: 4270559404298360}
   interactionText: {fileID: 114165939359754034}
+  machineUpgrade: {fileID: 0}
 --- !u!198 &198173484803955124
 ParticleSystem:
   m_ObjectHideFlags: 1

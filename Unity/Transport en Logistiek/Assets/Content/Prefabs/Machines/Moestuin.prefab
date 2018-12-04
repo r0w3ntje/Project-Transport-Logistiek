@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4366378519406638}
   - component: {fileID: 114495971964079912}
+  - component: {fileID: 114814558483652094}
   m_Layer: 0
   m_Name: Moestuin
   m_TagString: Untagged
@@ -201,6 +202,18 @@ MonoBehaviour:
   unitSpawnPoint: {fileID: 4155901173908918}
   interactionObject: {fileID: 4934657716724972}
   interactionText: {fileID: 114064068406866090}
+  machineUpgrade: {fileID: 0}
+--- !u!114 &114814558483652094
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1110423019476954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a1b93760af37ef44a3b42849fcf9fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114953385733727092
 MonoBehaviour:
   m_ObjectHideFlags: 1

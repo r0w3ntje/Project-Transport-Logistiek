@@ -10,22 +10,20 @@ public class PlayerMouseLook : MonoBehaviour
     [Range(70, 90)]
     public int FOV;
 
-
-
     private void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         Camera.main.fieldOfView = FOV;
-
     }
+
     private void Update()
     {
         Rotation();
     }
 
-    public float currentRotY;
-    //Player and Camera rotation
+    private float currentRotY;
+
     private void Rotation()
     {
         //Rotate the player
@@ -40,6 +38,4 @@ public class PlayerMouseLook : MonoBehaviour
 
         playerCamera.transform.localEulerAngles = new Vector3(-currentRotY, 0f, 0f);
     }
-
-
 }

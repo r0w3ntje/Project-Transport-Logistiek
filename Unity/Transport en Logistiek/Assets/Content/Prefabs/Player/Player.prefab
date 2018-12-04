@@ -139,12 +139,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4745803933229208}
-  - component: {fileID: 54387921133581340}
+  - component: {fileID: 23494494186270652}
+  - component: {fileID: 114811479120327186}
   - component: {fileID: 114860632372139612}
   - component: {fileID: 114070139869188018}
-  - component: {fileID: 23494494186270652}
-  - component: {fileID: 136296839471353534}
   - component: {fileID: 114821345407183362}
+  - component: {fileID: 54387921133581340}
+  - component: {fileID: 136296839471353534}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -597,7 +598,6 @@ MonoBehaviour:
   sensitivityX: 10
   sensitivityY: 10
   FOV: 90
-  currentRotY: 0
 --- !u!114 &114484207204745254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -657,6 +657,23 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &114811479120327186
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1881660755407904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5bdee4335cb60748b6d2c2d718b57d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  food: 0
+  iron: 0
+  ore: 0
+  foodText: {fileID: 0}
+  ironText: {fileID: 0}
+  oreText: {fileID: 0}
 --- !u!114 &114821345407183362
 MonoBehaviour:
   m_ObjectHideFlags: 1
