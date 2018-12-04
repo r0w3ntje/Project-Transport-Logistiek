@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Systems.PointSystem;
-using Systems.Singleton;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,8 +10,6 @@ public class Machine : MonoBehaviour
     [Header("Some need an unit to start with (can be none)")]
     public UnitEnum neededUnit;
     public UnitEnum producedUnit;
-
-    [SerializeField] private float producingTime;
 
     [SerializeField] private GameObject unitPrefab;
     [SerializeField] private Transform unitSpawnPoint;
@@ -24,7 +21,7 @@ public class Machine : MonoBehaviour
 
     private PlayerInteraction pi;
 
-    [SerializeField] private MachineUpgrade machineUpgrade;
+    private MachineUpgrade machineUpgrade;
 
     private void Start()
     {
@@ -62,11 +59,11 @@ public class Machine : MonoBehaviour
 
     public IEnumerator Producing()
     {
-        Debug.Log("Producing: " + producedUnit + ", in " + machineUpgrade.machineTimer + " seconds");
+        Debug.Log("Producing: " + producedUnit + ", in " + machineUpgrade.producingTime + " seconds");
 
         interactionText.text = producedUnit + " is aan het produceren...";
 
-        yield return new WaitForSeconds(machineUpgrade.machineTimer);
+        yield return new WaitForSeconds(machineUpgrade.producingTime);
 
         AddUnits();
         SpawnUnit();

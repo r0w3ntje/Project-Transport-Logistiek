@@ -9,7 +9,7 @@ public class MachineUpgrade : MonoBehaviour
     private int nextLevelUp = 2;
     private int currentLevel = 0;
 
-    public float machineTimer = 10f;
+    public float producingTime = 10f;
 
     //private int amount = 0;
 
@@ -63,7 +63,7 @@ public class MachineUpgrade : MonoBehaviour
         var a = 10f - currentLevel;
         if (a < 2f) a = 2f;
 
-        machineTimer = a;
+        producingTime = a;
     }
 
     // als je in het volgende level bent
