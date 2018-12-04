@@ -10,10 +10,6 @@ public class UserInterfaceItem : MonoBehaviour
     [Tooltip("To what menu belongs this object?")]
     protected MenuEnum menu;
 
-    [Space(8)]
-
-    [SerializeField] private bool e;
-
     private void Awake()
     {
         MenuEvent.OnMenu += Action;
