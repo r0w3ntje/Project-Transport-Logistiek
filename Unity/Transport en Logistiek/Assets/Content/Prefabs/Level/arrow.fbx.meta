@@ -1,18 +1,19 @@
 fileFormatVersion: 2
-guid: 838db30e107aa774ab3a96f761184c48
+guid: 7f0b65d9fc4f95746856131f7f92c07f
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: arrow
+    100004: CINEMA_4D_Editor
     400000: //RootNode
-    2100000: Color
-    2100002: Grey
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Plane
-    7400000: Default Take
-    9500000: //RootNode
-    2186277476908879412: ImportLogs
+    400002: arrow
+    400004: CINEMA_4D_Editor
+    2000000: CINEMA_4D_Editor
+    2100000: No Name
+    2300000: arrow
+    3300000: arrow
+    4300000: arrow
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -65,13 +66,13 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
