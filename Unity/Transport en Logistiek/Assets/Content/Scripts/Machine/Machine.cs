@@ -21,7 +21,7 @@ public class Machine : MonoBehaviour
 
     private PlayerInteraction pi;
 
-    private MachineUpgrade machineUpgrade;
+    [HideInInspector] public MachineUpgrade machineUpgrade;
 
     private void Start()
     {
@@ -41,10 +41,12 @@ public class Machine : MonoBehaviour
         if (Vector3.Distance(pi.transform.position, interactionObject.position) <= pi.interactDistance)
         {
             interactionText.enabled = true;
+            machineUpgrade.upgradeText.enabled = true;
         }
         else
         {
             interactionText.enabled = false;
+            machineUpgrade.upgradeText.enabled = false;
         }
     }
 
@@ -59,15 +61,12 @@ public class Machine : MonoBehaviour
 
     public IEnumerator Producing()
     {
-        Debug.Log("Producing: " + producedUnit + ", in " + machineUpgrade.producingTime + " seconds");
-
         interactionText.text = producedUnit + " is aan het produceren...";
 
         yield return new WaitForSeconds(machineUpgrade.producingTime);
 
         AddUnits();
         SpawnUnit();
-        machineUpgrade.GainExperience();
         SetText();
 
         producing = null;
@@ -87,33 +86,33 @@ public class Machine : MonoBehaviour
         switch (producedUnit)
         {
             case UnitEnum.Ijzer:
-                PointSystem.Add(ref PlayerData.Instance().iron, 1);
+                PlayerData.Instance().Add(ref PlayerData.Instance().iron, machineUpgrade.amountPerProducing);
                 break;
             case UnitEnum.Voedsel:
-                PointSystem.Add(ref PlayerData.Instance().food, 1);
+                PlayerData.Instance().Add(ref PlayerData.Instance().food, machineUpgrade.amountPerProducing);
                 break;
             case UnitEnum.Erts:
-                PointSystem.Add(ref PlayerData.Instance().ore, 1);
+                PlayerData.Instance().Add(ref PlayerData.Instance().ore, machineUpgrade.amountPerProducing);
                 break;
         }
     }
 
-    private void SetText()
+    public void SetText()
     {
+        interactionText.text = "Gebruik '" + PlayerInteraction.Instance().interactionKeyBind + "'";
+
         switch (neededUnit)
         {
             case UnitEnum.Geen:
-                interactionText.text = "Gebruik 'E'";
+                interactionText.text = "";
                 break;
             case UnitEnum.Ijzer:
-                interactionText.text = "Gebruik 'E'\nHeeft een ijzer krat nodig!";
-                break;
             case UnitEnum.Voedsel:
-                interactionText.text = "Gebruik 'E'\nHeeft een voedsel krat nodig!";
-                break;
             case UnitEnum.Erts:
-                interactionText.text = "Gebruik 'E'\nHeeft een erts krat nodig!";
+                interactionText.text += "\nHeeft een " + neededUnit.ToString() + " krat nodig!\n";
                 break;
         }
+
+        interactionText.text += "\nProduceert " + machineUpgrade.amountPerProducing + " " + producedUnit + " in " + machineUpgrade.producingTime + " seconden";
     }
 }

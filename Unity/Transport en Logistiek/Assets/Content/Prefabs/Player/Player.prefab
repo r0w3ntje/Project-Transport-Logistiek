@@ -687,6 +687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionKeyBind: 101
   dropKeybind: 102
+  upgradeKeyBind: 114
   isHolding: 0
   interactDistance: 4
   unit: {fileID: 0}

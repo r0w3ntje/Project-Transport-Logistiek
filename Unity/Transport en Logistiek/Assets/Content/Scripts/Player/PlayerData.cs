@@ -48,9 +48,7 @@ public class PlayerData : Singleton<PlayerData>
 
         PointSystem.Data(Action.Save, "food", ref food);
         PointSystem.Data(Action.Save, "iron", ref iron);
-        PointSystem.Data(Action.Save, "iron", ref ore);
-
-        UpdateTexts();
+        PointSystem.Data(Action.Save, "ore", ref ore);
     }
 
     public void Add<T>(ref T _var, T _amount)
