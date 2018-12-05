@@ -3,65 +3,68 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MachineUpgrade : MonoBehaviour
+namespace TransportLogistiek
 {
-    [SerializeField] private int machineLevel;
-
-    [Space(8)]
-
-    public int amountPerProducing;
-    public int ironUpgradeCosts;
-    [SerializeField] private float costsIncreaseFactor = 2f;
-
-    [Space(8)]
-
-    public float producingTime;
-
-    [Space(8)]
-
-    public Text upgradeText;
-
-    private void Start()
+    public class MachineUpgrade : MonoBehaviour
     {
-        machineLevel = 1;
+        [SerializeField] private int machineLevel;
 
-        UpdateMachineStats();
-    }
+        [Space(8)]
 
-    public void Upgrade()
-    {
-        if (PlayerData.Instance().iron >= ironUpgradeCosts)
+        public int amountPerProducing;
+        public int ironUpgradeCosts;
+        [SerializeField] private float costsIncreaseFactor = 2f;
+
+        [Space(8)]
+
+        public float producingTime;
+
+        [Space(8)]
+
+        public Text upgradeText;
+
+        private void Start()
         {
-            PlayerData.Instance().Add(ref PlayerData.Instance().iron, -ironUpgradeCosts);
-
-            machineLevel++;
+            machineLevel = 1;
 
             UpdateMachineStats();
-
-            GetComponent<Machine>().SetText();
         }
-    }
 
-    private void UpdateMachineStats()
-    {
-        ironUpgradeCosts = Mathf.RoundToInt(machineLevel * machineLevel * costsIncreaseFactor);
-        amountPerProducing = machineLevel;
+        public void Upgrade()
+        {
+            if (PlayerData.Instance().iron >= ironUpgradeCosts)
+            {
+                PlayerData.Instance().Add(ref PlayerData.Instance().iron, -ironUpgradeCosts);
 
-        SetProductionTimer();
+                machineLevel++;
 
-        UpdateTexts();
-    }
+                UpdateMachineStats();
 
-    private void UpdateTexts()
-    {
-        upgradeText.text = "Je hebt " + ironUpgradeCosts + " Ijzer met een ijzer krat nodig om de machine te verbeteren.\nVerbeter '" + PlayerInteraction.Instance().upgradeKeyBind + "'";
-    }
+                GetComponent<Machine>().SetText();
+            }
+        }
 
-    private void SetProductionTimer()
-    {
-        var a = 11f - machineLevel;
-        if (a < 2f) a = 2f;
+        private void UpdateMachineStats()
+        {
+            ironUpgradeCosts = Mathf.RoundToInt(machineLevel * machineLevel * costsIncreaseFactor);
+            amountPerProducing = machineLevel;
 
-        producingTime = a;
+            SetProductionTimer();
+
+            UpdateTexts();
+        }
+
+        private void UpdateTexts()
+        {
+            upgradeText.text = "Je hebt " + ironUpgradeCosts + " Ijzer met een ijzer krat nodig om de machine te verbeteren.\nVerbeter '" + PlayerInteraction.Instance().upgradeKeyBind + "'";
+        }
+
+        private void SetProductionTimer()
+        {
+            var a = 11f - machineLevel;
+            if (a < 2f) a = 2f;
+
+            producingTime = a;
+        }
     }
 }
