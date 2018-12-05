@@ -9,14 +9,17 @@ public class MachineUpgrade : MonoBehaviour {
     int nextLevelUp = 5;
     int currentLevel = 0;
 
-    float machineTimer = 10f;
 
     int amountOfIron = 0;
 
     // Use this for initialization
     void Start () {
         StartCor();
+    }
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
     }
 
     void StartCor()
@@ -34,7 +37,7 @@ public class MachineUpgrade : MonoBehaviour {
         if (time <= 0)
         {
             amountOfIron++;
-            Debug.Log("You gained 1 iron. You now have " + amountOfIron + " iron.");
+            Debug.Log("The machine gained 1 iron. The machine has " + amountOfIron + " iron.");
             StartCor();
 
 
@@ -44,33 +47,33 @@ public class MachineUpgrade : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-       /*machineTimer = Time.deltaTime;
-        if (machineTimer < 0)
-        {
-            amountOfIron++;
-            Debug.Log("You gained 1 iron.");
-        }*/
 
 
     }
 
     // als de machine collide met iron om te upgraden
     // gainExperience();
-    // then destroy iron
+    // then destroy iron die je geeft
+    // behalve als lvl hoger is dan X
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "iron")
+        if (currentLevel <= 7)
         {
-            GainExperience();
-            Destroy(other.gameObject);
-            Debug.Log("Hello poops");
+            if (other.gameObject.tag == "iron")
+            {
+                GainExperience();
+                Destroy(other.gameObject);
+            }
+        } else
+        {
+            Debug.Log("The mining machine has reached the maximum level.");
         }
     }
 
     void GainExperience()
     {
         currentXP++;
-        Debug.Log("You now have " + currentXP +" XP.");
+        Debug.Log("The mining machine has " + currentXP +" XP.");
         if (currentXP >= nextLevelUp)
         {
             levelUp();
@@ -88,6 +91,7 @@ public class MachineUpgrade : MonoBehaviour {
         nextLevelUp += nextLevelUp + 5;
        // machineTimer -= 10f - currentLevel;
         Debug.Log("You are now level " + currentLevel + ".");
+
     }
 
 }
