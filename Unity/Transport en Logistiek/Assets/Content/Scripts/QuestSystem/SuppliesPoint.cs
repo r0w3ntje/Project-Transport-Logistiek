@@ -53,7 +53,7 @@ public class SuppliesPoint : MonoBehaviour
     [ContextMenu("Pickup Supplies")]
     private void PickupSupplies()
     {
-        PlayerData.Instance().Add(ref PlayerData.Instance().supplies, suppliesAmount);
+        //PlayerData.Instance().Add(ref PlayerData.Instance().supplies, suppliesAmount);
 
         DeliverEvent.CallEvent();
     }
@@ -61,10 +61,10 @@ public class SuppliesPoint : MonoBehaviour
     [ContextMenu("Deliver Supplies")]
     private void DeliverSupplies()
     {
-        var supplies = PlayerData.Instance().supplies;
+        //var supplies = PlayerData.Instance().supplies;
 
-        PlayerData.Instance().Add(ref PlayerData.Instance().supplies, -supplies);
-        PlayerData.Instance().Add(ref PlayerData.Instance().money, supplies * pricePerSupply);
+        //PlayerData.Instance().Add(ref PlayerData.Instance().supplies, -supplies);
+        //PlayerData.Instance().Add(ref PlayerData.Instance().money, supplies * pricePerSupply);
 
         DeliverEvent.CallEvent();
     }

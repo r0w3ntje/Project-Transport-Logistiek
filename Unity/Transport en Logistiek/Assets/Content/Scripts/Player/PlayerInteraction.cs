@@ -8,6 +8,7 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
 {
     public KeyCode interactionKeyBind;
     [SerializeField] private KeyCode dropKeybind;
+    public KeyCode upgradeKeyBind;
 
     [Space(8)]
 
@@ -68,12 +69,27 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
         {
             if ((Input.GetKeyDown(interactionKeyBind) && shortestDistance <= interactDistance))
             {
-                if (machine.neededUnit == UnitEnum.Geen || (unit != null && machine.neededUnit == unit.UnitType))
+                if (machine.producing == null && (machine.neededUnit == UnitEnum.Geen || (unit != null && machine.neededUnit == unit.UnitType)))
                 {
                     machine.Produce();
 
                     if (unit != null && machine.neededUnit != UnitEnum.Geen)
                     {
+                        DestroyUnit();
+                    }
+                }
+            }
+        }
+
+        if ((Input.GetKeyDown(upgradeKeyBind) && shortestDistance <= interactDistance))
+        {
+            if (machine.producing == null && unit != null)
+            {
+                if (unit.UnitType == UnitEnum.Ijzer)
+                {
+                    if (PlayerData.Instance().iron >= machine.machineUpgrade.ironUpgradeCosts)
+                    {
+                        machine.machineUpgrade.Upgrade();
                         DestroyUnit();
                     }
                 }

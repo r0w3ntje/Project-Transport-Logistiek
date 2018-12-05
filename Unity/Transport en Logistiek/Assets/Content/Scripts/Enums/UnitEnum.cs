@@ -2,5 +2,6 @@
 {
     Geen = 0,
     Ijzer = 1,
-    Voedsel = 2
+    Voedsel = 2,
+    Erts = 3
 }
