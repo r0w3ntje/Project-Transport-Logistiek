@@ -13,6 +13,9 @@ ModelImporter:
     100014: //RootNode
     100016: transform1
     100018: transform2
+    100020: group2
+    100022: locator1
+    100024: QuickRigCharacter_Reference
     400000: group
     400002: group1
     400004: pasted__pCube2
@@ -23,6 +26,9 @@ ModelImporter:
     400014: //RootNode
     400016: transform1
     400018: transform2
+    400020: group2
+    400022: locator1
+    400024: QuickRigCharacter_Reference
     2100000: Suit
     2100002: Bag
     2100004: Helmet
