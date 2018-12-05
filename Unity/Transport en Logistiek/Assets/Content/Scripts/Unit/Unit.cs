@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
     public UnitEnum UnitType;
 
-    [SerializeField] private Material iron, food;
+    [SerializeField] private Material iron, food, ore;
 
     private Renderer meshRenderer;
 
@@ -29,12 +27,16 @@ public class Unit : MonoBehaviour
 
         switch (UnitType)
         {
-            case UnitEnum.Iron:
+            case UnitEnum.Ijzer:
                 mats[0] = iron;
                 break;
 
-            case UnitEnum.Food:
+            case UnitEnum.Voedsel:
                 mats[0] = food;
+                break;
+
+            case UnitEnum.Erts:
+                mats[0] = ore;
                 break;
         }
 

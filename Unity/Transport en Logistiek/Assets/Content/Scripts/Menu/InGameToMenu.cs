@@ -7,7 +7,7 @@ public class InGameToMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("BlockOutMaan");
+            SceneManager.LoadScene("Main");
         }
     }
 }

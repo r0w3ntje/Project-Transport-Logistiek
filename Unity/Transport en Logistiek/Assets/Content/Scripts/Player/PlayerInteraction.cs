@@ -8,6 +8,7 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
 {
     public KeyCode interactionKeyBind;
     [SerializeField] private KeyCode dropKeybind;
+    public KeyCode upgradeKeyBind;
 
     [Space(8)]
 
@@ -64,16 +65,31 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
 
         if (machine == null) return;
 
-        if (isHolding || (isHolding || machine.neededUnit == UnitEnum.None) || (isHolding && machine.neededUnit == UnitEnum.None))
+        if (isHolding || (isHolding || machine.neededUnit == UnitEnum.Geen) || (isHolding && machine.neededUnit == UnitEnum.Geen))
         {
             if ((Input.GetKeyDown(interactionKeyBind) && shortestDistance <= interactDistance))
             {
-                if (machine.neededUnit == UnitEnum.None || (unit != null && machine.neededUnit == unit.UnitType))
+                if (machine.producing == null && (machine.neededUnit == UnitEnum.Geen || (unit != null && machine.neededUnit == unit.UnitType)))
                 {
                     machine.Produce();
 
-                    if (unit != null && machine.neededUnit != UnitEnum.None)
+                    if (unit != null && machine.neededUnit != UnitEnum.Geen)
                     {
+                        DestroyUnit();
+                    }
+                }
+            }
+        }
+
+        if ((Input.GetKeyDown(upgradeKeyBind) && shortestDistance <= interactDistance))
+        {
+            if (machine.producing == null && unit != null)
+            {
+                if (unit.UnitType == UnitEnum.Ijzer)
+                {
+                    if (PlayerData.Instance().iron >= machine.machineUpgrade.ironUpgradeCosts)
+                    {
+                        machine.machineUpgrade.Upgrade();
                         DestroyUnit();
                     }
                 }
@@ -85,14 +101,6 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
     {
         if (Input.GetKeyDown(interactionKeyBind) && !isHolding)
         {
-            //if (machine != null)
-            //{
-            //    if (machine.producing != null)
-            //    {
-            //        return;
-            //    }
-            //}
-
             GetUnit();
 
             if (unit != null)
