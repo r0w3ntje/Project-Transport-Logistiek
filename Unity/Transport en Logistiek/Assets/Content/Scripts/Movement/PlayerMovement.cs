@@ -8,22 +8,22 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb; //Reference to rigidbody (used to apply forces)
 
     [Header("Variables")]
-    public float walkSpeed;
-    public float runSpeed;
-    public float currentSpeed;
-    public float MaxSlopeAngle;
-    public float Smoothing;
-    float Distance = 0f;
-    public AudioClip Footstep;
-
-    public Vector3 velocity;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float runSpeed;
+    [SerializeField] private float currentSpeed;
+    [SerializeField] private float MaxSlopeAngle;
+    [SerializeField] private float Smoothing;
+    private float Distance = 0f;
+    [SerializeField] private AudioClip Footstep;
 
     [Header("States")]
-    public bool isGrounded;
-    public bool isRunning;
-    public bool isIdle;
-    public bool isJumping;
-    public bool groundHit;
+    [SerializeField] private bool isGrounded;
+    [SerializeField] private bool isRunning;
+    [SerializeField] private bool isIdle;
+    [SerializeField] private bool isJumping;
+    [SerializeField] private bool groundHit;
+
+    private Vector3 velocity;
 
     private void Start()
     {
@@ -31,30 +31,34 @@ public class PlayerMovement : MonoBehaviour
         currentSpeed = walkSpeed;
     }
 
-    private void Update()
-    {
-        //Jump();
-    }
+    //private void Update()
+    //{
+    //    if (Cursor.lockState != CursorLockMode.Locked) return;
+
+    //    Jump();
+    //}
 
     private void FixedUpdate()
     {
+        if (Cursor.lockState != CursorLockMode.Locked) return;
+
         Sprint();
         Move();
         StickToGround();
     }
 
-    private void Jump()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            isJumping = true;
-        }
-    }
+    //private void Jump()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+    //    {
+    //        rb.AddForce(new Vector3(0f, jumpForce, 0f));
+    //    }
+    //}
 
     private void StickToGround()
     {
         RaycastHit hitInfo;
-        if (Physics.BoxCast(transform.position - new Vector3(0,.2f,0), new Vector3(.5f,.1f,.5f), Vector3.down, out hitInfo, transform.rotation, 1f, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+        if (Physics.BoxCast(transform.position - new Vector3(0, .2f, 0), new Vector3(.5f, .1f, .5f), Vector3.down, out hitInfo, transform.rotation, 1f, Physics.AllLayers, QueryTriggerInteraction.Ignore))
         {
             if (Mathf.Abs(Vector3.Angle(hitInfo.normal, Vector3.up)) < MaxSlopeAngle && groundHit)
             {
@@ -97,12 +101,12 @@ public class PlayerMovement : MonoBehaviour
             else velocity += transform.right * 1;
         }
         //Jump force apply
-        if (isJumping)
-        {
-            velocity = transform.up * 4;
-            rb.velocity += velocity;
-            isJumping = false;
-        }
+        //if (isJumping)
+        //{
+        //    velocity = transform.up * 4;
+        //    rb.velocity += velocity;
+        //    isJumping = false;
+        //}
         //Check idle state
         if (velocity == new Vector3(0, 0, 0))
         {
