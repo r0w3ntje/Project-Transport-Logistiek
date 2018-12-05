@@ -87,8 +87,11 @@ public class PlayerInteraction : Singleton<PlayerInteraction>
             {
                 if (unit.UnitType == UnitEnum.Ijzer)
                 {
-                    machine.machineUpgrade.Upgrade();
-                    DestroyUnit();
+                    if (PlayerData.Instance().iron >= machine.machineUpgrade.ironUpgradeCosts)
+                    {
+                        machine.machineUpgrade.Upgrade();
+                        DestroyUnit();
+                    }
                 }
             }
         }

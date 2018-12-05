@@ -10,7 +10,7 @@ public class MachineUpgrade : MonoBehaviour
     [Space(8)]
 
     public int amountPerProducing;
-    [SerializeField] private int ironUpgradeCosts;
+    public int ironUpgradeCosts;
     [SerializeField] private float costsIncreaseFactor = 2f;
 
     [Space(8)]
