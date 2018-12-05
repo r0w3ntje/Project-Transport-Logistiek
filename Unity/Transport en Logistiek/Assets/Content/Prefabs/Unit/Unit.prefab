@@ -158,7 +158,7 @@ MonoBehaviour:
   UnitType: 1
   iron: {fileID: 2100000, guid: feb1d8e7930690c4c9327dc0ce2cd4b5, type: 2}
   food: {fileID: 2100000, guid: 87d111c1d450ec940a6da08004dab01c, type: 2}
-  ore: {fileID: 2100000, guid: fe87479db62fe954e91bd420daa71d27, type: 2}
+  ore: {fileID: 2100000, guid: e356ab32c5d1d5f4eab389ac2cc4db5b, type: 2}
   followTrans: {fileID: 0}
   follow: 0
 --- !u!135 &135942733927397076
