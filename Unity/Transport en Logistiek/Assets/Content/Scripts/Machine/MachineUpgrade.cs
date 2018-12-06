@@ -58,7 +58,7 @@ namespace TransportLogistiek
 
         private void UpdateTexts()
         {
-            upgradeText.text = "Je hebt " + ironUpgradeCosts + " Ijzeren kratten nodig om de machine te verbeteren.\nVerbeter '" + PlayerInteraction.Instance().upgradeKeyBind + "'";
+            upgradeText.text = "Je hebt " + ironUpgradeCosts + " " + (ironUpgradeCosts == 0 ? "Ijzer krat" : "Ijzeren kratten ") + "nodig om de machine te verbeteren.\nVerbeter '" + PlayerInteraction.Instance().upgradeKeyBind + "'";
         }
 
         private void ResetProductionTimer()
