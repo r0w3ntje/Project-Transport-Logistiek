@@ -27,7 +27,12 @@ namespace TransportLogistiek
         [FMODUnity.EventRef]
         public string iron_Producing = "event:/Machines/IronRefinery_Producing";
 
+        [FMODUnity.EventRef]
+        public string miner_Producing = "event:/Machines/Miner";
+
         FMOD.Studio.EventInstance Iron_Producing;
+
+        FMOD.Studio.EventInstance Miner;
 
         [HideInInspector] public MachineUpgrade machineUpgrade;
 
@@ -72,6 +77,16 @@ namespace TransportLogistiek
             interactionText.text = producedUnit + " is aan het produceren...";
 
             AddUnits(neededUnit, -1);
+            if (gameObject.tag == "Miner")
+            {
+                Miner = FMODUnity.RuntimeManager.CreateInstance(miner_Producing);
+
+                Miner.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject.transform));
+
+                Miner.start();
+
+                Miner.setParameterValue("IsProducing", 1f);
+            }
 
             if (gameObject.tag == "Iron_Refinery")
             {

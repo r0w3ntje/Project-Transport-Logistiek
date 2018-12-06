@@ -8,6 +8,7 @@ TagManager:
   - Unit
   - iron
   - Iron_Refinery
+  - Miner
   layers:
   - Default
   - TransparentFX

@@ -26,7 +26,7 @@ MonoBehaviour:
     VegetationType: 4
     VegetationRenderType: 0
     VegetationScaleType: 0
-    MinScale: 0.8
+    MinScale: 0.5
     MaxScale: 1.2
     MinVectorScale: {x: 0.8, y: 0.8, z: 0.8}
     MaxVectorScale: {x: 1.2, y: 1.2, z: 1.2}
@@ -82,7 +82,7 @@ MonoBehaviour:
     VegetationSteepnessType: 0
     VegetationHeightType: 0
     MinimumSteepness: 0
-    MaximumSteepness: 25
+    MaximumSteepness: 10
     SteepnessCurve:
       serializedVersion: 2
       m_Curve:
@@ -656,7 +656,7 @@ MonoBehaviour:
     RandomPositionRelativeDistance: 1
     Offset: {x: 0, y: 0, z: 0}
     RotationOffset: {x: 359.2451, y: 321.91083, z: 0.040350895}
-    Rotation: 0
+    Rotation: 2
     UsePerlinMask: 1
     PerlinCutoff: 0.58914924
     PerlinScale: 3
@@ -686,14 +686,14 @@ MonoBehaviour:
       m_Center: {x: 221.09657, y: -0.19999993, z: 281.56424}
       m_Extent: {x: 15.587067, y: 1.4746579, z: 15.794983}
     Volume: 2904.456
-  - Name: StonePile_1
-    VegetationItemID: f2aee608-80b5-4011-8497-3c9f7fa1cb8b
+  - Name: StonePile1
+    VegetationItemID: 91e4174c-d28c-4083-95cc-148cb63d951f
     EnableRuntimeSpawn: 1
     PrefabType: 0
     ShaderType: 1
-    VegetationPrefab: {fileID: 1227628704413632, guid: a67c49f12a7b20b46bfd216afc4768ce,
+    VegetationPrefab: {fileID: 1565298454264660, guid: e0e006c9dce0efc46beeef17861581c9,
       type: 2}
-    VegetationGuid: a67c49f12a7b20b46bfd216afc4768ce
+    VegetationGuid: e0e006c9dce0efc46beeef17861581c9
     VegetationTexture: {fileID: 0}
     VegetationTextureGuid: 
     VegetationType: 4
@@ -705,7 +705,7 @@ MonoBehaviour:
     MaxVectorScale: {x: 1.2, y: 1.2, z: 1.2}
     UseAutomaticDensityScale: 0
     LodIndex: 2
-    Seed: 69
+    Seed: 73
     LODFactor: 1
     DisableLOD: 0
     DisableShadows: 0
@@ -749,13 +749,13 @@ MonoBehaviour:
     Hue: {r: 1, g: 0.5, b: 0, a: 0.09765625}
     TextureCutoff: 0.2
     YScale: 1
-    SampleDistance: 9.538209
-    Density: 0.294
+    SampleDistance: 8.716497
+    Density: 0.254
     UseCollisionDetection: 0
     VegetationSteepnessType: 0
     VegetationHeightType: 0
     MinimumSteepness: 0
-    MaximumSteepness: 25
+    MaximumSteepness: 5
     SteepnessCurve:
       serializedVersion: 2
       m_Curve:
@@ -1329,17 +1329,14 @@ MonoBehaviour:
     RandomPositionRelativeDistance: 1
     Offset: {x: 0, y: 0, z: 0}
     RotationOffset: {x: 0, y: 331.50092, z: 0}
-    Rotation: 0
+    Rotation: 2
     UsePerlinMask: 1
-    PerlinCutoff: 0.515886
+    PerlinCutoff: 0.54012376
     PerlinScale: 9
     InversePerlinMask: 0
     PerlinOffset: {x: 0, y: 0}
-    UseExcludeTextueMask: 1
-    ExcludeTextureMaskList:
-    - TextureLayer: 1
-      MinimumValue: 0.1
-      MaximumValue: 1
+    UseExcludeTextueMask: 0
+    ExcludeTextureMaskList: []
     UseIncludeTextueMask: 0
     IncludeTextureMaskList: []
     UseVegetationMask: 0
@@ -1356,9 +1353,9 @@ MonoBehaviour:
     IncludeDetailMaskRuleList: []
     IncludeDetailLayer: 0
     Bounds:
-      m_Center: {x: 229.39, y: -0.07796633, z: 237.82237}
-      m_Extent: {x: 7.193161, y: 1.5767336, z: 7.379013}
-    Volume: 669.52435
+      m_Center: {x: 176.97435, y: 11.917698, z: 194.9992}
+      m_Extent: {x: 7.193161, y: 1.2339382, z: 7.3790207}
+    Volume: 523.96454
   UseTerrainTextures: 1
   TerrainTextureList:
   - Texture: {fileID: 2800000, guid: 1a23124a897cda44db39f6ed03819fbe, type: 3}
@@ -1627,4 +1624,4 @@ MonoBehaviour:
     TextureWeight: 1
     TextureLayer: 3
     Enabled: 1
-  MaxVegetationItemHeight: 3.7841609
+  MaxVegetationItemHeight: 3.539179
