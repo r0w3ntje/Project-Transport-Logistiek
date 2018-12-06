@@ -23,6 +23,12 @@ namespace TransportLogistiek
 
         private PlayerInteraction pi;
 
+        [Header("Audio")]
+        [FMODUnity.EventRef]
+        public string iron_Producing = "event:/Machines/IronRefinery_Producing";
+
+        FMOD.Studio.EventInstance Iron_Producing;
+
         [HideInInspector] public MachineUpgrade machineUpgrade;
 
         private void Start()
@@ -65,6 +71,14 @@ namespace TransportLogistiek
         {
             interactionText.text = producedUnit + " is aan het produceren...";
 
+            Iron_Producing = FMODUnity.RuntimeManager.CreateInstance(iron_Producing);
+
+            Iron_Producing.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject.transform));
+
+            Iron_Producing.start();
+
+            Iron_Producing.setParameterValue("IsProducing", 1f);
+
             yield return new WaitForSeconds(machineUpgrade.producingTime);
 
             AddUnits();
@@ -76,6 +90,7 @@ namespace TransportLogistiek
 
         private void SpawnUnit()
         {
+            Iron_Producing.setParameterValue("IsProducing", 0f);
             var a = Instantiate(unitPrefab, unitSpawnPoint);
             a.transform.localPosition = Vector3.zero;
             a.transform.SetParent(null);
