@@ -16,10 +16,41 @@ MonoBehaviour:
   - {fileID: 114497208365763000}
   EditorEvents:
   - {fileID: 114652770675950612}
+  - {fileID: 114467821359438920}
   MasterBankRef: {fileID: 114497208365763000}
   StringsBankRef: {fileID: 114744451165047354}
-  stringsBankWriteTime: 636796933514203540
+  stringsBankWriteTime: 636796956237846039
   cacheVersion: 2
+--- !u!114 &114177802886429932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: IsProducing
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114275687166452920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: IsProducing
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114354541242792708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,6 +66,28 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114467821359438920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Machines/Miner
+  guid: c61e0d1160ae0d48925161aaaaf54cc5
+  Banks:
+  - {fileID: 114497208365763000}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4000
 --- !u!114 &114497208365763000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,11 +100,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: D:\Periode 3.2\Fmod\Periode 3.2 Game\Build\Desktop\Master Bank.bank
-  lastModified: 636796933514123323
+  lastModified: 636796956237775876
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 197440
+    Value: 249344
   Exists: 1
 --- !u!114 &114528351286221446
 MonoBehaviour:
@@ -102,7 +155,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 114354541242792708}
+  - {fileID: 114177802886429932}
   MinDistance: 1
   MaxDistance: 20
   Length: 12000
@@ -118,11 +171,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: D:\Periode 3.2\Fmod\Periode 3.2 Game\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636796933514203540
+  lastModified: 636796956237846039
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 742
+    Value: 790
   Exists: 1
 --- !u!114 &114935451324728972
 MonoBehaviour:
