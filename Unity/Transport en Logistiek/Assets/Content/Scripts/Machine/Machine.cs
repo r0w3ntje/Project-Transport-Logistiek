@@ -71,14 +71,19 @@ namespace TransportLogistiek
         {
             interactionText.text = producedUnit + " is aan het produceren...";
 
-            Iron_Producing = FMODUnity.RuntimeManager.CreateInstance(iron_Producing);
 
-            Iron_Producing.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject.transform));
+            if (gameObject.tag == "Iron_Refinery")
+            {
+                Iron_Producing = FMODUnity.RuntimeManager.CreateInstance(iron_Producing);
 
-            Iron_Producing.start();
+                Iron_Producing.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject.transform));
 
-            Iron_Producing.setParameterValue("IsProducing", 1f);
+                Iron_Producing.start();
 
+                Iron_Producing.setParameterValue("IsProducing", 1f);
+
+            }
+           
             yield return new WaitForSeconds(machineUpgrade.producingTime);
 
             AddUnits();
