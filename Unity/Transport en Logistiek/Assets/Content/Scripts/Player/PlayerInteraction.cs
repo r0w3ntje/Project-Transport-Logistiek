@@ -4,151 +4,165 @@ using System.Linq;
 using Systems.Singleton;
 using UnityEngine;
 
-public class PlayerInteraction : Singleton<PlayerInteraction>
+namespace TransportLogistiek
 {
-    public KeyCode interactionKeyBind;
-    [SerializeField] private KeyCode dropKeybind;
-
-    [Space(8)]
-
-    public bool isHolding;
-
-    [Space(8)]
-
-    public float interactDistance = 3f;
-
-    [Space(8)]
-
-    public Unit unit;
-    public Machine machine;
-
-    private void Start()
+    public class PlayerInteraction : Singleton<PlayerInteraction>
     {
-        isHolding = false;
-    }
+        public KeyCode interactionKeyBind;
+        [SerializeField] private KeyCode dropKeybind;
+        public KeyCode upgradeKeyBind;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(dropKeybind) && unit != null)
+        [Space(8)]
+
+        public bool isHolding;
+
+        [Space(8)]
+
+        public float interactDistance = 3f;
+
+        [Space(8)]
+
+        public Unit unit;
+        public Machine machine;
+
+        private void Start()
         {
-            DropUnit();
+            isHolding = false;
         }
 
-        UseMachine();
-        PickupUnit();
-    }
-
-    private void UseMachine()
-    {
-        List<Machine> machines = FindObjectsOfType<Machine>().ToList();
-
-        if (machines == null) return;
-
-        float shortestDistance = Vector3.Distance(transform.position, machines[0].interactionObject.transform.position);
-
-        machine = null;
-
-        for (int i = 0; i < machines.Count; i++)
+        private void Update()
         {
-            float distance = Vector3.Distance(transform.position, machines[i].interactionObject.transform.position);
+            if (unit == null)
+                isHolding = false;
 
-            if (distance <= shortestDistance)
+            if (Input.GetKeyDown(dropKeybind) && unit != null)
             {
-                shortestDistance = distance;
-                machine = machines[i];
+                DropUnit();
             }
+
+            UseMachine();
+            PickupUnit();
         }
 
-        if (machine == null) return;
-
-        if (isHolding || machine.neededUnit == UnitEnum.None)
+        private void UseMachine()
         {
-            if ((Input.GetKeyDown(interactionKeyBind) && shortestDistance <= interactDistance))
-            {
-                if (machine.neededUnit == UnitEnum.None || (unit != null && machine.neededUnit == unit.UnitType))
-                {
-                    machine.Produce();
+            List<Machine> machines = FindObjectsOfType<Machine>().ToList();
 
-                    if (unit != null && machine.neededUnit != UnitEnum.None)
+            if (machines == null) return;
+
+            float shortestDistance = Vector3.Distance(transform.position, machines[0].interactionObject.transform.position);
+
+            machine = null;
+
+            for (int i = 0; i < machines.Count; i++)
+            {
+                float distance = Vector3.Distance(transform.position, machines[i].interactionObject.transform.position);
+
+                if (distance <= shortestDistance)
+                {
+                    shortestDistance = distance;
+                    machine = machines[i];
+                }
+            }
+
+            if (machine == null) return;
+
+            if (isHolding || (isHolding || machine.neededUnit == UnitEnum.Geen) || (isHolding && machine.neededUnit == UnitEnum.Geen))
+            {
+                if ((Input.GetKeyDown(interactionKeyBind) && shortestDistance <= interactDistance))
+                {
+                    if (machine.producing == null && (machine.neededUnit == UnitEnum.Geen || (unit != null && machine.neededUnit == unit.UnitType)))
                     {
-                        DestroyUnit();
+                        machine.Produce();
+
+                        if (unit != null && machine.neededUnit != UnitEnum.Geen)
+                        {
+                            DestroyUnit();
+                        }
+                    }
+                }
+            }
+
+            if ((Input.GetKeyDown(upgradeKeyBind) && shortestDistance <= interactDistance))
+            {
+                if (machine.producing == null && unit != null)
+                {
+                    if (unit.UnitType == UnitEnum.Ijzer)
+                    {
+                        if (PlayerData.Instance().iron >= machine.machineUpgrade.ironUpgradeCosts)
+                        {
+                            machine.machineUpgrade.Upgrade();
+                            DestroyUnit();
+                        }
                     }
                 }
             }
         }
-    }
 
-    private void PickupUnit()
-    {
-        if (Input.GetKeyDown(interactionKeyBind) && !isHolding)
+        private void PickupUnit()
         {
-            if (machine != null)
+            if (Input.GetKeyDown(interactionKeyBind) && !isHolding)
             {
-                if (machine.producing != null)
+                GetUnit();
+
+                if (unit != null)
                 {
-                    return;
+                    unit.GetComponent<Rigidbody>().useGravity = false;
+                    unit.GetComponent<Rigidbody>().freezeRotation = true;
+                    unit.transform.rotation = Quaternion.Euler(Vector3.zero);
+                    unit.follow = true;
+                    isHolding = true;
                 }
             }
-
-            GetUnit();
-
-            if (unit != null)
-            {
-                unit.GetComponent<Rigidbody>().useGravity = false;
-                unit.GetComponent<Rigidbody>().freezeRotation = true;
-                unit.transform.rotation = Quaternion.Euler(Vector3.zero);
-                unit.follow = true;
-                isHolding = true;
-            }
         }
-    }
 
-    private void GetUnit()
-    {
-        List<Unit> units = FindObjectsOfType<Unit>().ToList();
-
-        if (units.Count == 0) return;
-
-        float shortestDistance = Vector3.Distance(transform.position, units[0].transform.position);
-        unit = null;
-
-        for (int i = 0; i < units.Count; i++)
+        private void GetUnit()
         {
-            float distance = Vector3.Distance(transform.position, units[i].transform.position);
+            List<Unit> units = FindObjectsOfType<Unit>().ToList();
 
-            if (distance <= shortestDistance && distance <= interactDistance)
+            if (units.Count == 0) return;
+
+            float shortestDistance = Vector3.Distance(transform.position, units[0].transform.position);
+            unit = null;
+
+            for (int i = 0; i < units.Count; i++)
             {
-                shortestDistance = distance;
-                unit = units[i];
+                float distance = Vector3.Distance(transform.position, units[i].transform.position);
+
+                if (distance <= shortestDistance && distance <= interactDistance)
+                {
+                    shortestDistance = distance;
+                    unit = units[i];
+                }
             }
         }
-    }
 
-    private void DropUnit()
-    {
-        if (!isHolding) return;
+        private void DropUnit()
+        {
+            if (!isHolding) return;
 
-        unit.GetComponent<Rigidbody>().useGravity = true;
-        unit.GetComponent<Rigidbody>().freezeRotation = false;
-        unit.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        unit.follow = false;
-        unit = null;
+            unit.GetComponent<Rigidbody>().useGravity = true;
+            unit.GetComponent<Rigidbody>().freezeRotation = false;
+            unit.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            unit.follow = false;
+            unit = null;
 
-        if (machine != null)
-            machine.interactionText.enabled = false;
-        machine = null;
+            if (machine != null)
+                machine.interactionText.enabled = false;
+            machine = null;
 
-        isHolding = false;
-    }
+            isHolding = false;
+        }
 
-    public void DestroyUnit()
-    {
-        isHolding = false;
+        public void DestroyUnit()
+        {
+            isHolding = false;
 
-        Destroy(unit.gameObject);
+            Destroy(unit.gameObject);
 
-        unit = null;
+            unit = null;
 
-        machine = null;
+            machine = null;
+        }
     }
 }

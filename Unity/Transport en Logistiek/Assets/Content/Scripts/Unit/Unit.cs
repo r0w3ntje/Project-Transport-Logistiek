@@ -1,51 +1,56 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Unit : MonoBehaviour
+namespace TransportLogistiek
 {
-    public UnitEnum UnitType;
-
-    [SerializeField] private Material iron, food;
-
-    private Renderer meshRenderer;
-
-    // Unit following
-    public Transform followTrans;
-    public bool follow;
-
-    private void Start()
+    public class Unit : MonoBehaviour
     {
-        followTrans = FindObjectOfType<PlayerInteraction>().transform;
+        public UnitEnum UnitType;
 
-        meshRenderer = GetComponent<MeshRenderer>();
+        [SerializeField] private Material iron, food, ore;
 
-        ChangeMaterial();
-    }
+        private Renderer meshRenderer;
 
-    private void ChangeMaterial()
-    {
-        var mats = meshRenderer.materials;
+        // Unit following
+        public Transform followTrans;
+        public bool follow;
 
-        switch (UnitType)
+        private void Start()
         {
-            case UnitEnum.Iron:
-                mats[0] = iron;
-                break;
+            followTrans = FindObjectOfType<PlayerInteraction>().transform;
 
-            case UnitEnum.Food:
-                mats[0] = food;
-                break;
+            meshRenderer = GetComponent<MeshRenderer>();
+
+            ChangeMaterial();
         }
 
-        meshRenderer.materials = mats;
-    }
-
-    private void FixedUpdate()
-    {
-        if (follow)
+        private void ChangeMaterial()
         {
-            transform.position = new Vector3(followTrans.position.x, followTrans.position.y + 2f, followTrans.position.z);
+            var mats = meshRenderer.materials;
+
+            switch (UnitType)
+            {
+                case UnitEnum.Ijzer:
+                    mats[0] = iron;
+                    break;
+
+                case UnitEnum.Voedsel:
+                    mats[0] = food;
+                    break;
+
+                case UnitEnum.Erts:
+                    mats[0] = ore;
+                    break;
+            }
+
+            meshRenderer.materials = mats;
+        }
+
+        private void FixedUpdate()
+        {
+            if (follow)
+            {
+                transform.position = new Vector3(followTrans.position.x, followTrans.position.y + 2f, followTrans.position.z);
+            }
         }
     }
 }
