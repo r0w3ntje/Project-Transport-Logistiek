@@ -32,16 +32,18 @@ namespace TransportLogistiek
 
         public void Upgrade()
         {
-            if (PlayerData.Instance().iron >= ironUpgradeCosts)
-            {
-                PlayerData.Instance().Add(ref PlayerData.Instance().iron, -ironUpgradeCosts);
+            ironUpgradeCosts--;
+            PlayerData.Instance().Add(ref PlayerData.Instance().iron, -1);
 
+            if (ironUpgradeCosts <= 0)
+            {
                 machineLevel++;
 
                 UpdateMachineStats();
 
                 GetComponent<Machine>().SetText();
             }
+            else UpdateTexts();
         }
 
         private void UpdateMachineStats()
@@ -49,17 +51,17 @@ namespace TransportLogistiek
             ironUpgradeCosts = Mathf.RoundToInt(machineLevel * machineLevel * costsIncreaseFactor);
             amountPerProducing = machineLevel;
 
-            SetProductionTimer();
+            ResetProductionTimer();
 
             UpdateTexts();
         }
 
         private void UpdateTexts()
         {
-            upgradeText.text = "Je hebt " + ironUpgradeCosts + " Ijzer met een ijzer krat nodig om de machine te verbeteren.\nVerbeter '" + PlayerInteraction.Instance().upgradeKeyBind + "'";
+            upgradeText.text = "Je hebt " + ironUpgradeCosts + " " + (ironUpgradeCosts == 0 ? "Ijzer krat" : "Ijzeren kratten ") + "nodig om de machine te verbeteren.\nVerbeter '" + PlayerInteraction.Instance().upgradeKeyBind + "'";
         }
 
-        private void SetProductionTimer()
+        private void ResetProductionTimer()
         {
             var a = 11f - machineLevel;
             if (a < 2f) a = 2f;

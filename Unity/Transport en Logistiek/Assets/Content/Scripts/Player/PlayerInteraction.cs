@@ -89,11 +89,8 @@ namespace TransportLogistiek
                 {
                     if (unit.UnitType == UnitEnum.Ijzer)
                     {
-                        if (PlayerData.Instance().iron >= machine.machineUpgrade.ironUpgradeCosts)
-                        {
-                            machine.machineUpgrade.Upgrade();
-                            DestroyUnit();
-                        }
+                        machine.machineUpgrade.Upgrade();
+                        DestroyUnit();
                     }
                 }
             }
