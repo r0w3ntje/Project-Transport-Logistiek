@@ -161,8 +161,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraHolder: {fileID: 4967178427674088}
   camera: {fileID: 4262873613448428}
-  movementSpeed: 24
+  movementSpeed: 30
   dragSpeed: 180
+  zoomSpeed: 30
+  maxZoom: {x: -50, y: 0}
 --- !u!114 &114273661130757174
 MonoBehaviour:
   m_ObjectHideFlags: 1
