@@ -9,8 +9,6 @@ namespace Factory
         [SerializeField] private Transform cameraHolder;
         [SerializeField] private new Transform camera;
 
-        [SerializeField] private float fixedHeight;
-
         [SerializeField] private float movementSpeed;
         [SerializeField] private float dragSpeed;
 
