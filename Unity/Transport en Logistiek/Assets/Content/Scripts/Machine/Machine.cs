@@ -76,6 +76,7 @@ namespace TransportLogistiek
         {
             interactionText.text = producedUnit + " is aan het produceren...";
 
+            AddUnits(neededUnit, -1);
             if (gameObject.tag == "Miner")
             {
                 Miner = FMODUnity.RuntimeManager.CreateInstance(miner_Producing);
@@ -98,38 +99,45 @@ namespace TransportLogistiek
                 Iron_Producing.setParameterValue("IsProducing", 1f);
 
             }
-           
+
             yield return new WaitForSeconds(machineUpgrade.producingTime);
 
-            AddUnits();
-            SpawnUnit();
+            StartCoroutine(SpawnUnit());
             SetText();
 
             producing = null;
         }
 
-        private void SpawnUnit()
+        private IEnumerator SpawnUnit()
         {
-            Iron_Producing.setParameterValue("IsProducing", 0f);
-            var a = Instantiate(unitPrefab, unitSpawnPoint);
-            a.transform.localPosition = Vector3.zero;
-            a.transform.SetParent(null);
-            a.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
-            a.GetComponent<Unit>().UnitType = producedUnit;
+            for (int i = 0; i < machineUpgrade.amountPerProducing; i++)
+            {
+                Iron_Producing.setParameterValue("IsProducing", 0f);
+
+                var a = Instantiate(unitPrefab, unitSpawnPoint);
+                a.transform.localPosition = Vector3.zero;
+                a.transform.SetParent(null);
+                a.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+                a.GetComponent<Unit>().UnitType = producedUnit;
+
+                AddUnits(producedUnit, 1);
+
+                yield return new WaitForSeconds(0.5f);
+            }
         }
 
-        private void AddUnits()
+        private void AddUnits(UnitEnum _unit, int _amount)
         {
-            switch (producedUnit)
+            switch (_unit)
             {
                 case UnitEnum.Ijzer:
-                    PlayerData.Instance().Add(ref PlayerData.Instance().iron, machineUpgrade.amountPerProducing);
+                    PlayerData.Instance().Add(ref PlayerData.Instance().iron, _amount);
                     break;
                 case UnitEnum.Voedsel:
-                    PlayerData.Instance().Add(ref PlayerData.Instance().food, machineUpgrade.amountPerProducing);
+                    PlayerData.Instance().Add(ref PlayerData.Instance().food, _amount);
                     break;
                 case UnitEnum.Erts:
-                    PlayerData.Instance().Add(ref PlayerData.Instance().ore, machineUpgrade.amountPerProducing);
+                    PlayerData.Instance().Add(ref PlayerData.Instance().ore, _amount);
                     break;
             }
         }
