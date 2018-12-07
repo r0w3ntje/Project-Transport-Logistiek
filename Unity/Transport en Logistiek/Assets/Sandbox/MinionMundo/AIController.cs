@@ -14,7 +14,7 @@ public class AIController : MonoBehaviour
     public Vector3 startLocation;
 
     [Header("External Scripts")]
-    public AIInfoInput aiInfoInput;
+    //public AIInfoInput aiInfoInput;
 
     public GetAllWaypoints getWP;
 
@@ -35,10 +35,10 @@ public class AIController : MonoBehaviour
     {
         hasDestination = false;
         collisionPrefab = getWP.collisionPrefab;
-        aiInfoInput = GetComponent<AIInfoInput>();
+       // aiInfoInput = GetComponent<AIInfoInput>();
 
         randomWaypoint = Random.Range(0, getWP.waypoints.Count);
-        randomTime = Random.Range(1, 120);
+        randomTime = Random.Range(1, 5);
 
         startLocation = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         agent = GetComponent<NavMeshAgent>();
@@ -55,7 +55,7 @@ public class AIController : MonoBehaviour
     {
         destination = _destination;
         currentWaypoint = destination.gameObject;
-        aiInfoInput.Goingto_Holder = destination.ToString();
+        //aiInfoInput.Goingto_Holder = destination.ToString();
         agent.SetDestination(_destination.position);
         getWP.waypoints.Remove(currentWaypoint);
     }
