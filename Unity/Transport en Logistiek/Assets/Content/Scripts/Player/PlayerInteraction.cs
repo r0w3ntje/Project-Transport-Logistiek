@@ -18,7 +18,7 @@ namespace TransportLogistiek
 
         [Space(8)]
 
-        public float interactDistance = 3f;
+        public float interactDistance = 15f;
 
         [Space(8)]
 

@@ -42,6 +42,18 @@ namespace TransportLogistiek
             machineUpgrade = GetComponent<MachineUpgrade>();
 
             SetText();
+
+            if (gameObject.tag == "Miner")
+            {
+                Miner = FMODUnity.RuntimeManager.CreateInstance(miner_Producing);
+
+                Miner.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject.transform));
+
+                Miner.start();
+
+                Miner.setParameterValue("IsProducing", 1f);
+            }
+
         }
 
         private void FixedUpdate()
@@ -77,16 +89,6 @@ namespace TransportLogistiek
             interactionText.text = producedUnit + " is aan het produceren...";
 
             AddUnits(neededUnit, -1);
-            if (gameObject.tag == "Miner")
-            {
-                Miner = FMODUnity.RuntimeManager.CreateInstance(miner_Producing);
-
-                Miner.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject.transform));
-
-                Miner.start();
-
-                Miner.setParameterValue("IsProducing", 1f);
-            }
 
             if (gameObject.tag == "Iron_Refinery")
             {
@@ -99,6 +101,7 @@ namespace TransportLogistiek
                 Iron_Producing.setParameterValue("IsProducing", 1f);
 
             }
+
 
             yield return new WaitForSeconds(machineUpgrade.producingTime);
 
