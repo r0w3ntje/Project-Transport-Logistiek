@@ -20,6 +20,10 @@ namespace Factory
         private Vector3 rotationPosition;
         private Vector3 otherRotation;
 
+        private float zoom;
+        [SerializeField] private float zoomSpeed;
+        [SerializeField] Vector2 maxZoom = new Vector2(-50f, 0f);
+
         private void Update()
         {
             Move();
@@ -32,7 +36,6 @@ namespace Factory
             cameraHolder.position += cameraHolder.right * movementSpeed * Input.GetAxis("Horizontal") * Time.deltaTime;
         }
 
-        private Vector3 pos;
         private void Rotate()
         {
             if (Input.GetMouseButtonDown(2))
@@ -48,10 +51,19 @@ namespace Factory
 
             if (isRotating)
             {
-                pos = Camera.main.ScreenToViewportPoint(mouseOrigin - Input.mousePosition);
+                var pos = Camera.main.ScreenToViewportPoint(mouseOrigin - Input.mousePosition);
                 cameraHolder.eulerAngles = new Vector3(0f, pos.x * dragSpeed, 0f) + otherRotation;
             }
             else otherRotation = cameraHolder.eulerAngles;
+
+            if (Input.GetAxis("Mouse ScrollWheel") != 0f)
+            {
+                zoom += (Input.GetAxis("Mouse ScrollWheel") * zoomSpeed);
+
+                zoom = Mathf.Clamp(zoom, maxZoom.x, maxZoom.y);
+
+                camera.transform.localPosition = new Vector3(0f, 0f, zoom);
+            }
         }
     }
 }
