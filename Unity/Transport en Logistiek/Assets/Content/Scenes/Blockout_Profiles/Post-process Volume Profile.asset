@@ -1536,4 +1536,4 @@ MonoBehaviour:
     defaultState: 1
   dirtIntensity:
     overrideState: 1
-    value: 0.62
+    value: 1.7
