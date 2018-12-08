@@ -38,13 +38,13 @@ namespace Factory
 
         private void Rotate()
         {
-            if (Input.GetMouseButtonDown(2))
+            if (Input.GetMouseButtonDown(1))
             {
                 mouseOrigin = Input.mousePosition;
                 isRotating = true;
             }
 
-            if (Input.GetMouseButtonUp(2))
+            if (Input.GetMouseButtonUp(1))
             {
                 isRotating = false;
             }
