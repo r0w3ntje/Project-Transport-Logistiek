@@ -14,11 +14,8 @@ namespace Factory
 
         private bool isRotating;
 
-        private Vector3 mouseOrigin;
-        private Vector3 oldMousePos;
-
-        private Vector3 rotationPosition;
-        private Vector3 otherRotation;
+        private Vector3 mouseOrigin;        
+        private Vector3 currentRotation;
 
         private float zoom;
         [SerializeField] private float zoomSpeed;
@@ -38,13 +35,13 @@ namespace Factory
 
         private void Rotate()
         {
-            if (Input.GetMouseButtonDown(2))
+            if (Input.GetMouseButtonDown(1))
             {
                 mouseOrigin = Input.mousePosition;
                 isRotating = true;
             }
 
-            if (Input.GetMouseButtonUp(2))
+            if (Input.GetMouseButtonUp(1))
             {
                 isRotating = false;
             }
@@ -52,9 +49,9 @@ namespace Factory
             if (isRotating)
             {
                 var pos = Camera.main.ScreenToViewportPoint(mouseOrigin - Input.mousePosition);
-                cameraHolder.eulerAngles = new Vector3(0f, pos.x * dragSpeed, 0f) + otherRotation;
+                cameraHolder.eulerAngles = new Vector3(0f, pos.x * dragSpeed, 0f) + currentRotation;
             }
-            else otherRotation = cameraHolder.eulerAngles;
+            else currentRotation = cameraHolder.eulerAngles;
 
             if (Input.GetAxis("Mouse ScrollWheel") != 0f)
             {
