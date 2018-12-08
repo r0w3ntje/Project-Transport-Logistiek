@@ -103,11 +103,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4940657681390842}
   - component: {fileID: 114911519787158576}
-  - component: {fileID: 65063341240824078}
   - component: {fileID: 114366765106444236}
+  - component: {fileID: 65063341240824078}
   m_Layer: 0
   m_Name: Iron_Refinery
-  m_TagString: Untagged
+  m_TagString: Iron_Refinery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -296,9 +296,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1287241274214360}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: -0.40149996, y: 17.15, z: 0.18899994}
-  m_LocalScale: {x: 0.050000027, y: 5, z: 0.050000027}
+  m_LocalRotation: {x: 0.92387956, y: -0, z: -0.38268343, w: 0}
+  m_LocalPosition: {x: 253.5, y: 3, z: 272.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4460622437658558}
   - {fileID: 4153096003223276}
@@ -308,7 +308,7 @@ Transform:
   - {fileID: 224455535860122478}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 180, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 45, z: 0}
 --- !u!23 &23321068066760094
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -403,7 +403,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 4, z: 4}
+  m_Size: {x: 4, y: 4, z: 4}
   m_Center: {x: 0.5438156, y: 1.3904967, z: -0.6361084}
 --- !u!65 &65222617667857672
 BoxCollider:
@@ -600,6 +600,8 @@ MonoBehaviour:
   unitSpawnPoint: {fileID: 4162431700133920}
   interactionObject: {fileID: 4270559404298360}
   interactionText: {fileID: 114995023742611748}
+  iron_Producing: event:/Machines/IronRefinery_Producing
+  miner_Producing: event:/Machines/Miner
   machineUpgrade: {fileID: 0}
 --- !u!114 &114995023742611748
 MonoBehaviour:

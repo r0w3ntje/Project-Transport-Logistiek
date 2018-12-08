@@ -9,51 +9,38 @@ namespace TransportLogistiek
     [RequireComponent(typeof(MachineUpgrade))]
     public class Machine : MonoBehaviour
     {
-        [Header("Some need an unit to start with (can be none)")]
+        [Header("Production")]
         public UnitEnum neededUnit;
         public UnitEnum producedUnit;
 
+        [Header("Unit")]
         [SerializeField] private GameObject unitPrefab;
-        [SerializeField] private Transform unitSpawnPoint;
 
+        [Header("Interaction")]
+        [SerializeField] private Transform unitSpawnPoint;
         public Transform interactionObject;
+
+        [Header("Texts")]
         public Text interactionText;
 
-        public Coroutine producing;
-
-        private PlayerInteraction pi;
-
         [Header("Audio")]
-        [FMODUnity.EventRef]
-        public string iron_Producing = "event:/Machines/IronRefinery_Producing";
-
-        [FMODUnity.EventRef]
-        public string miner_Producing = "event:/Machines/Miner";
+        [FMODUnity.EventRef] public string iron_Producing = "event:/Machines/IronRefinery_Producing";
+        [FMODUnity.EventRef] public string miner_Producing = "event:/Machines/Miner";
 
         FMOD.Studio.EventInstance Iron_Producing;
-
         FMOD.Studio.EventInstance Miner;
 
+        // Other
         [HideInInspector] public MachineUpgrade machineUpgrade;
+        public Coroutine producing;
 
         private void Start()
         {
-            pi = FindObjectOfType<PlayerInteraction>();
             machineUpgrade = GetComponent<MachineUpgrade>();
 
             SetText();
 
-            if (gameObject.tag == "Miner")
-            {
-                Miner = FMODUnity.RuntimeManager.CreateInstance(miner_Producing);
-
-                Miner.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject.transform));
-
-                Miner.start();
-
-                Miner.setParameterValue("IsProducing", 1f);
-            }
-
+            if (gameObject.tag == "Miner") PlayAudio(Miner, miner_Producing);
         }
 
         private void FixedUpdate()
@@ -63,7 +50,7 @@ namespace TransportLogistiek
 
         private void ShowText()
         {
-            if (Vector3.Distance(pi.transform.position, interactionObject.position) <= pi.interactDistance)
+            if (Vector3.Distance(PlayerInteraction.Instance().transform.position, interactionObject.position) <= PlayerInteraction.Instance().interactDistance)
             {
                 interactionText.enabled = true;
                 machineUpgrade.upgradeText.enabled = true;
@@ -90,18 +77,7 @@ namespace TransportLogistiek
 
             AddUnits(neededUnit, -1);
 
-            if (gameObject.tag == "Iron_Refinery")
-            {
-                Iron_Producing = FMODUnity.RuntimeManager.CreateInstance(iron_Producing);
-
-                Iron_Producing.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject.transform));
-
-                Iron_Producing.start();
-
-                Iron_Producing.setParameterValue("IsProducing", 1f);
-
-            }
-
+            if (gameObject.tag == "Iron_Refinery") PlayAudio(Iron_Producing, iron_Producing);
 
             yield return new WaitForSeconds(machineUpgrade.producingTime);
 
@@ -162,6 +138,17 @@ namespace TransportLogistiek
             }
 
             interactionText.text += "\nProduceert " + machineUpgrade.amountPerProducing + " " + producedUnit + " in " + machineUpgrade.producingTime + " seconden";
+        }
+
+        private void PlayAudio(FMOD.Studio.EventInstance _fmodEventInstance, string _instance)
+        {
+            _fmodEventInstance = FMODUnity.RuntimeManager.CreateInstance(_instance);
+
+            _fmodEventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject.transform));
+
+            _fmodEventInstance.start();
+
+            _fmodEventInstance.setParameterValue("IsProducing", 1f);
         }
     }
 }
