@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 78516044}
   - component: {fileID: 78516043}
   - component: {fileID: 78516042}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inside Dome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1160,6 +1160,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4940657681390842, guid: de0452d614598a349aa25b1e111df1f4,
     type: 2}
   m_PrefabInternal: {fileID: 1258495898}
+--- !u!4 &538623851 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4262873613448428, guid: 83f446e40fc39bf43b0fa8453eb9de3c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1054717310}
 --- !u!1 &553450244
 GameObject:
   m_ObjectHideFlags: 0
@@ -2499,6 +2504,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114273661130757174, guid: 83f446e40fc39bf43b0fa8453eb9de3c,
+        type: 2}
+      propertyPath: volumeTrigger
+      value: 
+      objectReference: {fileID: 538623851}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83f446e40fc39bf43b0fa8453eb9de3c, type: 2}
   m_IsPrefabAsset: 0
