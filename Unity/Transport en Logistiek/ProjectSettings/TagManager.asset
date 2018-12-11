@@ -9,6 +9,7 @@ TagManager:
   - iron
   - Iron_Refinery
   - Miner
+  - AI
   layers:
   - Default
   - TransparentFX

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: ee0b9193e0b2c3f4dafca4538703715e
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Lastwaerk regular
+  fontNames:
+  - Lastwaerk regular
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: bd92da5e6a25db64b9e4deca6968e210, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
