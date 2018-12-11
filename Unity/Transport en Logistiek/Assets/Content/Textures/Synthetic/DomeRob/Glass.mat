@@ -60,14 +60,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _BumpScale: 1
+    - _BumpScale: 3
     - _Cutoff: 0.44
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _GlossMapScale: 0.97
-    - _Glossiness: 0.158
+    - _Glossiness: 0.324
     - _GlossyReflections: 1
-    - _Metallic: 0
+    - _Metallic: 0.091
     - _Mode: 3
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -77,6 +77,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.8851698, b: 0.504717, a: 0.6901961}
+    - _Color: {r: 1, g: 1, b: 1, a: 0.59607846}
     - _EmissionColor: {r: 1, g: 0.50026315, b: 0.0141509175, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
