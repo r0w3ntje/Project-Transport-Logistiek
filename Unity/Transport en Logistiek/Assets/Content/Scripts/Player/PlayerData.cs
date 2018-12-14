@@ -7,21 +7,17 @@ using UnityEngine.UI;
 
 public class PlayerData : Singleton<PlayerData>
 {
-    //public float money;
-    //public int supplies;
-
+    [Header("Variables")]
     public int food;
     public int iron;
     public int ore;
+    public float energy;
 
     [Header("UI Elements")]
-
-    //[SerializeField] private Text moneyText;
-    //[SerializeField] private Text goodsText;
-
     [SerializeField] private Text foodText;
     [SerializeField] private Text ironText;
     [SerializeField] private Text oreText;
+    [SerializeField] private Text energyText;
 
     private void Start()
     {
@@ -30,12 +26,10 @@ public class PlayerData : Singleton<PlayerData>
 
     private void LoadData()
     {
-        //PointSystem.Data(Action.Load, "money", ref money);
-        //PointSystem.Data(Action.Load, "supplies", ref supplies);
-
         PointSystem.Data(Action.Load, "food", ref food);
         PointSystem.Data(Action.Load, "iron", ref iron);
         PointSystem.Data(Action.Load, "ore", ref ore);
+        PointSystem.Data(Action.Load, "energy", ref energy);
 
         UpdateTexts();
     }
@@ -43,12 +37,10 @@ public class PlayerData : Singleton<PlayerData>
     [ContextMenu("Save")]
     private void SaveData()
     {
-        //PointSystem.Data(Action.Save, "money", ref money);
-        //PointSystem.Data(Action.Save, "supplies", ref supplies);
-
         PointSystem.Data(Action.Save, "food", ref food);
         PointSystem.Data(Action.Save, "iron", ref iron);
         PointSystem.Data(Action.Save, "ore", ref ore);
+        PointSystem.Data(Action.Save, "energy", ref energy);
     }
 
     public void Add<T>(ref T _var, T _amount)
@@ -62,11 +54,9 @@ public class PlayerData : Singleton<PlayerData>
 
     private void UpdateTexts()
     {
-        //moneyText.text = "$" + money.ToString("F2");
-        //goodsText.text = "Supplies: " + supplies;
-
         foodText.text = food.ToString();
         ironText.text = iron.ToString();
         oreText.text = ore.ToString();
+        energyText.text = energy.ToString();
     }
 }
