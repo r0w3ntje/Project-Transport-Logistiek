@@ -9,58 +9,99 @@ namespace TransportLogistiek
     [RequireComponent(typeof(MachineUpgrade))]
     public class Machine : MonoBehaviour
     {
-        [Header("Production")]
-        public UnitEnum neededUnit;
-        public UnitEnum producedUnit;
+        #region Fields
+        [Header("ID")]
+        [SerializeField] private string uniqueID;
 
-        [Header("Unit")]
+        [Header("Machine")]
+        public MachineEnum machineType;
+        [SerializeField] private int machineLevel;
+
+        [Header("Production")]
+        [SerializeField] private float producingTime;
+
+        public UnitEnum neededUnit;
+        public float neededUnitAmount;
+
+        public UnitEnum producedUnit;
+        public float produceAmount;
+
+        [Header("Prefabs")]
         [SerializeField] private GameObject unitPrefab;
 
-        [Header("Interaction")]
-        [SerializeField] private Transform unitSpawnPoint;
-        public Transform interactionObject;
+        [Header("Upgrade")]
+        [SerializeField] private List<MachineUpgrades> upgrades;
 
-        [Header("Texts")]
-        public Text interactionText;
+        //[Header("Interaction")]
+        //[SerializeField] private Transform unitSpawnPoint;
+        //public Transform interactionObject;
 
-        [Header("Audio")]
-        [FMODUnity.EventRef] public string iron_Producing = "event:/Machines/IronRefinery_Producing";
-        [FMODUnity.EventRef] public string miner_Producing = "event:/Machines/Miner";
+        //[Header("Texts")]
+        //public Text interactionText;
 
-        FMOD.Studio.EventInstance Iron_Producing;
-        FMOD.Studio.EventInstance Miner;
+        ////[Header("Audio")]
+        //[FMODUnity.EventRef] public string iron_Producing = "event:/Machines/IronRefinery_Producing";
+        //[FMODUnity.EventRef] public string miner_Producing = "event:/Machines/Miner";
+
+        //private FMOD.Studio.EventInstance Iron_Producing;
+        //private FMOD.Studio.EventInstance Miner;
 
         // Other
         [HideInInspector] public MachineUpgrade machineUpgrade;
+
         public Coroutine producing;
+
+        #endregion
+
+        #region Interaction
+
+        private void OnMouseEnter()
+        {
+            CursorHoverInfo.Instance().hoverText.text = machineType.ToString();
+            CursorHoverInfo.Instance().hoverText.enabled = true;
+        }
+
+        private void OnMouseExit()
+        {
+            CursorHoverInfo.Instance().hoverText.enabled = false;
+        }
+
+        private void OnMouseDown()
+        {
+            MachineMenu.Instance().Open(this);
+        }
+
+        #endregion
 
         private void Start()
         {
+            PointSystem.Data(Action.Load, uniqueID, ref machineLevel);
+
             machineUpgrade = GetComponent<MachineUpgrade>();
 
-            SetText();
+            //SetText();
 
-            if (gameObject.tag == "Miner") PlayAudio(Miner, miner_Producing);
+            PlayAudio();
         }
 
-        private void FixedUpdate()
-        {
-            ShowText();
-        }
+        //private void FixedUpdate()
+        //{
+        //    ShowText();
+        //}
 
-        private void ShowText()
-        {
-            if (Vector3.Distance(PlayerInteraction.Instance().transform.position, interactionObject.position) <= PlayerInteraction.Instance().interactDistance)
-            {
-                interactionText.enabled = true;
-                machineUpgrade.upgradeText.enabled = true;
-            }
-            else
-            {
-                interactionText.enabled = false;
-                machineUpgrade.upgradeText.enabled = false;
-            }
-        }
+        //private void ShowText()
+        //{
+        //    if (Vector3.Distance(PlayerInteraction.Instance().transform.position, interactionObject.position) <= PlayerInteraction.Instance().interactDistance)
+        //    {
+        //        interactionText.enabled = true;
+        //        machineUpgrade.upgradeText.enabled = true;
+        //    }
+        //    else
+        //    {
+        //        interactionText.enabled = false;
+        //        machineUpgrade.upgradeText.enabled = false;
+        //    }
+        //}
 
         public void Produce()
         {
@@ -73,37 +114,39 @@ namespace TransportLogistiek
 
         public IEnumerator Producing()
         {
-            interactionText.text = producedUnit + " is aan het produceren...";
+            //interactionText.text = producedUnit + " is aan het produceren...";
 
             AddUnits(neededUnit, -1);
 
-            if (gameObject.tag == "Iron_Refinery") PlayAudio(Iron_Producing, iron_Producing);
+            PlayAudio();
 
             yield return new WaitForSeconds(machineUpgrade.producingTime);
 
-            StartCoroutine(SpawnUnit());
-            SetText();
+            //StartCoroutine(SpawnUnit());
+            //SetText();
 
-            producing = null;
+            //AddUnits(producedUnit)
+
+            //producing = null;
         }
 
-        private IEnumerator SpawnUnit()
-        {
-            for (int i = 0; i < machineUpgrade.amountPerProducing; i++)
-            {
-                Iron_Producing.setParameterValue("IsProducing", 0f);
+        //private IEnumerator SpawnUnit()
+        //{
+        //    for (int i = 0; i < machineUpgrade.amountPerProducing; i++)
+        //    {
+        //        //Iron_Producing.setParameterValue("IsProducing", 0f);
 
-                var a = Instantiate(unitPrefab, unitSpawnPoint);
-                a.transform.localPosition = Vector3.zero;
-                a.transform.SetParent(null);
-                a.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
-                a.GetComponent<Unit>().UnitType = producedUnit;
+        //        var a = Instantiate(unitPrefab, unitSpawnPoint);
+        //        a.transform.localPosition = Vector3.zero;
+        //        a.transform.SetParent(null);
+        //        a.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+        //        a.GetComponent<Unit>().UnitType = producedUnit;
 
-                AddUnits(producedUnit, 1);
+        //        AddUnits(producedUnit, 1);
 
-                yield return new WaitForSeconds(0.5f);
-            }
-        }
+        //        yield return new WaitForSeconds(0.5f);
+        //    }
+        //}
 
         private void AddUnits(UnitEnum _unit, int _amount)
         {
@@ -121,26 +164,32 @@ namespace TransportLogistiek
             }
         }
 
-        public void SetText()
+        //public void SetText()
+        //{
+        //    interactionText.text = "Gebruik '" + PlayerInteraction.Instance().interactionKeyBind + "'";
+
+        //    switch (neededUnit)
+        //    {
+        //        case UnitEnum.Geen:
+        //            interactionText.text = "";
+        //            break;
+        //        case UnitEnum.Ijzer:
+        //        case UnitEnum.Voedsel:
+        //        case UnitEnum.Erts:
+        //            interactionText.text += "\nHeeft een " + neededUnit.ToString() + " krat nodig!\n";
+        //            break;
+        //    }
+
+        //    interactionText.text += "\nProduceert " + machineUpgrade.amountPerProducing + " " + producedUnit + " in " + machineUpgrade.producingTime + " seconden";
+        //}
+
+        private void PlayAudio()
         {
-            interactionText.text = "Gebruik '" + PlayerInteraction.Instance().interactionKeyBind + "'";
-
-            switch (neededUnit)
-            {
-                case UnitEnum.Geen:
-                    interactionText.text = "";
-                    break;
-                case UnitEnum.Ijzer:
-                case UnitEnum.Voedsel:
-                case UnitEnum.Erts:
-                    interactionText.text += "\nHeeft een " + neededUnit.ToString() + " krat nodig!\n";
-                    break;
-            }
-
-            interactionText.text += "\nProduceert " + machineUpgrade.amountPerProducing + " " + producedUnit + " in " + machineUpgrade.producingTime + " seconden";
+            //if (gameObject.tag == "Iron_Refinery") FMODAudio(Iron_Producing, iron_Producing);
+            //if (gameObject.tag == "Miner") FMODAudio(Miner, miner_Producing);
         }
 
-        private void PlayAudio(FMOD.Studio.EventInstance _fmodEventInstance, string _instance)
+        private void FMODAudio(FMOD.Studio.EventInstance _fmodEventInstance, string _instance)
         {
             _fmodEventInstance = FMODUnity.RuntimeManager.CreateInstance(_instance);
 
@@ -149,6 +198,19 @@ namespace TransportLogistiek
             _fmodEventInstance.start();
 
             _fmodEventInstance.setParameterValue("IsProducing", 1f);
+        }
+
+        [System.Serializable]
+        public class MachineUpgrades
+        {
+            public int level;
+
+            public int ironUpgradeCosts;
+
+            public int producingAmount;
+            public int neededAmount;
+
+            public float producingTime;
         }
     }
 }
