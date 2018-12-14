@@ -50,50 +50,50 @@ namespace TransportLogistiek
 
             if (machines == null) return;
 
-            float shortestDistance = Vector3.Distance(transform.position, machines[0].interactionObject.transform.position);
+            //float shortestDistance = Vector3.Distance(transform.position, machines[0].interactionObject.transform.position);
 
             machine = null;
 
             for (int i = 0; i < machines.Count; i++)
             {
-                float distance = Vector3.Distance(transform.position, machines[i].interactionObject.transform.position);
+                //float distance = Vector3.Distance(transform.position, machines[i].interactionObject.transform.position);
 
-                if (distance <= shortestDistance)
-                {
-                    shortestDistance = distance;
-                    machine = machines[i];
-                }
+                //if (distance <= shortestDistance)
+                //{
+                //    shortestDistance = distance;
+                //    machine = machines[i];
+                //}
             }
 
             if (machine == null) return;
 
             if (isHolding || (isHolding || machine.neededUnit == UnitEnum.Geen) || (isHolding && machine.neededUnit == UnitEnum.Geen))
             {
-                if ((Input.GetKeyDown(interactionKeyBind) && shortestDistance <= interactDistance))
-                {
-                    if (machine.producing == null && (machine.neededUnit == UnitEnum.Geen || (unit != null && machine.neededUnit == unit.UnitType)))
-                    {
-                        machine.Produce();
+                //if ((Input.GetKeyDown(interactionKeyBind) && shortestDistance <= interactDistance))
+                //{
+                //    if (machine.producing == null && (machine.neededUnit == UnitEnum.Geen || (unit != null && machine.neededUnit == unit.UnitType)))
+                //    {
+                //        machine.Produce();
 
-                        if (unit != null && machine.neededUnit != UnitEnum.Geen)
-                        {
-                            DestroyUnit();
-                        }
-                    }
-                }
+                //        if (unit != null && machine.neededUnit != UnitEnum.Geen)
+                //        {
+                //            DestroyUnit();
+                //        }
+                //    }
+                //}
             }
 
-            if ((Input.GetKeyDown(upgradeKeyBind) && shortestDistance <= interactDistance))
-            {
-                if (machine.producing == null && unit != null)
-                {
-                    if (unit.UnitType == UnitEnum.Ijzer)
-                    {
-                        machine.machineUpgrade.Upgrade();
-                        DestroyUnit();
-                    }
-                }
-            }
+            //if ((Input.GetKeyDown(upgradeKeyBind) && shortestDistance <= interactDistance))
+            //{
+            //    if (machine.producing == null && unit != null)
+            //    {
+            //        if (unit.UnitType == UnitEnum.Ijzer)
+            //        {
+            //            machine.machineUpgrade.Upgrade();
+            //            DestroyUnit();
+            //        }
+            //    }
+            //}
         }
 
         private void PickupUnit()
@@ -107,7 +107,7 @@ namespace TransportLogistiek
                     unit.GetComponent<Rigidbody>().useGravity = false;
                     unit.GetComponent<Rigidbody>().freezeRotation = true;
                     unit.transform.rotation = Quaternion.Euler(Vector3.zero);
-                    unit.follow = true;
+                    //unit.follow = true;
                     isHolding = true;
                 }
             }
@@ -141,11 +141,11 @@ namespace TransportLogistiek
             unit.GetComponent<Rigidbody>().useGravity = true;
             unit.GetComponent<Rigidbody>().freezeRotation = false;
             unit.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            unit.follow = false;
+            //unit.follow = false;
             unit = null;
 
-            if (machine != null)
-                machine.interactionText.enabled = false;
+            //if (machine != null)
+            //    machine.interactionText.enabled = false;
             machine = null;
 
             isHolding = false;
