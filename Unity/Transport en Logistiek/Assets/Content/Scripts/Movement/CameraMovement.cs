@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Factory
+namespace TransportLogistiek
 {
     public class CameraMovement : MonoBehaviour
     {
