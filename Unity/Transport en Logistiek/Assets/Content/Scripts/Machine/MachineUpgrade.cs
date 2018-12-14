@@ -41,7 +41,7 @@ namespace TransportLogistiek
 
                 UpdateMachineStats();
 
-                GetComponent<Machine>().SetText();
+                //GetComponent<Machine>().SetText();
             }
             else UpdateTexts();
         }

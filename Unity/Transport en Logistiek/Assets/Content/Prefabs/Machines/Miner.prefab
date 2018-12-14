@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4110559037476888}
   - component: {fileID: 33707608654029018}
   - component: {fileID: 23904410423218208}
+  - component: {fileID: 64707130557805306}
   m_Layer: 0
   m_Name: pCube3
   m_TagString: Untagged
@@ -207,6 +208,7 @@ GameObject:
   - component: {fileID: 4891135193417712}
   - component: {fileID: 114291700072072614}
   - component: {fileID: 114704622044949818}
+  - component: {fileID: 64185232654988792}
   m_Layer: 0
   m_Name: Miner
   m_TagString: Untagged
@@ -256,7 +258,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1471643785186016}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7, y: -2, z: -7}
+  m_LocalPosition: {x: -5, y: -2, z: 7}
   m_LocalScale: {x: 4, y: 1, z: 4}
   m_Children: []
   m_Father: {fileID: 4891135193417712}
@@ -361,7 +363,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1263472480981716}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -369,14 +371,14 @@ Transform:
   - {fileID: 4110559037476888}
   m_Father: {fileID: 4891135193417712}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4891135193417712
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1863228066869978}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 208, y: 4, z: 258}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -389,7 +391,7 @@ Transform:
   - {fileID: 224924328457166708}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!23 &23009932447840678
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -600,6 +602,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1471643785186016}
   m_Mesh: {fileID: 4300000, guid: 8e2ad0598db9e7f4bad3c729837c109a, type: 3}
+--- !u!64 &64185232654988792
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1863228066869978}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: e1ec45ce7f8544544b62b2478e4d2551, type: 3}
+--- !u!64 &64707130557805306
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1101310798548046}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: e1ec45ce7f8544544b62b2478e4d2551, type: 3}
 --- !u!95 &95739132423886676
 Animator:
   serializedVersion: 3
@@ -663,14 +693,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcba41fa97c17f4b91c1309089319fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  machineType: 0
+  machineLevel: 0
+  producingTime: 0
   neededUnit: 2
+  neededUnitAmount: 0
   producedUnit: 3
+  produceAmount: 0
   unitPrefab: {fileID: 1096486860187912, guid: 1f9e1ee1a9e85814b8252084f2394420, type: 2}
-  unitSpawnPoint: {fileID: 4793085018563884}
-  interactionObject: {fileID: 4310512090513250}
-  interactionText: {fileID: 114798415858169710}
-  iron_Producing: event:/Machines/IronRefinery_Producing
-  miner_Producing: event:/Machines/Miner
+  upgrades:
+  - level: 0
+    ironUpgradeCosts: 1
+    producingAmount: 1
+    neededAmount: 1
+    producingTime: 10
+  - level: 1
+    ironUpgradeCosts: 8
+    producingAmount: 2
+    neededAmount: 1
+    producingTime: 9.5
+  - level: 2
+    ironUpgradeCosts: 12
+    producingAmount: 3
+    neededAmount: 2
+    producingTime: 9
   machineUpgrade: {fileID: 0}
 --- !u!114 &114505655777459668
 MonoBehaviour:

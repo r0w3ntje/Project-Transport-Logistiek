@@ -4,24 +4,94 @@ namespace TransportLogistiek
 {
     public class Unit : MonoBehaviour
     {
+        [Header("Unit")]
         public UnitEnum UnitType;
 
-        [SerializeField] private Material iron, food, ore;
+        [Header("Materials")]
+        [SerializeField] private Material iron;
+        [SerializeField] private Material food;
+        [SerializeField] private Material ore;
 
-        private Renderer meshRenderer;
+        [Header("Components")]
+        [SerializeField] private Rigidbody rb;
+        [SerializeField] Renderer meshRenderer;
 
-        // Unit following
-        public Transform followTrans;
-        public bool follow;
+        //private Vector3 offset;
+
+        private CameraMovement camMove;
+
+        private Vector3 unitOrigin, mouseOrigin;
+        private Vector3 basePos, pos2;
 
         private void Start()
         {
-            followTrans = FindObjectOfType<PlayerInteraction>().transform;
-
-            meshRenderer = GetComponent<MeshRenderer>();
+            //camMove = FindObjectOfType<CameraMovement>();
 
             ChangeMaterial();
         }
+
+        //private void OnMouseDown()
+        //{
+        //    PlayerUnitPickup.Instance().unit = this.gameObject;
+        //    rb.isKinematic = true;
+
+        //    //unitOrigin = transform.position;
+        //    //Debug.Log("unitOrigin" + unitOrigin);
+        //    //mouseOrigin = Camera.main.ViewportPointToRay(Input.mousePosition).origin;
+        //    //Debug.Log("mouseOrigin" + mouseOrigin);
+
+        //    //Debug.Log("Difference" + (unitOrigin - mouseOrigin));
+
+        //    //Debug.Log("New mouse origin" + ((unitOrigin - mouseOrigin) + mouseOrigin));
+        //    unitOrigin = transform.position;
+        //    mouseOrigin = Camera.main.ViewportPointToRay(Input.mousePosition).origin;
+        //    basePos = (unitOrigin - mouseOrigin) + mouseOrigin;
+        //}
+
+        //private void OnMouseDrag()
+        //{
+
+        //    //Debug.Log("unitOrigin" + unitOrigin);
+        //    //Debug.Log("mouseOrigin" + mouseOrigin);
+
+        //    //Debug.Log("Difference" + (unitOrigin - mouseOrigin));
+
+        //    var mousePos = Camera.main.ViewportPointToRay(Input.mousePosition).origin;
+        //    mousePos += basePos;
+        //    Debug.Log(mousePos);
+
+        //    transform.position = mousePos;
+
+        //    //Debug.Log("New mouse origin" + unitPosition);
+
+        //    //transform.position = unitPosition;
+
+        //    //var mouseWorldPos = Camera.main.ViewportPointToRay(Input.mousePosition);
+        //    //var mouseWorldPos = Camera.main.ViewportPointToRay(Input.mousePosition);
+
+        //    //Debug.Log(mouseWorldPos);
+
+        //    //Debug.Log("MOUSEWORLDPOS" + mouseWorldPos);
+
+        //    //transform.position = new Vector3(mouseWorldPos.x, 10f, mouseWorldPos.y);
+        //    //transform.position = mouseWorldPos;
+        //    //Debug.Log(" -1- " + transform.position + " -2- " + camMove.transform.position + " -3- " + offset);
+
+        //    //Debug.Log("Mouse position 5" + Camera.main.ViewportPointToRay(Input.mousePosition));
+
+
+        //    //var x =
+
+        //    //Debug.Log(Camera.main.ViewportToWorldPoint(Input.mousePosition - offset));
+
+        //    //Debug.Log("X: " + transform.position.x + " , Y:" + transform.position.y + ", Z: " + transform.position.z);
+        //}
+
+        //private void OnMouseUp()
+        //{
+        //    PlayerUnitPickup.Instance().unit = null;
+        //    rb.isKinematic = false;
+        //}
 
         private void ChangeMaterial()
         {
@@ -43,14 +113,6 @@ namespace TransportLogistiek
             }
 
             meshRenderer.materials = mats;
-        }
-
-        private void FixedUpdate()
-        {
-            if (follow)
-            {
-                transform.position = new Vector3(followTrans.position.x, followTrans.position.y + 2f, followTrans.position.z);
-            }
         }
     }
 }

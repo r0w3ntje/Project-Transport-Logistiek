@@ -16,30 +16,30 @@ namespace Systems.PointSystem
             if (typeof(T) == typeof(float))
             {
                 if (_dataAction == Action.Save) PlayerPrefs.SetFloat(_playerpref, (float)variable);
-                else if (_dataAction == Action.Load) variable = PlayerPrefs.GetFloat(_playerpref, 0f);
+                else if (_dataAction == Action.Load) variable = PlayerPrefs.GetFloat(_playerpref, (float)variable);
                 else if (_dataAction == Action.Reset)
                 {
-                    PlayerPrefs.SetFloat(_playerpref, 0f);
+                    PlayerPrefs.SetFloat(_playerpref, (float)variable);
                     variable = PlayerPrefs.GetFloat(_playerpref);
                 }
             }
             else if (typeof(T) == typeof(int))
             {
                 if (_dataAction == Action.Save) PlayerPrefs.SetInt(_playerpref, (int)variable);
-                else if (_dataAction == Action.Load) variable = PlayerPrefs.GetInt(_playerpref, 0);
+                else if (_dataAction == Action.Load) variable = PlayerPrefs.GetInt(_playerpref, (int)variable);
                 else if (_dataAction == Action.Reset)
                 {
-                    PlayerPrefs.SetInt(_playerpref, 0);
+                    PlayerPrefs.SetInt(_playerpref, (int)variable);
                     variable = PlayerPrefs.GetInt(_playerpref);
                 }
             }
             else if (typeof(T) == typeof(string))
             {
                 if (_dataAction == Action.Save) PlayerPrefs.SetString(_playerpref, (string)variable);
-                else if (_dataAction == Action.Load) variable = PlayerPrefs.GetString(_playerpref, "");
+                else if (_dataAction == Action.Load) variable = PlayerPrefs.GetString(_playerpref, (string)variable);
                 else if (_dataAction == Action.Reset)
                 {
-                    PlayerPrefs.SetString(_playerpref, "");
+                    PlayerPrefs.SetString(_playerpref, (string)variable);
                     variable = PlayerPrefs.GetString(_playerpref);
                 }
             }
