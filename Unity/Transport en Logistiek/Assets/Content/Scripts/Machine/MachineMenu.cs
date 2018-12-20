@@ -16,7 +16,8 @@ namespace TransportLogistiek
         [Header("Produce")]
         [SerializeField] private Text produceText;
 
-        //[Header("Upgrade")]
+        [Header("Upgrade")]
+        [SerializeField] private Text upgradeText;
 
         private Machine machine;
 
@@ -36,17 +37,37 @@ namespace TransportLogistiek
             menuPanel.SetActive(false);
         }
 
+        public void Produce()
+        {
+            machine.Produce();
+        }
+
+        public void Upgrade()
+        {
+            machine.Upgrade();
+        }
+
         private void SetData(Machine _machine)
         {
             machine = _machine;
-            nameText.text = _machine.machineType.ToString();
 
-            produceText.text = "Produce: " + _machine.produceAmount + " '" + _machine.producedUnit.ToString() + "'";
+            UpdateTexts();
+        }
 
-            if (_machine.neededUnit != UnitEnum.Geen)
+        private void UpdateTexts()
+        {
+            nameText.text = machine.machineType.ToString();
+
+            //Produce
+            produceText.text = "Produce: " + machine.upgrades[machine.machineLevel].producingAmount + " '" + machine.producedUnit.ToString() + "'";
+
+            if (machine.neededUnit != UnitEnum.Geen)
             {
-                produceText.text += "\nRequires: " + _machine.neededUnitAmount + " '" + _machine.neededUnit.ToString() + "'";
+                produceText.text += "\nRequires: " + machine.upgrades[machine.machineLevel].neededAmount + " '" + machine.neededUnit.ToString() + "'";
             }
+
+            //Upgrade
+            upgradeText.text = machine.upgrades[machine.machineLevel].producingAmount + " '" + machine.producedUnit.ToString() + "' per production \nRequires " + machine.upgrades[machine.machineLevel].ironUpgradeCosts + " 'Iron'";
         }
     }
 }

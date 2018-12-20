@@ -22,6 +22,8 @@ public class PlayerData : Singleton<PlayerData>
     private void Start()
     {
         LoadData();
+
+        Add(ref iron, 25);
     }
 
     private void LoadData()
@@ -57,6 +59,32 @@ public class PlayerData : Singleton<PlayerData>
         foodText.text = food.ToString();
         ironText.text = iron.ToString();
         oreText.text = ore.ToString();
-        energyText.text = energy.ToString();
+        //energyText.text = energy.ToString();
+    }
+
+    public bool HasSufficientUnits(UnitEnum _unit, int _amount)
+    {
+        bool hasSufficientUnits = false;
+
+        switch (_unit)
+        {
+            case UnitEnum.Ijzer:
+                if (PlayerData.Instance().iron >= _amount)
+                    hasSufficientUnits = true;
+                break;
+            case UnitEnum.Voedsel:
+                if (PlayerData.Instance().food >= _amount)
+                    hasSufficientUnits = true;
+                break;
+            case UnitEnum.Erts:
+                if (PlayerData.Instance().ore >= _amount)
+                    hasSufficientUnits = true;
+                break;
+            default:
+                hasSufficientUnits = false;
+                break;
+        }
+
+        return hasSufficientUnits;
     }
 }

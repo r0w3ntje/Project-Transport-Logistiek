@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 namespace TransportLogistiek
 {
-    [RequireComponent(typeof(MachineUpgrade))]
     public class Machine : MonoBehaviour
     {
         #region Fields
@@ -15,22 +14,18 @@ namespace TransportLogistiek
 
         [Header("Machine")]
         public MachineEnum machineType;
-        [SerializeField] private int machineLevel;
+        public int machineLevel;
+        public bool machineIsOn;
 
         [Header("Production")]
-        [SerializeField] private float producingTime;
-
         public UnitEnum neededUnit;
-        public float neededUnitAmount;
-
         public UnitEnum producedUnit;
-        public float produceAmount;
 
         [Header("Prefabs")]
         [SerializeField] private GameObject unitPrefab;
 
-        [Header("Upgrade")]
-        [SerializeField] private List<MachineUpgrades> upgrades;
+        [Header("Upgrades")]
+        public List<MachineUpgrades> upgrades;
 
         //[Header("Interaction")]
         //[SerializeField] private Transform unitSpawnPoint;
@@ -47,7 +42,7 @@ namespace TransportLogistiek
         //private FMOD.Studio.EventInstance Miner;
 
         // Other
-        [HideInInspector] public MachineUpgrade machineUpgrade;
+        //[HideInInspector] public MachineUpgrade machineUpgrade;
 
         public Coroutine producing;
 
@@ -75,13 +70,15 @@ namespace TransportLogistiek
 
         private void Start()
         {
-            PointSystem.Data(Action.Load, uniqueID, ref machineLevel);
+            LoadMachineLevel();
 
-            machineUpgrade = GetComponent<MachineUpgrade>();
+            //PointSystem.Data(Action.Load, uniqueID, ref machineLevel);
+
+            //machineUpgrade = GetComponent<MachineUpgrade>();
 
             //SetText();
 
-            PlayAudio();
+            //PlayAudio();
         }
 
         //private void FixedUpdate()
@@ -103,32 +100,86 @@ namespace TransportLogistiek
         //    }
         //}
 
+        #region Production
+
         public void Produce()
         {
-            if (producedUnit != UnitEnum.Geen)
+            if (PlayerData.Instance().HasSufficientUnits(neededUnit, upgrades[machineLevel].neededAmount))
             {
-                if (producing == null)
-                    producing = StartCoroutine(Producing());
+                if (producedUnit != UnitEnum.Geen)
+                {
+                    if (producing == null)
+                        producing = StartCoroutine(Producing());
+                }
             }
         }
 
         public IEnumerator Producing()
         {
-            //interactionText.text = producedUnit + " is aan het produceren...";
-
-            AddUnits(neededUnit, -1);
+            AddUnits(neededUnit, -upgrades[machineLevel].neededAmount);
 
             PlayAudio();
 
-            yield return new WaitForSeconds(machineUpgrade.producingTime);
+            yield return new WaitForSeconds(upgrades[machineLevel].producingTime);
 
             //StartCoroutine(SpawnUnit());
             //SetText();
 
-            //AddUnits(producedUnit)
+            AddUnits(producedUnit, upgrades[machineLevel].producingAmount);
 
-            //producing = null;
+            producing = null;
         }
+
+        #endregion
+
+        #region Upgrades
+
+        public void Upgrade()
+        {
+            if (PlayerData.Instance().HasSufficientUnits(UnitEnum.Ijzer, upgrades[machineLevel].ironUpgradeCosts))
+            {
+                machineLevel++;
+                SaveMachineLevel();
+            }
+        }
+
+        private void SaveMachineLevel()
+        {
+            PlayerPrefs.SetInt(uniqueID, machineLevel);
+        }
+
+        private void LoadMachineLevel()
+        {
+            if (!PlayerPrefs.HasKey(uniqueID))
+                SaveMachineLevel();
+            machineLevel = PlayerPrefs.GetInt(uniqueID);
+
+            machineLevel = 0;
+        }
+
+        [System.Serializable]
+        public class MachineUpgrades
+        {
+            public int ironUpgradeCosts;
+
+            public int producingAmount;
+            public int neededAmount;
+
+            public float energyConsumption;
+
+            public float producingTime;
+        }
+
+        #endregion
+
+        #region Maintenance
+
+        [Header("Maintenance")]
+        [SerializeField] private bool isKaput;
+        [SerializeField] private float kaputTimer;
+        [SerializeField] private int kaputSchadeInIjzer;
+
+        #endregion
 
         //private IEnumerator SpawnUnit()
         //{
@@ -183,6 +234,8 @@ namespace TransportLogistiek
         //    interactionText.text += "\nProduceert " + machineUpgrade.amountPerProducing + " " + producedUnit + " in " + machineUpgrade.producingTime + " seconden";
         //}
 
+        #region Fmod Audio
+
         private void PlayAudio()
         {
             //if (gameObject.tag == "Iron_Refinery") FMODAudio(Iron_Producing, iron_Producing);
@@ -200,17 +253,6 @@ namespace TransportLogistiek
             _fmodEventInstance.setParameterValue("IsProducing", 1f);
         }
 
-        [System.Serializable]
-        public class MachineUpgrades
-        {
-            public int level;
-
-            public int ironUpgradeCosts;
-
-            public int producingAmount;
-            public int neededAmount;
-
-            public float producingTime;
-        }
+        #endregion
     }
 }
