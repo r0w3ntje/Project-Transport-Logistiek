@@ -103,7 +103,7 @@ namespace TransportLogistiek
                     mats[0] = iron;
                     break;
 
-                case UnitEnum.Voedsel:
+                case UnitEnum.Stroom:
                     mats[0] = food;
                     break;
 

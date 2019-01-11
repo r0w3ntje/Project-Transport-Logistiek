@@ -102,9 +102,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4940657681390842}
-  - component: {fileID: 114911519787158576}
-  - component: {fileID: 114366765106444236}
   - component: {fileID: 65063341240824078}
+  - component: {fileID: 114827342749031930}
+  - component: {fileID: 114828124417164320}
+  - component: {fileID: 114434824959658852}
+  - component: {fileID: 114529781479192204}
   m_Layer: 0
   m_Name: Iron_Refinery
   m_TagString: Iron_Refinery
@@ -297,7 +299,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1287241274214360}
   m_LocalRotation: {x: 0.92387956, y: -0, z: -0.38268343, w: 0}
-  m_LocalPosition: {x: 253.5, y: 3, z: 272.5}
+  m_LocalPosition: {x: 246, y: 3, z: 280}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4460622437658558}
@@ -552,7 +554,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114366765106444236
+--- !u!114 &114434824959658852
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -560,15 +562,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1287241274214360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a1b93760af37ef44a3b42849fcf9fca, type: 3}
+  m_Script: {fileID: 11500000, guid: d3c580f18e812e54d8f1e954de632e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  machineLevel: 0
-  amountPerProducing: 0
-  ironUpgradeCosts: 0
-  costsIncreaseFactor: 2
-  producingTime: 10
-  upgradeText: {fileID: 114165939359754034}
+  isOn: 0
+  unitInput: 3
+  unitOutput: 1
 --- !u!114 &114462528848513924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -583,7 +582,18 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 2, y: 2}
   m_UseGraphicAlpha: 1
---- !u!114 &114911519787158576
+--- !u!114 &114529781479192204
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1287241274214360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 676f9f4403f4065459219f673ac51dc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114827342749031930
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -594,15 +604,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcba41fa97c17f4b91c1309089319fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neededUnit: 3
-  producedUnit: 1
-  unitPrefab: {fileID: 1096486860187912, guid: 1f9e1ee1a9e85814b8252084f2394420, type: 2}
-  unitSpawnPoint: {fileID: 4162431700133920}
-  interactionObject: {fileID: 4270559404298360}
-  interactionText: {fileID: 114995023742611748}
-  iron_Producing: event:/Machines/IronRefinery_Producing
-  miner_Producing: event:/Machines/Miner
+  uniqueID: IronRefinery_1
+  machineType: 1
+  machineProduction: {fileID: 0}
   machineUpgrade: {fileID: 0}
+--- !u!114 &114828124417164320
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1287241274214360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a1b93760af37ef44a3b42849fcf9fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  machineLevel: 0
+  upgrades:
+  - unitInputAmount: 1
+    unitOutputAmount: 1
+    energyConsumptionPerSec: 1
+    producingTime: 5
+    ironUpgradeCosts: 1
 --- !u!114 &114995023742611748
 MonoBehaviour:
   m_ObjectHideFlags: 1
