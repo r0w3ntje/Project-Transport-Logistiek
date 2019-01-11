@@ -546,7 +546,6 @@ MonoBehaviour:
   sensitivityX: 10
   sensitivityY: 10
   FOV: 90
-  currentRotY: 0
 --- !u!114 &357518451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -564,7 +563,6 @@ MonoBehaviour:
   MaxSlopeAngle: 90
   Smoothing: 0.6
   Footstep: {fileID: 0}
-  velocity: {x: 0, y: 0, z: 0}
   isGrounded: 0
   isRunning: 0
   isIdle: 0
@@ -1440,7 +1438,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a43a29ea970815e4dab463b759c44770, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 260ca7bb718cc8d42adf84cc0c44432f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1797,7 +1795,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 3c0c5ab0068fb9b42a752ba79a2d524c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2939195a332801a48a3ee866333f2d9e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
