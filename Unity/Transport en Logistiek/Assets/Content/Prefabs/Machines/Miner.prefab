@@ -206,9 +206,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4891135193417712}
-  - component: {fileID: 114291700072072614}
-  - component: {fileID: 114704622044949818}
   - component: {fileID: 64185232654988792}
+  - component: {fileID: 114433866599880054}
+  - component: {fileID: 114166048084138272}
+  - component: {fileID: 114570942299688020}
+  - component: {fileID: 114397484408931752}
   m_Layer: 0
   m_Name: Miner
   m_TagString: Untagged
@@ -682,7 +684,36 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114291700072072614
+--- !u!114 &114166048084138272
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1863228066869978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a1b93760af37ef44a3b42849fcf9fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  machineLevel: 0
+  upgrades:
+  - unitInputAmount: 1
+    unitOutputAmount: 1
+    energyConsumptionPerSec: 1
+    producingTime: 5
+    ironUpgradeCosts: 1
+--- !u!114 &114397484408931752
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1863228066869978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 676f9f4403f4065459219f673ac51dc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114433866599880054
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -693,30 +724,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcba41fa97c17f4b91c1309089319fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uniqueID: Miner_1
   machineType: 0
-  machineLevel: 0
-  producingTime: 0
-  neededUnit: 2
-  neededUnitAmount: 0
-  producedUnit: 3
-  produceAmount: 0
-  unitPrefab: {fileID: 1096486860187912, guid: 1f9e1ee1a9e85814b8252084f2394420, type: 2}
-  upgrades:
-  - level: 0
-    ironUpgradeCosts: 1
-    producingAmount: 1
-    neededAmount: 1
-    producingTime: 10
-  - level: 1
-    ironUpgradeCosts: 8
-    producingAmount: 2
-    neededAmount: 1
-    producingTime: 9.5
-  - level: 2
-    ironUpgradeCosts: 12
-    producingAmount: 3
-    neededAmount: 2
-    producingTime: 9
+  machineProduction: {fileID: 0}
   machineUpgrade: {fileID: 0}
 --- !u!114 &114505655777459668
 MonoBehaviour:
@@ -774,6 +784,20 @@ MonoBehaviour:
   m_Text: 'Je hebt 5 Ijzer nodig om de machine te verbeteren
 
     Verbeter ''R'''
+--- !u!114 &114570942299688020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1863228066869978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3c580f18e812e54d8f1e954de632e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOn: 0
+  unitInput: 0
+  unitOutput: 3
 --- !u!114 &114576267161425258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -802,23 +826,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 2, y: 2}
   m_UseGraphicAlpha: 1
---- !u!114 &114704622044949818
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1863228066869978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a1b93760af37ef44a3b42849fcf9fca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  machineLevel: 0
-  amountPerProducing: 0
-  ironUpgradeCosts: 0
-  costsIncreaseFactor: 2
-  producingTime: 10
-  upgradeText: {fileID: 114537241732767522}
 --- !u!114 &114776056754178400
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -7,66 +7,127 @@ namespace TransportLogistiek
 {
     public class MachineUpgrade : MonoBehaviour
     {
-        [SerializeField] private int machineLevel;
+        [Header("Machine Upgrade")]
+        public int machineLevel;
 
-        [Space(8)]
+        [Header("Upgrades")]
+        public List<MachineUpgrades> upgrades;
 
-        public int amountPerProducing;
-        public int ironUpgradeCosts;
-        [SerializeField] private float costsIncreaseFactor = 2f;
+        private Machine machine;
 
-        [Space(8)]
-
-        public float producingTime;
-
-        [Space(8)]
-
-        public Text upgradeText;
+        private void Awake()
+        {
+            Load();
+        }
 
         private void Start()
         {
-            machineLevel = 1;
+            machine = GetComponent<Machine>();
+        }
 
-            UpdateMachineStats();
+        private void Load()
+        {
+            if (machine == null) Start();
+            machineLevel = PlayerData.Instance().LoadInt(machine.uniqueID);
+        }
+        private void Save()
+        {
+            PlayerData.Instance().SaveInt(machine.uniqueID, machineLevel);
         }
 
         public void Upgrade()
         {
-            ironUpgradeCosts--;
-            PlayerData.Instance().Add(ref PlayerData.Instance().iron, -1);
+            if (machineLevel >= upgrades.Count - 1)
+            {
+                return;
+            }
 
-            if (ironUpgradeCosts <= 0)
+            if (PlayerData.Instance().HasSufficientUnits(UnitEnum.Ijzer, upgrades[machineLevel].ironUpgradeCosts))
             {
                 machineLevel++;
-
-                UpdateMachineStats();
-
-                //GetComponent<Machine>().SetText();
+                Save();
             }
-            else UpdateTexts();
+
+            MachineMenu.Instance().SetData(MachineMenu.Instance().machine);
         }
 
-        private void UpdateMachineStats()
+        [System.Serializable]
+        public class MachineUpgrades
         {
-            ironUpgradeCosts = Mathf.RoundToInt(machineLevel * machineLevel * costsIncreaseFactor);
-            amountPerProducing = machineLevel;
+            [Header("Production")]
+            public int unitInputAmount;
+            public int unitOutputAmount;
 
-            ResetProductionTimer();
+            [Space(8)]
 
-            UpdateTexts();
+            public float energyConsumptionPerSec;
+            public float producingTime;
+
+            [Space(8)]
+
+            public int ironUpgradeCosts;
         }
 
-        private void UpdateTexts()
-        {
-            upgradeText.text = "Je hebt " + ironUpgradeCosts + " " + (ironUpgradeCosts == 0 ? "Ijzer krat" : "Ijzeren kratten ") + "nodig om de machine te verbeteren.\nVerbeter '" + PlayerInteraction.Instance().upgradeKeyBind + "'";
-        }
+        //[SerializeField] private int machineLevel;
 
-        private void ResetProductionTimer()
-        {
-            var a = 11f - machineLevel;
-            if (a < 2f) a = 2f;
+        //[Space(8)]
 
-            producingTime = a;
-        }
+        //public int amountPerProducing;
+        //public int ironUpgradeCosts;
+        //[SerializeField] private float costsIncreaseFactor = 2f;
+
+        //[Space(8)]
+
+        //public float producingTime;
+
+        //[Space(8)]
+
+        //public Text upgradeText;
+
+        //private void Start()
+        //{
+        //    machineLevel = 1;
+
+        //    UpdateMachineStats();
+        //}
+
+        //public void Upgrade()
+        //{
+        //    ironUpgradeCosts--;
+        //    PlayerData.Instance().Add(ref PlayerData.Instance().iron, -1);
+
+        //    if (ironUpgradeCosts <= 0)
+        //    {
+        //        machineLevel++;
+
+        //        UpdateMachineStats();
+
+        //        //GetComponent<Machine>().SetText();
+        //    }
+        //    else UpdateTexts();
+        //}
+
+        //private void UpdateMachineStats()
+        //{
+        //    ironUpgradeCosts = Mathf.RoundToInt(machineLevel * machineLevel * costsIncreaseFactor);
+        //    amountPerProducing = machineLevel;
+
+        //    ResetProductionTimer();
+
+        //    UpdateTexts();
+        //}
+
+        //private void UpdateTexts()
+        //{
+        //    upgradeText.text = "Je hebt " + ironUpgradeCosts + " " + (ironUpgradeCosts == 0 ? "Ijzer krat" : "Ijzeren kratten ") + "nodig om de machine te verbeteren.\nVerbeter '" + PlayerInteraction.Instance().upgradeKeyBind + "'";
+        //}
+
+        //private void ResetProductionTimer()
+        //{
+        //    var a = 11f - machineLevel;
+        //    if (a < 2f) a = 2f;
+
+        //    producingTime = a;
+        //}
     }
 }

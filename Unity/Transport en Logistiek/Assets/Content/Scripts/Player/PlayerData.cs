@@ -8,25 +8,26 @@ using UnityEngine.UI;
 public class PlayerData : Singleton<PlayerData>
 {
     [Header("Variables")]
-    public int food;
     public int iron;
     public int ore;
     public float energy;
 
     [Header("UI Elements")]
-    [SerializeField] private Text foodText;
     [SerializeField] private Text ironText;
     [SerializeField] private Text oreText;
     [SerializeField] private Text energyText;
 
     private void Start()
     {
+        PlayerPrefs.DeleteAll();
         LoadData();
+
+        Add(ref ore, 25);
+        Add(ref energy, 13);
     }
 
     private void LoadData()
     {
-        PointSystem.Data(Action.Load, "food", ref food);
         PointSystem.Data(Action.Load, "iron", ref iron);
         PointSystem.Data(Action.Load, "ore", ref ore);
         PointSystem.Data(Action.Load, "energy", ref energy);
@@ -37,7 +38,6 @@ public class PlayerData : Singleton<PlayerData>
     [ContextMenu("Save")]
     private void SaveData()
     {
-        PointSystem.Data(Action.Save, "food", ref food);
         PointSystem.Data(Action.Save, "iron", ref iron);
         PointSystem.Data(Action.Save, "ore", ref ore);
         PointSystem.Data(Action.Save, "energy", ref energy);
@@ -54,9 +54,63 @@ public class PlayerData : Singleton<PlayerData>
 
     private void UpdateTexts()
     {
-        foodText.text = food.ToString();
         ironText.text = iron.ToString();
         oreText.text = ore.ToString();
         energyText.text = energy.ToString();
+    }
+
+    public bool HasSufficientUnits<T>(UnitEnum _unit, T _amount)
+    {
+        bool hasSufficientUnits = false;
+
+        object variable = _amount;
+
+        switch (_unit)
+        {
+            case UnitEnum.Ijzer:
+                if (iron >= (int)variable)
+                    hasSufficientUnits = true;
+                break;
+            case UnitEnum.Stroom:
+                if (energy >= (float)variable)
+                    hasSufficientUnits = true;
+                break;
+            case UnitEnum.Erts:
+                if (ore >= (int)variable)
+                    hasSufficientUnits = true;
+                break;
+            default:
+                hasSufficientUnits = false;
+                break;
+        }
+
+        return hasSufficientUnits;
+    }
+
+    public float LoadFloat(string playerprefs)
+    {
+        return PlayerPrefs.GetFloat(playerprefs, 0f);
+    }
+    public void SaveFloat(string playerprefs, float value)
+    {
+        PlayerPrefs.SetFloat(playerprefs, value);
+    }
+
+    public int LoadInt(string playerprefs)
+    {
+        return PlayerPrefs.GetInt(playerprefs, 0);
+    }
+    public void SaveInt(string playerprefs, int value)
+    {
+        PlayerPrefs.SetInt(playerprefs, value);
+    }
+
+    public string LoadString(string playerprefs)
+    {
+        return PlayerPrefs.GetString(playerprefs, "");
+    }
+    public void SaveString(string playerprefs, string value)
+    {
+        PlayerPrefs.SetString(playerprefs, value);
     }
 }

@@ -67,21 +67,21 @@ namespace TransportLogistiek
 
             if (machine == null) return;
 
-            if (isHolding || (isHolding || machine.neededUnit == UnitEnum.Geen) || (isHolding && machine.neededUnit == UnitEnum.Geen))
-            {
-                //if ((Input.GetKeyDown(interactionKeyBind) && shortestDistance <= interactDistance))
-                //{
-                //    if (machine.producing == null && (machine.neededUnit == UnitEnum.Geen || (unit != null && machine.neededUnit == unit.UnitType)))
-                //    {
-                //        machine.Produce();
+            //if (isHolding || (isHolding || machine.unitInput == UnitEnum.Geen) || (isHolding && machine.unitInput == UnitEnum.Geen))
+            //{
+            //    //if ((Input.GetKeyDown(interactionKeyBind) && shortestDistance <= interactDistance))
+            //    //{
+            //    //    if (machine.producing == null && (machine.neededUnit == UnitEnum.Geen || (unit != null && machine.neededUnit == unit.UnitType)))
+            //    //    {
+            //    //        machine.Produce();
 
-                //        if (unit != null && machine.neededUnit != UnitEnum.Geen)
-                //        {
-                //            DestroyUnit();
-                //        }
-                //    }
-                //}
-            }
+            //    //        if (unit != null && machine.neededUnit != UnitEnum.Geen)
+            //    //        {
+            //    //            DestroyUnit();
+            //    //        }
+            //    //    }
+            //    //}
+            //}
 
             //if ((Input.GetKeyDown(upgradeKeyBind) && shortestDistance <= interactDistance))
             //{

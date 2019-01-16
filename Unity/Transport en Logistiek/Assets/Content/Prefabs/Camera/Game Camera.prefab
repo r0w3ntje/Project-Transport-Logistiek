@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4967178427674088}
   - component: {fileID: 114010976785932634}
+  - component: {fileID: 114516500214639188}
   m_Layer: 0
   m_Name: Game Camera
   m_TagString: Untagged
@@ -177,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 0}
+  volumeTrigger: {fileID: 4262873613448428}
   volumeLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -225,6 +226,25 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &114516500214639188
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1030474711918734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5bdee4335cb60748b6d2c2d718b57d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  food: 0
+  iron: 0
+  ore: 0
+  energy: 0
+  foodText: {fileID: 0}
+  ironText: {fileID: 0}
+  oreText: {fileID: 0}
+  energyText: {fileID: 0}
 --- !u!114 &114774151269354608
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -2,6 +2,6 @@
 {
     Geen = 0,
     Ijzer = 1,
-    Voedsel = 2,
+    Stroom = 2,
     Erts = 3
 }
