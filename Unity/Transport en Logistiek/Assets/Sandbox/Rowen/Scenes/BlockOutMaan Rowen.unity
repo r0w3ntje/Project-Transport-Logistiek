@@ -3406,7 +3406,7 @@ GameObject:
   - component: {fileID: 1042134129}
   - component: {fileID: 1042134128}
   m_Layer: 0
-  m_Name: MoestuinText
+  m_Name: EnergyGeneratorText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3431,11 +3431,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'Moestuin
-
-
-
-'
+  m_text: Energy Generator
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
@@ -3503,12 +3499,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -2.6079712, w: 0}
   m_textInfo:
     textComponent: {fileID: 1042134128}
-    characterCount: 11
+    characterCount: 16
     spriteCount: 0
-    spaceCount: 3
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
-    lineCount: 3
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -3593,7 +3589,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 253.01, y: 8}
+  m_AnchoredPosition: {x: 253.01, y: 8.86}
   m_SizeDelta: {x: 4.8, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1054717310
@@ -4137,6 +4133,48 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1001 &1410087807
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1719143740}
+    m_Modifications:
+    - target: {fileID: 4366378519406638, guid: 60ab0a93bf4324b48b851300424157bc, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 253.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4366378519406638, guid: 60ab0a93bf4324b48b851300424157bc, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4366378519406638, guid: 60ab0a93bf4324b48b851300424157bc, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 244.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 4366378519406638, guid: 60ab0a93bf4324b48b851300424157bc, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4366378519406638, guid: 60ab0a93bf4324b48b851300424157bc, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4366378519406638, guid: 60ab0a93bf4324b48b851300424157bc, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4366378519406638, guid: 60ab0a93bf4324b48b851300424157bc, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4366378519406638, guid: 60ab0a93bf4324b48b851300424157bc, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 60ab0a93bf4324b48b851300424157bc, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1412768575
 GameObject:
   m_ObjectHideFlags: 0
@@ -4622,7 +4660,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1719143740}
   m_Layer: 0
-  m_Name: Moestuin
+  m_Name: EnergyGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4643,48 +4681,6 @@ Transform:
   m_Father: {fileID: 1377535971}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1769094992
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1719143740}
-    m_Modifications:
-    - target: {fileID: 4366378519406638, guid: 60ab0a93bf4324b48b851300424157bc, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 253.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 4366378519406638, guid: 60ab0a93bf4324b48b851300424157bc, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4366378519406638, guid: 60ab0a93bf4324b48b851300424157bc, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 244.31
-      objectReference: {fileID: 0}
-    - target: {fileID: 4366378519406638, guid: 60ab0a93bf4324b48b851300424157bc, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4366378519406638, guid: 60ab0a93bf4324b48b851300424157bc, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4366378519406638, guid: 60ab0a93bf4324b48b851300424157bc, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4366378519406638, guid: 60ab0a93bf4324b48b851300424157bc, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4366378519406638, guid: 60ab0a93bf4324b48b851300424157bc, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 60ab0a93bf4324b48b851300424157bc, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!224 &1785167515 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224907547950228036, guid: 55cc36c808f1b18499fb5adc3188915b,
@@ -5607,7 +5603,7 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4366378519406638, guid: 60ab0a93bf4324b48b851300424157bc,
     type: 2}
-  m_PrefabInternal: {fileID: 1769094992}
+  m_PrefabInternal: {fileID: 1410087807}
 --- !u!1 &2049253103
 GameObject:
   m_ObjectHideFlags: 0
