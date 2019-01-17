@@ -31,7 +31,7 @@ namespace TransportLogistiek
         {
             ProductionProcess();
 
-            Debug.Log("tIMER: " + productionTimer);
+            //Debug.Log("tIMER: " + productionTimer);
         }
 
         public void StartNewProduction()
