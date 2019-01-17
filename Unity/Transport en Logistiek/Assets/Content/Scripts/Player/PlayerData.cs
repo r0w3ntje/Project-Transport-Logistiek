@@ -26,7 +26,7 @@ public class PlayerData : Singleton<PlayerData>
         LoadData();
 
         Add(ref ore, 25);
-        Add(ref energy, 13);
+        Add(ref energy, 100);
     }
 
     private void LoadData()

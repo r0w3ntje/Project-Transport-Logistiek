@@ -58,7 +58,7 @@ namespace TransportLogistiek
                 machine.AddUnits(unitOutput, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
             }
 
-            Debug.Log("New Production");
+            Debug.Log("New Production"); 
 
             MachineMenu.Instance().SetData(MachineMenu.Instance().machine);
         }

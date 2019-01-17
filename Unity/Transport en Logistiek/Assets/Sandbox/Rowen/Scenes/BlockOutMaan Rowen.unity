@@ -3314,6 +3314,11 @@ Prefab:
       propertyPath: m_Name
       value: Iron Refinery
       objectReference: {fileID: 0}
+    - target: {fileID: 114827342749031930, guid: de0452d614598a349aa25b1e111df1f4,
+        type: 2}
+      propertyPath: uniqueID
+      value: IronRefinery_2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0452d614598a349aa25b1e111df1f4, type: 2}
   m_IsPrefabAsset: 0
