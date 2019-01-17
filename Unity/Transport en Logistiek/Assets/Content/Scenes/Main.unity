@@ -913,6 +913,43 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114265975992466476, guid: a246084347460f1449f1f899dfb52a19,
+        type: 2}
+      propertyPath: m_Text
+      value: "Dit is een management game op de MAAN!\nVerzamel grondstoffen door de
+        machines te gebruiken. Breid je basis uit en maak de machines duurzamer om
+        makkelijker te overleven!\n\nBesturing:\nBewegen: WASD / \u2191\u2190\u2193\u2192\r\nDraaien:
+        Middenmuisknop inhouden\r\nInteractie: Linkermuisknop"
+      objectReference: {fileID: 0}
+    - target: {fileID: 224815711485784532, guid: a246084347460f1449f1f899dfb52a19,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -126
+      objectReference: {fileID: 0}
+    - target: {fileID: 224815711485784532, guid: a246084347460f1449f1f899dfb52a19,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 723.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 224815711485784532, guid: a246084347460f1449f1f899dfb52a19,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224161764992679278, guid: a246084347460f1449f1f899dfb52a19,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224161764992679278, guid: a246084347460f1449f1f899dfb52a19,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -441
+      objectReference: {fileID: 0}
+    - target: {fileID: 1484434120724186, guid: a246084347460f1449f1f899dfb52a19, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a246084347460f1449f1f899dfb52a19, type: 2}
   m_IsPrefabAsset: 0
