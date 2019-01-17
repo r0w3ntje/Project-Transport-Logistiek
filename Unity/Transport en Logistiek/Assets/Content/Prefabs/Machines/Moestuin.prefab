@@ -19,8 +19,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4366378519406638}
-  - component: {fileID: 114495971964079912}
-  - component: {fileID: 114814558483652094}
+  - component: {fileID: 114570413815585710}
+  - component: {fileID: 114940135088975808}
+  - component: {fileID: 114006330421800846}
+  - component: {fileID: 114646007344640112}
+  - component: {fileID: 65081240583198360}
   m_Layer: 0
   m_Name: Moestuin
   m_TagString: Untagged
@@ -74,26 +77,10 @@ GameObject:
   - component: {fileID: 4711238718290144}
   - component: {fileID: 33661186181710938}
   - component: {fileID: 23990488917541604}
-  - component: {fileID: 65899771646166562}
   m_Layer: 0
   m_Name: MoesTuinModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1528537975163446
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4934657716724972}
-  m_Layer: 0
-  m_Name: InteractionObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -115,34 +102,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1699430005677738
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4155901173908918}
-  m_Layer: 0
-  m_Name: UnitSpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4155901173908918
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1699430005677738}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4366378519406638}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4366378519406638
 Transform:
   m_ObjectHideFlags: 1
@@ -150,13 +109,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1110423019476954}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 253.01, y: 0, z: 244.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4711238718290144}
   - {fileID: 224766537073144222}
-  - {fileID: 4934657716724972}
-  - {fileID: 4155901173908918}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -172,19 +129,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4366378519406638}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4934657716724972
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1528537975163446}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4366378519406638}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23990488917541604
 MeshRenderer:
@@ -228,18 +172,32 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1401068674303566}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65899771646166562
+--- !u!65 &65081240583198360
 BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1401068674303566}
+  m_GameObject: {fileID: 1110423019476954}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 20, y: 0.5, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114006330421800846
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1110423019476954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3c580f18e812e54d8f1e954de632e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOn: 0
+  unitInput: 4
+  unitOutput: 2
 --- !u!114 &114064068406866090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -305,26 +263,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 2, y: 2}
   m_UseGraphicAlpha: 1
---- !u!114 &114495971964079912
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1110423019476954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fcba41fa97c17f4b91c1309089319fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  neededUnit: 0
-  producedUnit: 2
-  unitPrefab: {fileID: 1096486860187912, guid: 1f9e1ee1a9e85814b8252084f2394420, type: 2}
-  unitSpawnPoint: {fileID: 4155901173908918}
-  interactionObject: {fileID: 4934657716724972}
-  interactionText: {fileID: 114510601266069638}
-  iron_Producing: event:/Machines/IronRefinery_Producing
-  miner_Producing: event:/Machines/Miner
-  machineUpgrade: {fileID: 0}
 --- !u!114 &114510601266069638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -358,6 +296,21 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Gebruik 'E'
+--- !u!114 &114570413815585710
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1110423019476954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fcba41fa97c17f4b91c1309089319fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueID: EnergyGenerator_1
+  machineType: 2
+  machineProduction: {fileID: 0}
+  machineUpgrade: {fileID: 0}
 --- !u!114 &114577050801260518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -372,7 +325,18 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 2, y: 2}
   m_UseGraphicAlpha: 1
---- !u!114 &114814558483652094
+--- !u!114 &114646007344640112
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1110423019476954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 676f9f4403f4065459219f673ac51dc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114940135088975808
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -384,11 +348,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   machineLevel: 0
-  amountPerProducing: 0
-  ironUpgradeCosts: 0
-  costsIncreaseFactor: 2
-  producingTime: 10
-  upgradeText: {fileID: 114064068406866090}
+  upgrades:
+  - unitInputAmount: 1
+    unitOutputAmount: 10
+    energyConsumptionPerSec: 0
+    producingTime: 10
+    ironUpgradeCosts: 2
 --- !u!114 &114953385733727092
 MonoBehaviour:
   m_ObjectHideFlags: 1

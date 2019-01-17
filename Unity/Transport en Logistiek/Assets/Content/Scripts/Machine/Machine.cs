@@ -43,6 +43,9 @@ namespace TransportLogistiek
                 case UnitEnum.Erts:
                     PlayerData.Instance().Add(ref PlayerData.Instance().ore, _amount);
                     break;
+                case UnitEnum.Helium:
+                    PlayerData.Instance().Add(ref PlayerData.Instance().helium, _amount);
+                    break;
             }
         }
 

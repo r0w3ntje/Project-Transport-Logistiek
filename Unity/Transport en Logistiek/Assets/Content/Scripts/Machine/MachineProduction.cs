@@ -30,8 +30,6 @@ namespace TransportLogistiek
         private void Update()
         {
             ProductionProcess();
-
-            //Debug.Log("tIMER: " + productionTimer);
         }
 
         public void StartNewProduction()
@@ -42,11 +40,23 @@ namespace TransportLogistiek
                 {
                     return;
                 }
+                else
+                {
+                    machine.AddUnits(unitInput, -machineUpgrade.upgrades[machineUpgrade.machineLevel].unitInputAmount);
+                }
             }
 
             productionTimer = machineUpgrade.upgrades[machineUpgrade.machineLevel].producingTime;
-            machine.AddUnits(unitOutput, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
 
+            if (machine.machineType == MachineEnum.Miner)
+            {
+                machine.AddUnits(UnitEnum.Helium, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
+                machine.AddUnits(UnitEnum.Erts, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
+            }
+            else
+            {
+                machine.AddUnits(unitOutput, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
+            }
 
             Debug.Log("New Production");
 
@@ -68,7 +78,6 @@ namespace TransportLogistiek
                 {
                     StartNewProduction();
                 }
-
             }
         }
     }
