@@ -413,6 +413,11 @@ MonoBehaviour:
     energyConsumptionPerSec: 1
     producingTime: 5
     ironUpgradeCosts: 1
+  - unitInputAmount: 1
+    unitOutputAmount: 1
+    energyConsumptionPerSec: 0.5
+    producingTime: 5
+    ironUpgradeCosts: 1
 --- !u!198 &198173484803955124
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -50,7 +50,7 @@ namespace TransportLogistiek
             machine = _machine;
 
             isOnToggle.isOn = machine.machineProduction.isOn;
-            //UpdateTexts();
+            UpdateTexts();
         }
 
         //private void FixedUpdate()
@@ -108,20 +108,20 @@ namespace TransportLogistiek
 
         private void UpdateTexts()
         {
-            //nameText.text = machine.machineType.ToString();
+            nameText.text = machine.machineType.ToString();
 
             var upgrade = machine.machineUpgrade.upgrades[machine.machineUpgrade.machineLevel];
 
             //Produce
-            produceText.text = "Produce: " + upgrade.unitOutputAmount + " '" + machine.machineProduction.unitOutput.ToString() + "'";
+            produceText.text = "Produces " + upgrade.unitOutputAmount + " " + machine.machineProduction.unitOutput.ToString() + " using\n" + upgrade.unitInputAmount + " " + machine.machineProduction.unitInput.ToString()+ " and " + (upgrade.energyConsumptionPerSec * upgrade.producingTime).ToString("F0") + " energy";
 
-            if (machine.machineProduction.unitInput != UnitEnum.Geen)
-            {
-                produceText.text += "\nRequires: " + upgrade.unitInputAmount + " '" + machine.machineProduction.unitInput.ToString() + "'";
-            }
+            //if (machine.machineProduction.unitInput != UnitEnum.Geen)
+            //{
+            //    produceText.text += "\nRequires: " + upgrade.unitInputAmount + " '" + machine.machineProduction.unitInput.ToString() + "'";
+            //}
 
             //Upgrade
-            upgradeText.text = upgrade.unitOutputAmount + " '" + machine.machineProduction.unitOutput.ToString() + "' per production \nRequires " + upgrade.ironUpgradeCosts + " 'Iron'";
+            upgradeText.text = upgrade.unitOutputAmount + " " + machine.machineProduction.unitOutput.ToString() + " per production \nRequires " + upgrade.ironUpgradeCosts + " Iron";
         }
     }
 }

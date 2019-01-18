@@ -247,7 +247,12 @@ MonoBehaviour:
   - unitInputAmount: 1
     unitOutputAmount: 10
     energyConsumptionPerSec: 0
-    producingTime: 10
+    producingTime: 5
+    ironUpgradeCosts: 1
+  - unitInputAmount: 1
+    unitOutputAmount: 15
+    energyConsumptionPerSec: 0
+    producingTime: 5
     ironUpgradeCosts: 1
 --- !u!114 &114759604647443580
 MonoBehaviour:
