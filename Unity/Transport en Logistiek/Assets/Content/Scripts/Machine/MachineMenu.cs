@@ -49,6 +49,7 @@ namespace TransportLogistiek
         {
             machine = _machine;
 
+            isOnToggle.isOn = machine.machineProduction.isOn;
             //UpdateTexts();
         }
 
