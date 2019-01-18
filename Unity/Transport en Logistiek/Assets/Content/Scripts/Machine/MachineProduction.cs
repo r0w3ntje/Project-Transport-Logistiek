@@ -58,7 +58,7 @@ namespace TransportLogistiek
                 machine.AddUnits(unitOutput, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
             }
 
-            Debug.Log("New Production"); 
+            Debug.Log("New Production");
 
             MachineMenu.Instance().SetData(MachineMenu.Instance().machine);
         }
@@ -72,6 +72,11 @@ namespace TransportLogistiek
                 {
                     productionTimer -= Time.deltaTime;
                     PlayerData.Instance().Add(ref PlayerData.Instance().energy, -machineUpgrade.upgrades[machineUpgrade.machineLevel].energyConsumptionPerSec * Time.deltaTime);
+                }
+
+                if (machineUpgrade.upgrades[machineUpgrade.machineLevel].energyConsumptionPerSec == 0f)
+                {
+                    productionTimer -= Time.deltaTime;
                 }
 
                 if (productionTimer <= 0f)

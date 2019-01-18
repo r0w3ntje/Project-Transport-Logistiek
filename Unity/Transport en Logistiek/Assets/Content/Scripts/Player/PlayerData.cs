@@ -25,8 +25,7 @@ public class PlayerData : Singleton<PlayerData>
         PlayerPrefs.DeleteAll();
         LoadData();
 
-        Add(ref ore, 25);
-        Add(ref energy, 100);
+        Add(ref energy, 50);
     }
 
     private void LoadData()
