@@ -37,14 +37,13 @@ namespace TransportLogistiek
 
         public void Upgrade()
         {
-            if (machineLevel >= upgrades.Count - 1)
-            {
-                return;
-            }
-
             if (PlayerData.Instance().HasSufficientUnits(UnitEnum.Ijzer, upgrades[machineLevel].ironUpgradeCosts))
             {
                 machineLevel++;
+                if (machineLevel >= upgrades.Count - 1)
+                {
+                    machineLevel = upgrades.Count - 1;
+                }
                 Save();
             }
 
@@ -67,67 +66,5 @@ namespace TransportLogistiek
 
             public int ironUpgradeCosts;
         }
-
-        //[SerializeField] private int machineLevel;
-
-        //[Space(8)]
-
-        //public int amountPerProducing;
-        //public int ironUpgradeCosts;
-        //[SerializeField] private float costsIncreaseFactor = 2f;
-
-        //[Space(8)]
-
-        //public float producingTime;
-
-        //[Space(8)]
-
-        //public Text upgradeText;
-
-        //private void Start()
-        //{
-        //    machineLevel = 1;
-
-        //    UpdateMachineStats();
-        //}
-
-        //public void Upgrade()
-        //{
-        //    ironUpgradeCosts--;
-        //    PlayerData.Instance().Add(ref PlayerData.Instance().iron, -1);
-
-        //    if (ironUpgradeCosts <= 0)
-        //    {
-        //        machineLevel++;
-
-        //        UpdateMachineStats();
-
-        //        //GetComponent<Machine>().SetText();
-        //    }
-        //    else UpdateTexts();
-        //}
-
-        //private void UpdateMachineStats()
-        //{
-        //    ironUpgradeCosts = Mathf.RoundToInt(machineLevel * machineLevel * costsIncreaseFactor);
-        //    amountPerProducing = machineLevel;
-
-        //    ResetProductionTimer();
-
-        //    UpdateTexts();
-        //}
-
-        //private void UpdateTexts()
-        //{
-        //    upgradeText.text = "Je hebt " + ironUpgradeCosts + " " + (ironUpgradeCosts == 0 ? "Ijzer krat" : "Ijzeren kratten ") + "nodig om de machine te verbeteren.\nVerbeter '" + PlayerInteraction.Instance().upgradeKeyBind + "'";
-        //}
-
-        //private void ResetProductionTimer()
-        //{
-        //    var a = 11f - machineLevel;
-        //    if (a < 2f) a = 2f;
-
-        //    producingTime = a;
-        //}
     }
 }

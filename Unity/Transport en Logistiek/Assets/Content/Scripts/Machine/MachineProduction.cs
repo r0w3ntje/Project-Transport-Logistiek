@@ -24,7 +24,7 @@ namespace TransportLogistiek
             machine = GetComponent<Machine>();
             machineUpgrade = GetComponent<MachineUpgrade>();
 
-            productionTimer = machineUpgrade.upgrades[machineUpgrade.machineLevel].producingTime;
+            //productionTimer = machineUpgrade.upgrades[machineUpgrade.machineLevel].producingTime;
         }
 
         private void Update()
@@ -34,6 +34,15 @@ namespace TransportLogistiek
 
         public void StartNewProduction()
         {
+            if (machine.machineType == MachineEnum.EnergyGenerator)
+            {
+                if ((PlayerData.Instance().energy + machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount) >= PlayerData.Instance().maxEnergy)
+                {
+                    productionTimer = machineUpgrade.upgrades[machineUpgrade.machineLevel].producingTime;
+                    return;
+                }
+            }
+
             if (unitInput != UnitEnum.Geen)
             {
                 if (PlayerData.Instance().HasSufficientUnits(unitInput, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitInputAmount) == false)

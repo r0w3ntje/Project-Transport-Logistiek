@@ -113,7 +113,7 @@ namespace TransportLogistiek
             var upgrade = machine.machineUpgrade.upgrades[machine.machineUpgrade.machineLevel];
 
             //Produce
-            produceText.text = "Produces " + upgrade.unitOutputAmount + " " + machine.machineProduction.unitOutput.ToString() + " using\n" + upgrade.unitInputAmount + " " + machine.machineProduction.unitInput.ToString()+ " and " + (upgrade.energyConsumptionPerSec * upgrade.producingTime).ToString("F0") + " energy";
+            produceText.text = "Produces " + upgrade.unitOutputAmount + " " + machine.machineProduction.unitOutput.ToString() + " using\n" + upgrade.unitInputAmount + " " + machine.machineProduction.unitInput.ToString()+ " and " + (upgrade.energyConsumptionPerSec * upgrade.producingTime).ToString("F1") + " energy";
 
             //if (machine.machineProduction.unitInput != UnitEnum.Geen)
             //{
