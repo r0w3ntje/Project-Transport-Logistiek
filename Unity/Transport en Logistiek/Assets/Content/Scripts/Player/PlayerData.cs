@@ -10,26 +10,29 @@ public class PlayerData : Singleton<PlayerData>
     [Header("Variables")]
     public int iron;
     public int ore;
+    public int helium;
     public float energy;
+    public float maxEnergy;
 
     [Header("UI Elements")]
     [SerializeField] private Text ironText;
     [SerializeField] private Text oreText;
-    [SerializeField] private Text energyText;
+    [SerializeField] private Text heliumText;
+    [SerializeField] private Slider energyBar;
 
     private void Start()
     {
         PlayerPrefs.DeleteAll();
         LoadData();
 
-        Add(ref ore, 25);
-        Add(ref energy, 13);
+        Add(ref energy, 50);
     }
 
     private void LoadData()
     {
         PointSystem.Data(Action.Load, "iron", ref iron);
         PointSystem.Data(Action.Load, "ore", ref ore);
+        PointSystem.Data(Action.Load, "helium", ref helium);
         PointSystem.Data(Action.Load, "energy", ref energy);
 
         UpdateTexts();
@@ -40,6 +43,7 @@ public class PlayerData : Singleton<PlayerData>
     {
         PointSystem.Data(Action.Save, "iron", ref iron);
         PointSystem.Data(Action.Save, "ore", ref ore);
+        PointSystem.Data(Action.Save, "helium", ref helium);
         PointSystem.Data(Action.Save, "energy", ref energy);
     }
 
@@ -56,7 +60,8 @@ public class PlayerData : Singleton<PlayerData>
     {
         ironText.text = iron.ToString();
         oreText.text = ore.ToString();
-        energyText.text = energy.ToString();
+        heliumText.text = helium.ToString();
+        energyBar.value = energy / maxEnergy;
     }
 
     public bool HasSufficientUnits<T>(UnitEnum _unit, T _amount)
@@ -77,6 +82,10 @@ public class PlayerData : Singleton<PlayerData>
                 break;
             case UnitEnum.Erts:
                 if (ore >= (int)variable)
+                    hasSufficientUnits = true;
+                break;
+            case UnitEnum.Helium:
+                if (helium >= (int)variable)
                     hasSufficientUnits = true;
                 break;
             default:

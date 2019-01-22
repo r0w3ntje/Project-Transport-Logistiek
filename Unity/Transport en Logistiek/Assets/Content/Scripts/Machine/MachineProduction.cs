@@ -24,29 +24,48 @@ namespace TransportLogistiek
             machine = GetComponent<Machine>();
             machineUpgrade = GetComponent<MachineUpgrade>();
 
-            productionTimer = machineUpgrade.upgrades[machineUpgrade.machineLevel].producingTime;
+            //productionTimer = machineUpgrade.upgrades[machineUpgrade.machineLevel].producingTime;
         }
 
         private void Update()
         {
             ProductionProcess();
-
-            Debug.Log("tIMER: " + productionTimer);
         }
 
         public void StartNewProduction()
         {
+            if (machine.machineType == MachineEnum.EnergyGenerator)
+            {
+                if ((PlayerData.Instance().energy + machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount) >= PlayerData.Instance().maxEnergy)
+                {
+                    productionTimer = machineUpgrade.upgrades[machineUpgrade.machineLevel].producingTime;
+                    return;
+                }
+            }
+
             if (unitInput != UnitEnum.Geen)
             {
                 if (PlayerData.Instance().HasSufficientUnits(unitInput, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitInputAmount) == false)
                 {
                     return;
                 }
+                else
+                {
+                    machine.AddUnits(unitInput, -machineUpgrade.upgrades[machineUpgrade.machineLevel].unitInputAmount);
+                }
             }
 
             productionTimer = machineUpgrade.upgrades[machineUpgrade.machineLevel].producingTime;
-            machine.AddUnits(unitOutput, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
 
+            if (machine.machineType == MachineEnum.Miner)
+            {
+                machine.AddUnits(UnitEnum.Helium, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
+                machine.AddUnits(UnitEnum.Erts, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
+            }
+            else
+            {
+                machine.AddUnits(unitOutput, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
+            }
 
             Debug.Log("New Production");
 
@@ -64,11 +83,15 @@ namespace TransportLogistiek
                     PlayerData.Instance().Add(ref PlayerData.Instance().energy, -machineUpgrade.upgrades[machineUpgrade.machineLevel].energyConsumptionPerSec * Time.deltaTime);
                 }
 
+                if (machineUpgrade.upgrades[machineUpgrade.machineLevel].energyConsumptionPerSec == 0f)
+                {
+                    productionTimer -= Time.deltaTime;
+                }
+
                 if (productionTimer <= 0f)
                 {
                     StartNewProduction();
                 }
-
             }
         }
     }
