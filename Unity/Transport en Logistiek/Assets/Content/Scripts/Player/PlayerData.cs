@@ -20,9 +20,13 @@ public class PlayerData : Singleton<PlayerData>
     [SerializeField] private Text heliumText;
     [SerializeField] private Slider energyBar;
 
-    private void Start()
+    private void Awake()
     {
         PlayerPrefs.DeleteAll();
+    }
+
+    private void Start()
+    {
         LoadData();
 
         Add(ref energy, 50);

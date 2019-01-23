@@ -16,13 +16,12 @@ namespace TransportLogistiek
         [Header("Is On")]
         [SerializeField] private Toggle isOnToggle;
 
-        [Header("Produce")]
-        [SerializeField] private Text produceText;
-        [SerializeField] private Image produceButtonImage;
-
         [Header("Upgrade")]
-        [SerializeField] private Text upgradeText;
+        [SerializeField] private Text upgradeInfoText;
         [SerializeField] private Image upgradeButtonImage;
+
+        [Header("Info")]
+        [SerializeField] private Text infoText;
 
         [Header("Colors")]
         [SerializeField] private Color active;
@@ -112,16 +111,10 @@ namespace TransportLogistiek
 
             var upgrade = machine.machineUpgrade.upgrades[machine.machineUpgrade.machineLevel];
 
-            //Produce
-            produceText.text = "Produces " + upgrade.unitOutputAmount + " " + machine.machineProduction.unitOutput.ToString() + " using\n" + upgrade.unitInputAmount + " " + machine.machineProduction.unitInput.ToString()+ " and " + (upgrade.energyConsumptionPerSec * upgrade.producingTime).ToString("F1") + " energy";
-
-            //if (machine.machineProduction.unitInput != UnitEnum.Geen)
-            //{
-            //    produceText.text += "\nRequires: " + upgrade.unitInputAmount + " '" + machine.machineProduction.unitInput.ToString() + "'";
-            //}
-
             //Upgrade
-            upgradeText.text = upgrade.unitOutputAmount + " " + machine.machineProduction.unitOutput.ToString() + " per production \nRequires " + upgrade.ironUpgradeCosts + " Iron";
+            upgradeInfoText.text = upgrade.unitOutputAmount + " " + machine.machineProduction.unitOutput.ToString() + " per production \nRequires " + upgrade.ironUpgradeCosts + " Iron";
+
+            infoText.text = machine.infoText;
         }
     }
 }

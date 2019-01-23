@@ -22,6 +22,8 @@ namespace TransportLogistiek
         [HideInInspector] public MachineProduction machineProduction;
         [HideInInspector] public MachineUpgrade machineUpgrade;
 
+        public string infoText;
+
         #endregion
 
         private void Start()

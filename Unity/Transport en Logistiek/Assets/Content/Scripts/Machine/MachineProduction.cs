@@ -24,7 +24,7 @@ namespace TransportLogistiek
             machine = GetComponent<Machine>();
             machineUpgrade = GetComponent<MachineUpgrade>();
 
-            //productionTimer = machineUpgrade.upgrades[machineUpgrade.machineLevel].producingTime;
+            productionTimer = machineUpgrade.upgrades[machineUpgrade.machineLevel].producingTime;
         }
 
         private void Update()
@@ -77,7 +77,7 @@ namespace TransportLogistiek
         {
             if (isOn)
             {
-                if (PlayerData.Instance().energy >= 0f)
+                if (PlayerData.Instance().energy >= 0f && productionTimer > 0f)
                 {
                     productionTimer -= Time.deltaTime;
                     PlayerData.Instance().Add(ref PlayerData.Instance().energy, -machineUpgrade.upgrades[machineUpgrade.machineLevel].energyConsumptionPerSec * Time.deltaTime);

@@ -391,10 +391,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcba41fa97c17f4b91c1309089319fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uniqueID: Iron_Refinery_1
-  machineType: 1
+  uniqueID: Iron_Refinery_0
+  machineType: 0
   machineProduction: {fileID: 0}
   machineUpgrade: {fileID: 0}
+  infoText: The refinery smelts Ore into Iron
 --- !u!114 &114828124417164320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -411,13 +412,8 @@ MonoBehaviour:
   - unitInputAmount: 1
     unitOutputAmount: 1
     energyConsumptionPerSec: 1
-    producingTime: 5
-    ironUpgradeCosts: 1
-  - unitInputAmount: 1
-    unitOutputAmount: 1
-    energyConsumptionPerSec: 0.5
-    producingTime: 5
-    ironUpgradeCosts: 1
+    producingTime: 10
+    ironUpgradeCosts: 3
 --- !u!198 &198173484803955124
 ParticleSystem:
   m_ObjectHideFlags: 1

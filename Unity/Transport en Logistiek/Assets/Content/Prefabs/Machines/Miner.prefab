@@ -568,16 +568,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   machineLevel: 0
   upgrades:
-  - unitInputAmount: 1
-    unitOutputAmount: 1
+  - unitInputAmount: 0
+    unitOutputAmount: 0
     energyConsumptionPerSec: 1
-    producingTime: 5
-    ironUpgradeCosts: 1
-  - unitInputAmount: 1
-    unitOutputAmount: 1
-    energyConsumptionPerSec: 0.5
-    producingTime: 5
-    ironUpgradeCosts: 1
+    producingTime: 10
+    ironUpgradeCosts: 3
 --- !u!114 &114397484408931752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -600,10 +595,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcba41fa97c17f4b91c1309089319fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uniqueID: Miner_1
+  uniqueID: Miner_0
   machineType: 0
   machineProduction: {fileID: 0}
   machineUpgrade: {fileID: 0}
+  infoText: The miner mines Helium and Ore
 --- !u!114 &114570942299688020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -617,7 +613,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOn: 0
   unitInput: 0
-  unitOutput: 3
+  unitOutput: 4
 --- !u!114 &114776056754178400
 MonoBehaviour:
   m_ObjectHideFlags: 1
