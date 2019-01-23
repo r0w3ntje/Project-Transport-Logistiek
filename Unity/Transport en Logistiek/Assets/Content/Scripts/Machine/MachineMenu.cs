@@ -52,49 +52,6 @@ namespace TransportLogistiek
             UpdateTexts();
         }
 
-        //private void FixedUpdate()
-        //{
-        //    if (machine == null) return;
-
-        //    //CheckProduction();
-        //    CheckUpgrade();
-        //}
-
-        //private void CheckProduction()
-        //{
-        //    // Not producing at the moment
-        //    if (machine.producing == null)
-        //    {
-        //        // Has enough resources for the production
-        //        if (PlayerData.Instance().HasSufficientUnits(machine.unitInput, machine.upgrades[machine.machineLevel].neededAmount))
-        //        {
-        //            produceButtonImage.color = active;
-        //            return;
-        //        }
-
-        //        produceButtonImage.color = inActive;
-        //    }
-        //    else produceButtonImage.color = inActive;
-        //}
-
-        //private void CheckUpgrade()
-        //{
-        //    // Has enough resources for the production
-        //    if (PlayerData.Instance().HasSufficientUnits(UnitEnum.Ijzer, machine.upgrades[machine.machineLevel].ironUpgradeCosts))
-        //    {
-        //        upgradeButtonImage.color = active;
-        //        return;
-        //    }
-
-        //    upgradeButtonImage.color = inActive;
-        //}
-
-
-        //public void Produce()
-        //{
-        //    machine.StartProduction();
-        //}
-
         public void MachineOnOff()
         {
             machine.machineProduction.isOn = isOnToggle.isOn;
