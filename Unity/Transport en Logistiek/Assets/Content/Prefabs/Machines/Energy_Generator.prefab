@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqueID: Energy_Generator_0
-  machineType: 0
+  machineType: 2
   machineProduction: {fileID: 0}
   machineUpgrade: {fileID: 0}
   infoText: This machine generates electricity

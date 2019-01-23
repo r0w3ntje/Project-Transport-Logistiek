@@ -36,7 +36,7 @@ namespace TransportLogistiek
         {
             if (machine.machineType == MachineEnum.EnergyGenerator)
             {
-                if ((PlayerData.Instance().energy + machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount) >= PlayerData.Instance().maxEnergy)
+                if (PlayerData.Instance().energy + machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount >= PlayerData.Instance().maxEnergy)
                 {
                     productionTimer = machineUpgrade.upgrades[machineUpgrade.machineLevel].producingTime;
                     return;
