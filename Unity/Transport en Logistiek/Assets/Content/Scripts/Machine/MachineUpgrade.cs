@@ -34,14 +34,15 @@ namespace TransportLogistiek
         {
             if (PlayerData.Instance().HasSufficientUnits(UnitEnum.Ijzer, upgrades[machineLevel].ironUpgradeCosts))
             {
-                PlayerData.Instance().Add(ref PlayerData.Instance().iron, -upgrades[machineLevel].ironUpgradeCosts);
-
                 machineLevel++;
                 if (machineLevel >= upgrades.Count - 1)
                 {
                     machineLevel = upgrades.Count - 1;
+                    return;
                 }
                 Save();
+
+                PlayerData.Instance().Add(ref PlayerData.Instance().iron, -upgrades[machineLevel - 1].ironUpgradeCosts);
                 MachineMenu.Instance().SetData(MachineMenu.Instance().machine);
             }
         }

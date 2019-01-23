@@ -246,10 +246,20 @@ MonoBehaviour:
   machineLevel: 0
   upgrades:
   - unitInputAmount: 1
+    unitOutputAmount: 15
+    energyConsumptionPerSec: 0
+    producingTime: 10
+    ironUpgradeCosts: 5
+  - unitInputAmount: 1
     unitOutputAmount: 20
     energyConsumptionPerSec: 0
     producingTime: 10
-    ironUpgradeCosts: 3
+    ironUpgradeCosts: 15
+  - unitInputAmount: 1
+    unitOutputAmount: 25
+    energyConsumptionPerSec: 0
+    producingTime: 10
+    ironUpgradeCosts: 30
 --- !u!114 &114759604647443580
 MonoBehaviour:
   m_ObjectHideFlags: 1
