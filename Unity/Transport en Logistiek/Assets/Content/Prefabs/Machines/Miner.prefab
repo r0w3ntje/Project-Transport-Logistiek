@@ -569,7 +569,7 @@ MonoBehaviour:
   machineLevel: 0
   upgrades:
   - unitInputAmount: 0
-    unitOutputAmount: 0
+    unitOutputAmount: 1
     energyConsumptionPerSec: 1
     producingTime: 10
     ironUpgradeCosts: 3
