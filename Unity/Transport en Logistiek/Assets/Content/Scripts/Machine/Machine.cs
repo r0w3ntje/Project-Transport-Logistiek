@@ -28,27 +28,8 @@ namespace TransportLogistiek
 
         private void Start()
         {
-            machineProduction = GetComponent<MachineProduction>();
-            machineUpgrade = GetComponent<MachineUpgrade>();
-        }
-
-        public void AddUnits(UnitEnum _unit, int _amount)
-        {
-            switch (_unit)
-            {
-                case UnitEnum.Ijzer:
-                    PlayerData.Instance().Add(ref PlayerData.Instance().iron, _amount);
-                    break;
-                case UnitEnum.Stroom:
-                    PlayerData.Instance().Add(ref PlayerData.Instance().energy, _amount);
-                    break;
-                case UnitEnum.Erts:
-                    PlayerData.Instance().Add(ref PlayerData.Instance().ore, _amount);
-                    break;
-                case UnitEnum.Helium:
-                    PlayerData.Instance().Add(ref PlayerData.Instance().helium, _amount);
-                    break;
-            }
+            machineProduction = GetComponent(typeof(MachineProduction)) as MachineProduction;
+            machineUpgrade = GetComponent(typeof(MachineUpgrade)) as MachineUpgrade;
         }
 
         #region Fmod Audio

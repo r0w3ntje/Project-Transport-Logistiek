@@ -8,10 +8,6 @@ using UnityEngine.UI;
 public class PlayerData : Singleton<PlayerData>
 {
     [Header("Variables")]
-    public int iron;
-    public int ore;
-    public int helium;
-    public float energy;
     public float maxEnergy;
 
     [Header("UI Elements")]
@@ -20,84 +16,69 @@ public class PlayerData : Singleton<PlayerData>
     [SerializeField] private Text heliumText;
     [SerializeField] private Slider energyBar;
 
-    private void Awake()
+    public Dictionary<UnitEnum, float> unitData = new Dictionary<UnitEnum, float>
     {
-        PlayerPrefs.DeleteAll();
-    }
+        { UnitEnum.Iron, 0f },
+        { UnitEnum.Energy, 0f },
+        { UnitEnum.Ore, 0f },
+        { UnitEnum.Helium, 0f }
+    };
+
+    //private void Awake()
+    //{
+    //    PlayerPrefs.DeleteAll();
+    //}
 
     private void Start()
     {
-        LoadData();
+        //LoadData();
 
-        Add(ref energy, 50);
+        Add(UnitEnum.Energy, 50f);
     }
 
-    private void LoadData()
+    //private void LoadData()
+    //{
+    //    PointSystem.Data(Action.Load, "iron", ref iron);
+    //    PointSystem.Data(Action.Load, "ore", ref ore);
+    //    PointSystem.Data(Action.Load, "helium", ref helium);
+    //    PointSystem.Data(Action.Load, "energy", ref energy);
+
+    //    UpdateTexts();
+    //}
+
+    //[ContextMenu("Save")]
+    //private void SaveData()
+    //{
+    //    PointSystem.Data(Action.Save, "iron", ref iron);
+    //    PointSystem.Data(Action.Save, "ore", ref ore);
+    //    PointSystem.Data(Action.Save, "helium", ref helium);
+    //    PointSystem.Data(Action.Save, "energy", ref energy);
+    //}
+
+    public void Add(UnitEnum _unit, float _amount)
     {
-        PointSystem.Data(Action.Load, "iron", ref iron);
-        PointSystem.Data(Action.Load, "ore", ref ore);
-        PointSystem.Data(Action.Load, "helium", ref helium);
-        PointSystem.Data(Action.Load, "energy", ref energy);
+        unitData[_unit] += _amount;
 
-        UpdateTexts();
-    }
+        //Debug.Log(_unit + ", " + unitData[_unit]);
 
-    [ContextMenu("Save")]
-    private void SaveData()
-    {
-        PointSystem.Data(Action.Save, "iron", ref iron);
-        PointSystem.Data(Action.Save, "ore", ref ore);
-        PointSystem.Data(Action.Save, "helium", ref helium);
-        PointSystem.Data(Action.Save, "energy", ref energy);
-    }
+        //PointSystem.Add(ref unitData[_unit], _amount);
 
-    public void Add<T>(ref T _var, T _amount)
-    {
-        PointSystem.Add(ref _var, _amount);
-
-        SaveData();
+        //SaveData();
 
         UpdateTexts();
     }
 
     private void UpdateTexts()
     {
-        ironText.text = iron.ToString();
-        oreText.text = ore.ToString();
-        heliumText.text = helium.ToString();
-        energyBar.value = energy / maxEnergy;
+        ironText.text = unitData[UnitEnum.Iron].ToString();
+        oreText.text = unitData[UnitEnum.Ore].ToString();
+        heliumText.text = unitData[UnitEnum.Helium].ToString();
+        energyBar.value = unitData[UnitEnum.Energy] / maxEnergy;
     }
 
-    public bool HasSufficientUnits<T>(UnitEnum _unit, T _amount)
+    public bool HasSufficientUnits(UnitEnum _unit, float _amount)
     {
-        bool hasSufficientUnits = false;
-
-        object variable = _amount;
-
-        switch (_unit)
-        {
-            case UnitEnum.Ijzer:
-                if (iron >= (int)variable)
-                    hasSufficientUnits = true;
-                break;
-            case UnitEnum.Stroom:
-                if (energy >= (float)variable)
-                    hasSufficientUnits = true;
-                break;
-            case UnitEnum.Erts:
-                if (ore >= (int)variable)
-                    hasSufficientUnits = true;
-                break;
-            case UnitEnum.Helium:
-                if (helium >= (int)variable)
-                    hasSufficientUnits = true;
-                break;
-            default:
-                hasSufficientUnits = false;
-                break;
-        }
-
-        return hasSufficientUnits;
+        return unitData[_unit] >= _amount;
     }
 
     public float LoadFloat(string playerprefs)

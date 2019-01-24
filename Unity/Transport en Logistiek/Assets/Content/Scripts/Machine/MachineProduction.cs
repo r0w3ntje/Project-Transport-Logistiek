@@ -36,7 +36,7 @@ namespace TransportLogistiek
         {
             if (machine.machineType == MachineEnum.EnergyGenerator)
             {
-                if (PlayerData.Instance().energy + machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount >= PlayerData.Instance().maxEnergy)
+                if (PlayerData.Instance().unitData[UnitEnum.Energy] + machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount >= PlayerData.Instance().maxEnergy)
                 {
                     productionTimer = machineUpgrade.upgrades[machineUpgrade.machineLevel].producingTime;
                     return;
@@ -51,7 +51,7 @@ namespace TransportLogistiek
                 }
                 else
                 {
-                    machine.AddUnits(unitInput, -machineUpgrade.upgrades[machineUpgrade.machineLevel].unitInputAmount);
+                    PlayerData.Instance().Add(unitInput, -machineUpgrade.upgrades[machineUpgrade.machineLevel].unitInputAmount);
                 }
             }
 
@@ -59,12 +59,12 @@ namespace TransportLogistiek
 
             if (machine.machineType == MachineEnum.Miner)
             {
-                machine.AddUnits(UnitEnum.Helium, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
-                machine.AddUnits(UnitEnum.Erts, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
+                PlayerData.Instance().Add(UnitEnum.Helium, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
+                PlayerData.Instance().Add(UnitEnum.Ore, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
             }
             else
             {
-                machine.AddUnits(unitOutput, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
+                PlayerData.Instance().Add(unitOutput, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
             }
 
             Debug.Log("New Production");
@@ -77,10 +77,10 @@ namespace TransportLogistiek
         {
             if (isOn)
             {
-                if (PlayerData.Instance().energy >= 0f && productionTimer > 0f)
+                if (PlayerData.Instance().unitData[UnitEnum.Energy] >= 0f && productionTimer > 0f)
                 {
                     productionTimer -= Time.deltaTime;
-                    PlayerData.Instance().Add(ref PlayerData.Instance().energy, -machineUpgrade.upgrades[machineUpgrade.machineLevel].energyConsumptionPerSec * Time.deltaTime);
+                    PlayerData.Instance().Add(UnitEnum.Energy, -machineUpgrade.upgrades[machineUpgrade.machineLevel].energyConsumptionPerSec * Time.deltaTime);
                 }
 
                 if (machineUpgrade.upgrades[machineUpgrade.machineLevel].energyConsumptionPerSec == 0f)
