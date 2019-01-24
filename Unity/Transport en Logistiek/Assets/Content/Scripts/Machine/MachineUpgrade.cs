@@ -50,18 +50,23 @@ namespace TransportLogistiek
         [System.Serializable]
         public class MachineUpgrades
         {
-            [Header("Production")]
-            public int unitInputAmount;
-            public int unitOutputAmount;
+            [Header("Upgrade")]
+
+            public Unit[] unitInput;
+            public Unit[] unitOutput;
 
             [Space(8)]
 
             public float energyConsumptionPerSec;
             public float producingTime;
-
-            [Space(8)]
-
             public int ironUpgradeCosts;
+        }
+
+        [System.Serializable]
+        public class Unit
+        {
+            public UnitEnum unit;
+            public int amount = 1;
         }
     }
 }

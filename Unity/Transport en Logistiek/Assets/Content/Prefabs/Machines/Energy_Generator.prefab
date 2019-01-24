@@ -202,9 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c580f18e812e54d8f1e954de632e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOn: 0
-  unitInput: 4
-  unitOutput: 2
+  machineState: 0
 --- !u!114 &114293759159116738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqueID: Energy_Generator_0
-  machineType: 2
+  name: Energy Generator
   machineProduction: {fileID: 0}
   machineUpgrade: {fileID: 0}
   infoText: This machine generates electricity
@@ -245,18 +243,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   machineLevel: 0
   upgrades:
-  - unitInputAmount: 1
-    unitOutputAmount: 15
+  - unitInput:
+    - unit: 4
+      amount: 1
+    unitOutput:
+    - unit: 2
+      amount: 20
     energyConsumptionPerSec: 0
     producingTime: 10
     ironUpgradeCosts: 5
-  - unitInputAmount: 1
-    unitOutputAmount: 20
+  - unitInput:
+    - unit: 4
+      amount: 1
+    unitOutput:
+    - unit: 2
+      amount: 25
     energyConsumptionPerSec: 0
     producingTime: 10
     ironUpgradeCosts: 15
-  - unitInputAmount: 1
-    unitOutputAmount: 25
+  - unitInput:
+    - unit: 4
+      amount: 1
+    unitOutput:
+    - unit: 2
+      amount: 30
     energyConsumptionPerSec: 0
     producingTime: 10
     ironUpgradeCosts: 30

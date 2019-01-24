@@ -48,13 +48,16 @@ namespace TransportLogistiek
         {
             machine = _machine;
 
-            isOnToggle.isOn = machine.machineProduction.isOn;
+            isOnToggle.isOn = machine.machineProduction.machineState == MachineStateEnum.On;
             UpdateTexts();
         }
 
-        public void MachineOnOff()
+        public void MachineState()
         {
-            machine.machineProduction.isOn = isOnToggle.isOn;
+            machine.machineProduction.machineState = isOnToggle.isOn ? MachineStateEnum.On : MachineStateEnum.Off;
+
+            if (machine.machineProduction.machineState == MachineStateEnum.On)
+                machine.machineProduction.StartProduction();
         }
 
         public void Upgrade()
@@ -64,12 +67,12 @@ namespace TransportLogistiek
 
         private void UpdateTexts()
         {
-            nameText.text = machine.machineType.ToString();
+            nameText.text = machine.name;
 
             var upgrade = machine.machineUpgrade.upgrades[machine.machineUpgrade.machineLevel];
 
             //Upgrade
-            upgradeInfoText.text = upgrade.unitOutputAmount + " " + machine.machineProduction.unitOutput.ToString() + " per production \nRequires " + upgrade.ironUpgradeCosts + " Iron";
+            //upgradeInfoText.text = upgrade.unitOutputAmount + " " + machine.machineProduction.unitOutput.ToString() + " per production \nRequires " + upgrade.ironUpgradeCosts + " Iron";
 
             infoText.text = machine.infoText;
         }

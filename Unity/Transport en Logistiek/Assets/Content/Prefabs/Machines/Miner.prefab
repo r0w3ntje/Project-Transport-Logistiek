@@ -568,18 +568,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   machineLevel: 0
   upgrades:
-  - unitInputAmount: 0
-    unitOutputAmount: 1
+  - unitInput: []
+    unitOutput:
+    - unit: 3
+      amount: 1
+    - unit: 4
+      amount: 1
     energyConsumptionPerSec: 1
     producingTime: 10
     ironUpgradeCosts: 5
-  - unitInputAmount: 0
-    unitOutputAmount: 1
+  - unitInput: []
+    unitOutput:
+    - unit: 3
+      amount: 1
+    - unit: 4
+      amount: 1
     energyConsumptionPerSec: 2
     producingTime: 5
     ironUpgradeCosts: 15
-  - unitInputAmount: 0
-    unitOutputAmount: 2
+  - unitInput: []
+    unitOutput:
+    - unit: 3
+      amount: 1
+    - unit: 4
+      amount: 1
     energyConsumptionPerSec: 3
     producingTime: 5
     ironUpgradeCosts: 30
@@ -606,6 +618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqueID: Miner_0
+  name: Miner
   machineType: 0
   machineProduction: {fileID: 0}
   machineUpgrade: {fileID: 0}
@@ -621,9 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c580f18e812e54d8f1e954de632e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOn: 0
-  unitInput: 0
-  unitOutput: 4
+  machineState: 0
 --- !u!114 &114776056754178400
 MonoBehaviour:
   m_ObjectHideFlags: 1

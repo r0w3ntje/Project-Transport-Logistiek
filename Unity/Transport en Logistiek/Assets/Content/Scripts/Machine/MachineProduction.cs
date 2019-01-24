@@ -6,93 +6,113 @@ namespace TransportLogistiek
 {
     public class MachineProduction : MonoBehaviour
     {
-        [Header("Production")]
-        public bool isOn;
-
-        [Space(8)]
-
-        public UnitEnum unitInput;
-        public UnitEnum unitOutput;
+        [Header("Machine Production")]
+        public MachineStateEnum machineState;
 
         private float productionTimer;
 
-        private Machine machine;
         private MachineUpgrade machineUpgrade;
+
+        private void Awake()
+        {
+            machineUpgrade = GetComponent<MachineUpgrade>();
+        }
 
         private void Start()
         {
-            machine = GetComponent<Machine>();
-            machineUpgrade = GetComponent<MachineUpgrade>();
-
-            productionTimer = machineUpgrade.upgrades[machineUpgrade.machineLevel].producingTime;
+            productionTimer = CurrentUpgrade().producingTime;
         }
 
         private void Update()
         {
-            ProductionProcess();
+            Production();
         }
 
-        public void StartNewProduction()
+        private MachineUpgrade.MachineUpgrades CurrentUpgrade()
         {
-            if (machine.machineType == MachineEnum.EnergyGenerator)
+            return machineUpgrade.upgrades[machineUpgrade.machineLevel];
+        }
+
+        public void StartProduction()
+        {
+            bool canProduce = true;
+
+            if (CurrentUpgrade().unitInput.Length != 0)
             {
-                if (PlayerData.Instance().unitData[UnitEnum.Energy] + machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount >= PlayerData.Instance().maxEnergy)
+                for (int i = 0; i < CurrentUpgrade().unitInput.Length; i++)
                 {
-                    productionTimer = machineUpgrade.upgrades[machineUpgrade.machineLevel].producingTime;
-                    return;
+                    if (CurrentUpgrade().unitInput[i].unit != UnitEnum.None)
+                    {
+                        // If there's enough input resources to start production
+                        canProduce = PlayerData.Instance().HasSufficientUnits(CurrentUpgrade().unitInput[i].unit,
+                            CurrentUpgrade().unitInput[i].amount);
+                    }
                 }
             }
 
-            if (unitInput != UnitEnum.Geen)
+            if (canProduce == false)
             {
-                if (PlayerData.Instance().HasSufficientUnits(unitInput, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitInputAmount) == false)
+                return;
+            }
+
+            if (CurrentUpgrade().unitInput.Length != 0)
+            {
+                for (int i = 0; i < CurrentUpgrade().unitInput.Length; i++)
                 {
-                    return;
-                }
-                else
-                {
-                    PlayerData.Instance().Add(unitInput, -machineUpgrade.upgrades[machineUpgrade.machineLevel].unitInputAmount);
+                    if (CurrentUpgrade().unitInput[i].unit != UnitEnum.None)
+                    {
+                        PlayerData.Instance().Add(CurrentUpgrade().unitInput[i].unit, -CurrentUpgrade().unitInput[i].amount);
+                    }
                 }
             }
 
-            productionTimer = machineUpgrade.upgrades[machineUpgrade.machineLevel].producingTime;
-
-            if (machine.machineType == MachineEnum.Miner)
-            {
-                PlayerData.Instance().Add(UnitEnum.Helium, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
-                PlayerData.Instance().Add(UnitEnum.Ore, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
-            }
-            else
-            {
-                PlayerData.Instance().Add(unitOutput, machineUpgrade.upgrades[machineUpgrade.machineLevel].unitOutputAmount);
-            }
+            productionTimer = CurrentUpgrade().producingTime;
 
             Debug.Log("New Production");
 
             MachineMenu.Instance().SetData(MachineMenu.Instance().machine);
         }
 
-        // The production process progress
-        private void ProductionProcess()
+        private void Production()
         {
-            if (isOn)
+            if (machineState == MachineStateEnum.On)
             {
-                if (PlayerData.Instance().unitData[UnitEnum.Energy] >= 0f && productionTimer > 0f)
+                if (PlayerData.Instance().unitData[UnitEnum.Energy] >= 0f)
                 {
+                    PlayerData.Instance().Add(UnitEnum.Energy, -CurrentUpgrade().energyConsumptionPerSec * Time.deltaTime);
                     productionTimer -= Time.deltaTime;
-                    PlayerData.Instance().Add(UnitEnum.Energy, -machineUpgrade.upgrades[machineUpgrade.machineLevel].energyConsumptionPerSec * Time.deltaTime);
                 }
 
-                if (machineUpgrade.upgrades[machineUpgrade.machineLevel].energyConsumptionPerSec == 0f)
+                if (CurrentUpgrade().energyConsumptionPerSec == 0f)
                 {
                     productionTimer -= Time.deltaTime;
                 }
 
                 if (productionTimer <= 0f)
                 {
-                    StartNewProduction();
+                    FinishedProduction();
                 }
             }
+        }
+
+        private void FinishedProduction()
+        {
+            // Add resources
+            if (CurrentUpgrade().unitOutput.Length != 0)
+            {
+                for (int i = 0; i < CurrentUpgrade().unitOutput.Length; i++)
+                {
+                    if (CurrentUpgrade().unitOutput[i].unit != UnitEnum.None)
+                    {
+                        PlayerData.Instance().Add(CurrentUpgrade().unitOutput[i].unit,
+                            CurrentUpgrade().unitOutput[i].amount);
+                    }
+                }
+            }
+
+            productionTimer = CurrentUpgrade().producingTime;
+
+            StartProduction();
         }
     }
 }

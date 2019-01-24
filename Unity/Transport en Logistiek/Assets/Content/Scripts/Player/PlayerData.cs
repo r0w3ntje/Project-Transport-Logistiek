@@ -24,16 +24,12 @@ public class PlayerData : Singleton<PlayerData>
         { UnitEnum.Helium, 0f }
     };
 
-    //private void Awake()
-    //{
-    //    PlayerPrefs.DeleteAll();
-    //}
-
     private void Start()
     {
         //LoadData();
 
         Add(UnitEnum.Energy, 50f);
+        Add(UnitEnum.Helium, 1);
     }
 
     //private void LoadData()
@@ -59,13 +55,16 @@ public class PlayerData : Singleton<PlayerData>
     {
         unitData[_unit] += _amount;
 
-        //Debug.Log(_unit + ", " + unitData[_unit]);
-
         //PointSystem.Add(ref unitData[_unit], _amount);
 
         //SaveData();
 
         UpdateTexts();
+    }
+
+    public bool HasSufficientUnits(UnitEnum _unit, float _amount)
+    {
+        return unitData[_unit] >= _amount;
     }
 
     private void UpdateTexts()
@@ -74,11 +73,6 @@ public class PlayerData : Singleton<PlayerData>
         oreText.text = unitData[UnitEnum.Ore].ToString();
         heliumText.text = unitData[UnitEnum.Helium].ToString();
         energyBar.value = unitData[UnitEnum.Energy] / maxEnergy;
-    }
-
-    public bool HasSufficientUnits(UnitEnum _unit, float _amount)
-    {
-        return unitData[_unit] >= _amount;
     }
 
     public float LoadFloat(string playerprefs)

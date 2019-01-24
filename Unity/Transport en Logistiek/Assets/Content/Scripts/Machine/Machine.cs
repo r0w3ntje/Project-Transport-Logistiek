@@ -16,8 +16,11 @@ namespace TransportLogistiek
         [Header("ID")]
         public string uniqueID;
 
-        [Header("Machine")]
-        public MachineEnum machineType;
+        [Header("Name")]
+        public string name;
+
+        //[Header("Machine")]
+        //public MachineEnum machineType;
 
         [HideInInspector] public MachineProduction machineProduction;
         [HideInInspector] public MachineUpgrade machineUpgrade;
