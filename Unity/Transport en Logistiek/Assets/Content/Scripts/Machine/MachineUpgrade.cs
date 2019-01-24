@@ -32,7 +32,7 @@ namespace TransportLogistiek
 
         public void Upgrade()
         {
-            if (PlayerData.Instance().HasSufficientUnits(UnitEnum.Iron, upgrades[machineLevel].ironUpgradeCosts))
+            if (PlayerData.Instance().HasSufficientUnits(UnitEnum.Ijzer, upgrades[machineLevel].ironUpgradeCosts))
             {
                 machineLevel++;
                 if (machineLevel >= upgrades.Count - 1)
@@ -42,7 +42,7 @@ namespace TransportLogistiek
                 }
                 Save();
 
-                PlayerData.Instance().Add(UnitEnum.Iron, -upgrades[machineLevel - 1].ironUpgradeCosts);
+                PlayerData.Instance().Add(ref PlayerData.Instance().iron, -upgrades[machineLevel - 1].ironUpgradeCosts);
                 MachineMenu.Instance().SetData(MachineMenu.Instance().machine);
             }
         }
