@@ -58,15 +58,13 @@ namespace TransportLogistiek
             }
             else currentRotation = cameraHolder.eulerAngles;
 
-            /*if (Input.GetAxis("Mouse ScrollWheel") != 0f)
+            if (Input.GetAxis("Mouse ScrollWheel") != 0f)
             {
                 zoom += (Input.GetAxis("Mouse ScrollWheel") * zoomSpeed);
-
                 zoom = Mathf.Clamp(zoom, maxZoom.x, maxZoom.y);
 
                 camera.transform.localPosition = new Vector3(0f, 0f, zoom);
-            }*/
-            // Scrollen uitgezet omdat het niet goed werkt met clampen
+            }
         }
     }
 }
