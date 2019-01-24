@@ -9,7 +9,7 @@ namespace TransportLogistiek
         [Header("Machine Production")]
         public MachineStateEnum machineState;
 
-        private float productionTimer;
+        [HideInInspector] public float productionTimer;
 
         private MachineUpgrade machineUpgrade;
 
@@ -28,7 +28,7 @@ namespace TransportLogistiek
             Production();
         }
 
-        private MachineUpgrade.MachineUpgrades CurrentUpgrade()
+        public MachineUpgrade.MachineUpgrades CurrentUpgrade()
         {
             return machineUpgrade.upgrades[machineUpgrade.machineLevel];
         }

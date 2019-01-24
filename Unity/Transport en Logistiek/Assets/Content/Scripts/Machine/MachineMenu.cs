@@ -13,8 +13,9 @@ namespace TransportLogistiek
 
         [SerializeField] private Text nameText;
 
-        [Header("Is On")]
-        [SerializeField] private Toggle isOnToggle;
+        [Header("Toggle")]
+        [SerializeField] private Toggle machineStateToggle;
+        [SerializeField] private Slider progressBar;
 
         [Header("Upgrade")]
         [SerializeField] private Text upgradeInfoText;
@@ -34,11 +35,17 @@ namespace TransportLogistiek
             Close();
         }
 
+        private void Update()
+        {
+            progressBar.value = 1f - (machine.machineProduction.productionTimer / machine.machineProduction.CurrentUpgrade().producingTime);
+        }
+
         public void Open(Machine _machine)
         {
             SetData(_machine);
             menuPanel.SetActive(true);
         }
+
         public void Close()
         {
             menuPanel.SetActive(false);
@@ -48,13 +55,13 @@ namespace TransportLogistiek
         {
             machine = _machine;
 
-            isOnToggle.isOn = machine.machineProduction.machineState == MachineStateEnum.On;
+            machineStateToggle.isOn = machine.machineProduction.machineState == MachineStateEnum.On;
             UpdateTexts();
         }
 
         public void MachineState()
         {
-            machine.machineProduction.machineState = isOnToggle.isOn ? MachineStateEnum.On : MachineStateEnum.Off;
+            machine.machineProduction.machineState = machineStateToggle.isOn ? MachineStateEnum.On : MachineStateEnum.Off;
 
             if (machine.machineProduction.machineState == MachineStateEnum.On)
                 machine.machineProduction.StartProduction();

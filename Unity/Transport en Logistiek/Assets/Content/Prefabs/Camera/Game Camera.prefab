@@ -96,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1030474711918734}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 256, y: 22, z: 256}
+  m_LocalPosition: {x: 288.8, y: 30, z: 258.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4649743369925234}
@@ -237,10 +237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5bdee4335cb60748b6d2c2d718b57d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iron: 0
-  ore: 0
-  helium: 0
-  energy: 0
   maxEnergy: 100
   ironText: {fileID: 0}
   oreText: {fileID: 0}

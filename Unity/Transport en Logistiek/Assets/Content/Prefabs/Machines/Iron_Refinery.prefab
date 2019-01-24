@@ -367,6 +367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   machineState: 0
+  productionTimer: 0
 --- !u!114 &114529781479192204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -391,7 +392,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uniqueID: Iron_Refinery_0
   name: Iron Refinery
-  machineType: 1
   machineProduction: {fileID: 0}
   machineUpgrade: {fileID: 0}
   infoText: The refinery smelts Ore into Iron
