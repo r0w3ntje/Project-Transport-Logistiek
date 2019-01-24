@@ -37,7 +37,8 @@ namespace TransportLogistiek
 
         private void Update()
         {
-            progressBar.value = 1f - (machine.machineProduction.productionTimer / machine.machineProduction.CurrentUpgrade().producingTime);
+            if (machine != null)
+                progressBar.value = 1f - (machine.machineProduction.productionTimer / machine.machineProduction.CurrentUpgrade().producingTime);
         }
 
         public void Open(Machine _machine)
