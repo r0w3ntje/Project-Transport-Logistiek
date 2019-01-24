@@ -33,9 +33,9 @@ namespace TransportLogistiek
             cameraHolder.position += cameraHolder.right * movementSpeed * Input.GetAxis("Horizontal") * Time.deltaTime;
 
             cameraHolder.position = new Vector3(
-                Mathf.Clamp(cameraHolder.position.x, 200, 280),
+                Mathf.Clamp(cameraHolder.position.x, 180, 300),
                 Mathf.Clamp(cameraHolder.position.y, 4, 30),
-                Mathf.Clamp(cameraHolder.position.z, 236, 279));
+                Mathf.Clamp(cameraHolder.position.z, 210, 300));
         }
 
         private void Rotate()
