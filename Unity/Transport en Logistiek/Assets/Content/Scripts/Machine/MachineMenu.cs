@@ -13,8 +13,9 @@ namespace TransportLogistiek
 
         [SerializeField] private Text nameText;
 
-        [Header("Is On")]
-        [SerializeField] private Toggle isOnToggle;
+        [Header("Toggle")]
+        [SerializeField] private Toggle machineStateToggle;
+        [SerializeField] private Slider progressBar;
 
         [Header("Upgrade")]
         [SerializeField] private Text upgradeInfoText;
@@ -34,11 +35,18 @@ namespace TransportLogistiek
             Close();
         }
 
+        private void Update()
+        {
+            if (machine != null)
+                progressBar.value = 1f - (machine.machineProduction.productionTimer / machine.machineProduction.CurrentUpgrade().producingTime);
+        }
+
         public void Open(Machine _machine)
         {
             SetData(_machine);
             menuPanel.SetActive(true);
         }
+
         public void Close()
         {
             menuPanel.SetActive(false);
@@ -48,13 +56,16 @@ namespace TransportLogistiek
         {
             machine = _machine;
 
-            isOnToggle.isOn = machine.machineProduction.isOn;
+            machineStateToggle.isOn = machine.machineProduction.machineState == MachineStateEnum.On;
             UpdateTexts();
         }
 
-        public void MachineOnOff()
+        public void MachineState()
         {
-            machine.machineProduction.isOn = isOnToggle.isOn;
+            machine.machineProduction.machineState = machineStateToggle.isOn ? MachineStateEnum.On : MachineStateEnum.Off;
+
+            if (machine.machineProduction.machineState == MachineStateEnum.On)
+                machine.machineProduction.StartProduction();
         }
 
         public void Upgrade()
@@ -64,12 +75,12 @@ namespace TransportLogistiek
 
         private void UpdateTexts()
         {
-            nameText.text = machine.machineType.ToString();
+            nameText.text = machine.name;
 
             var upgrade = machine.machineUpgrade.upgrades[machine.machineUpgrade.machineLevel];
 
             //Upgrade
-            upgradeInfoText.text = upgrade.unitOutputAmount + " " + machine.machineProduction.unitOutput.ToString() + " per production \nRequires " + upgrade.ironUpgradeCosts + " Iron";
+            //upgradeInfoText.text = upgrade.unitOutputAmount + " " + machine.machineProduction.unitOutput.ToString() + " per production \nRequires " + upgrade.ironUpgradeCosts + " Iron";
 
             infoText.text = machine.infoText;
         }

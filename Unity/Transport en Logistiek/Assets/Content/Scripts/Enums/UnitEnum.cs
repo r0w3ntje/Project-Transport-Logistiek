@@ -1,8 +1,8 @@
 ﻿public enum UnitEnum
 {
-    Geen = 0,
-    Ijzer = 1,
-    Stroom = 2,
-    Erts = 3,
+    None = 0,
+    Iron = 1,
+    Energy = 2,
+    Ore = 3,
     Helium = 4        
 }

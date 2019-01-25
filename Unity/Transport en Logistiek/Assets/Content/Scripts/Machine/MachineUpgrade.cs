@@ -32,7 +32,7 @@ namespace TransportLogistiek
 
         public void Upgrade()
         {
-            if (PlayerData.Instance().HasSufficientUnits(UnitEnum.Ijzer, upgrades[machineLevel].ironUpgradeCosts))
+            if (PlayerData.Instance().HasSufficientUnits(UnitEnum.Iron, upgrades[machineLevel].ironUpgradeCosts))
             {
                 machineLevel++;
                 if (machineLevel >= upgrades.Count - 1)
@@ -42,7 +42,7 @@ namespace TransportLogistiek
                 }
                 Save();
 
-                PlayerData.Instance().Add(ref PlayerData.Instance().iron, -upgrades[machineLevel - 1].ironUpgradeCosts);
+                PlayerData.Instance().Add(UnitEnum.Iron, -upgrades[machineLevel - 1].ironUpgradeCosts);
                 MachineMenu.Instance().SetData(MachineMenu.Instance().machine);
             }
         }
@@ -50,18 +50,23 @@ namespace TransportLogistiek
         [System.Serializable]
         public class MachineUpgrades
         {
-            [Header("Production")]
-            public int unitInputAmount;
-            public int unitOutputAmount;
+            [Header("Upgrade")]
+
+            public Unit[] unitInput;
+            public Unit[] unitOutput;
 
             [Space(8)]
 
             public float energyConsumptionPerSec;
             public float producingTime;
-
-            [Space(8)]
-
             public int ironUpgradeCosts;
+        }
+
+        [System.Serializable]
+        public class Unit
+        {
+            public UnitEnum unit;
+            public int amount = 1;
         }
     }
 }

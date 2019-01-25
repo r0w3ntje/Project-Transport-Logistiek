@@ -31,6 +31,11 @@ namespace TransportLogistiek
         {
             cameraHolder.position += cameraHolder.forward * movementSpeed * Input.GetAxis("Vertical") * Time.deltaTime;
             cameraHolder.position += cameraHolder.right * movementSpeed * Input.GetAxis("Horizontal") * Time.deltaTime;
+
+            cameraHolder.position = new Vector3(
+                Mathf.Clamp(cameraHolder.position.x, 180, 300),
+                Mathf.Clamp(cameraHolder.position.y, 4, 30),
+                Mathf.Clamp(cameraHolder.position.z, 210, 300));
         }
 
         private void Rotate()
@@ -56,7 +61,6 @@ namespace TransportLogistiek
             if (Input.GetAxis("Mouse ScrollWheel") != 0f)
             {
                 zoom += (Input.GetAxis("Mouse ScrollWheel") * zoomSpeed);
-
                 zoom = Mathf.Clamp(zoom, maxZoom.x, maxZoom.y);
 
                 camera.transform.localPosition = new Vector3(0f, 0f, zoom);

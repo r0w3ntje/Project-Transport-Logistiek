@@ -15,7 +15,7 @@ namespace TransportLogistiek
 
         private void OnMouseEnter()
         {
-            CursorHoverInfo.Instance().hoverText.text = machine.machineType.ToString();
+            CursorHoverInfo.Instance().hoverText.text = machine.name;
             CursorHoverInfo.Instance().hoverText.enabled = true;
         }
 

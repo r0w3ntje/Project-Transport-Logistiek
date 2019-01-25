@@ -568,18 +568,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   machineLevel: 0
   upgrades:
-  - unitInputAmount: 0
-    unitOutputAmount: 1
+  - unitInput: []
+    unitOutput:
+    - unit: 3
+      amount: 1
+    - unit: 4
+      amount: 1
     energyConsumptionPerSec: 1
     producingTime: 10
     ironUpgradeCosts: 5
-  - unitInputAmount: 0
-    unitOutputAmount: 1
+  - unitInput: []
+    unitOutput:
+    - unit: 3
+      amount: 1
+    - unit: 4
+      amount: 1
     energyConsumptionPerSec: 2
     producingTime: 5
     ironUpgradeCosts: 15
-  - unitInputAmount: 0
-    unitOutputAmount: 2
+  - unitInput: []
+    unitOutput:
+    - unit: 3
+      amount: 1
+    - unit: 4
+      amount: 1
     energyConsumptionPerSec: 3
     producingTime: 5
     ironUpgradeCosts: 30
@@ -606,7 +618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqueID: Miner_0
-  machineType: 0
+  name: Miner
   machineProduction: {fileID: 0}
   machineUpgrade: {fileID: 0}
   infoText: The miner mines Helium and Ore
@@ -621,9 +633,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c580f18e812e54d8f1e954de632e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOn: 0
-  unitInput: 0
-  unitOutput: 4
+  machineState: 0
+  productionTimer: 0
 --- !u!114 &114776056754178400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5150,13 +5161,13 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1909427434238266}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -1.45}
+  m_LocalRotation: {x: -0, y: -0.7247734, z: 0, w: -0.6889873}
+  m_LocalPosition: {x: 0, y: 0, z: 1.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4891135193417712}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -267.1, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 10.3, y: 7.95}
