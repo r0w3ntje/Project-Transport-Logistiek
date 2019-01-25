@@ -56,13 +56,11 @@ namespace TransportLogistiek
 
         public void StartProduction()
         {
+            if (machineState == MachineStateEnum.Off) return;
+            if (finishedProducing == false) return;
+
             bool canProduce = HasSufficientInputUnits();
-
-            if (canProduce == false)
-                return;
-
-            if (finishedProducing == false)
-                return;
+            if (canProduce == false) return;
 
             if (CurrentUpgrade().unitInput.Length != 0)
             {
