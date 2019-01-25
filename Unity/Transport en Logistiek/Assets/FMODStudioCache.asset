@@ -17,58 +17,10 @@ MonoBehaviour:
   EditorEvents:
   - {fileID: 114372893471565254}
   - {fileID: 114398904484111852}
-  - {fileID: 114080294831977968}
-  - {fileID: 114643281452811056}
-  - {fileID: 114161037240305978}
-  - {fileID: 114880193056123950}
   MasterBankRef: {fileID: 114907406320815142}
   StringsBankRef: {fileID: 114178168514026220}
-  stringsBankWriteTime: 636839291774934882
+  stringsBankWriteTime: 636796956237846039
   cacheVersion: 2
---- !u!114 &114080294831977968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/Menu/Open
-  guid: 2a9da7f44fed994787e2b1eda7db4f4e
-  Banks:
-  - {fileID: 114907406320815142}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1500
---- !u!114 &114161037240305978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/Menu/Click
-  guid: b720f5e3ecffc94ca218227d2fd96d1c
-  Banks:
-  - {fileID: 114907406320815142}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1608
 --- !u!114 &114178168514026220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,11 +33,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: D:\Periode 3.2\Fmod\Periode 3.2 Game\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636839291774934882
+  lastModified: 636796956237846039
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 970
+    Value: 790
   Exists: 1
 --- !u!114 &114372893471565254
 MonoBehaviour:
@@ -128,86 +80,11 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 114432133325650298}
+  - {fileID: 114418764277860208}
   MinDistance: 1
   MaxDistance: 20
   Length: 12000
 --- !u!114 &114418764277860208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: IsProducing
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114432133325650298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: IsProducing
-  Min: 0
-  Max: 1
-  Default: 0
---- !u!114 &114643281452811056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/Machines/Power
-  guid: 91416c27aad10a4ba0866012567a8f93
-  Banks:
-  - {fileID: 114907406320815142}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 114880322106120060}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 10500
---- !u!114 &114880193056123950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: event:/Menu/Close
-  guid: fde5c2b015e15b4396602d35533d7ec5
-  Banks:
-  - {fileID: 114907406320815142}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1500
---- !u!114 &114880322106120060
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -234,9 +111,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: D:\Periode 3.2\Fmod\Periode 3.2 Game\Build\Desktop\Master Bank.bank
-  lastModified: 636839291774774024
+  lastModified: 636796956237775876
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 422784
+    Value: 249344
   Exists: 1
