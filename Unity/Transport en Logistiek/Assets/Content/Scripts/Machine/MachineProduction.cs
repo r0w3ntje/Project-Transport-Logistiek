@@ -10,6 +10,7 @@ namespace TransportLogistiek
         public MachineStateEnum machineState;
 
         [HideInInspector] public float productionTimer;
+        private bool finishedProducing;
 
         private MachineUpgrade machineUpgrade;
 
@@ -33,9 +34,9 @@ namespace TransportLogistiek
             return machineUpgrade.upgrades[machineUpgrade.machineLevel];
         }
 
-        public void StartProduction()
+        private bool HasSufficientInputUnits()
         {
-            bool canProduce = true;
+            bool hasEnoughUnits = false;
 
             if (CurrentUpgrade().unitInput.Length != 0)
             {
@@ -44,11 +45,21 @@ namespace TransportLogistiek
                     if (CurrentUpgrade().unitInput[i].unit != UnitEnum.None)
                     {
                         // If there's enough input resources to start production
-                        canProduce = PlayerData.Instance().HasSufficientUnits(CurrentUpgrade().unitInput[i].unit,
-                            CurrentUpgrade().unitInput[i].amount);
+                        hasEnoughUnits = PlayerData.Instance().HasSufficientUnits(CurrentUpgrade().unitInput[i].unit, CurrentUpgrade().unitInput[i].amount);
+
+                        //Debug.Log("A: " + CurrentUpgrade().unitInput[i].unit.ToString() + ", B: " + CurrentUpgrade().unitInput[i].amount);
+                        //Debug.Log("C: " + hasEnoughUnits);
                     }
                 }
             }
+            else hasEnoughUnits = true;
+
+            return hasEnoughUnits;
+        }
+
+        public void StartProduction()
+        {
+            bool canProduce = HasSufficientInputUnits();
 
             if (canProduce == false)
             {
@@ -62,13 +73,13 @@ namespace TransportLogistiek
                     if (CurrentUpgrade().unitInput[i].unit != UnitEnum.None)
                     {
                         PlayerData.Instance().Add(CurrentUpgrade().unitInput[i].unit, -CurrentUpgrade().unitInput[i].amount);
+                        //Debug.Log("C: " + CurrentUpgrade().unitInput[i].unit.ToString() + ", D: " + -CurrentUpgrade().unitInput[i].amount);
+                        productionTimer = CurrentUpgrade().producingTime;
+                        Debug.Log("New Production");
+                        finishedProducing = false;
                     }
                 }
             }
-
-            productionTimer = CurrentUpgrade().producingTime;
-
-            Debug.Log("New Production");
 
             MachineMenu.Instance().SetData(MachineMenu.Instance().machine);
         }
@@ -77,40 +88,41 @@ namespace TransportLogistiek
         {
             if (machineState == MachineStateEnum.On)
             {
-                if (PlayerData.Instance().unitData[UnitEnum.Energy] >= 0f)
+                if (productionTimer >= 0f)
                 {
-                    PlayerData.Instance().Add(UnitEnum.Energy, -CurrentUpgrade().energyConsumptionPerSec * Time.deltaTime);
-                    productionTimer -= Time.deltaTime;
-                }
+                    if (PlayerData.Instance().unitData[UnitEnum.Energy] >= 0f)
+                    {
+                        PlayerData.Instance().Add(UnitEnum.Energy, -CurrentUpgrade().energyConsumptionPerSec * Time.deltaTime);
+                        productionTimer -= Time.deltaTime;
+                    }
 
-                if (CurrentUpgrade().energyConsumptionPerSec == 0f)
-                {
-                    productionTimer -= Time.deltaTime;
+                    if (CurrentUpgrade().energyConsumptionPerSec == 0f)
+                        productionTimer -= Time.deltaTime;
                 }
 
                 if (productionTimer <= 0f)
-                {
                     FinishedProduction();
-                }
             }
         }
 
         private void FinishedProduction()
         {
-            // Add resources
-            if (CurrentUpgrade().unitOutput.Length != 0)
+            if (finishedProducing == false)
             {
-                for (int i = 0; i < CurrentUpgrade().unitOutput.Length; i++)
+                // Add resources
+                if (CurrentUpgrade().unitOutput.Length != 0)
                 {
-                    if (CurrentUpgrade().unitOutput[i].unit != UnitEnum.None)
+                    for (int i = 0; i < CurrentUpgrade().unitOutput.Length; i++)
                     {
-                        PlayerData.Instance().Add(CurrentUpgrade().unitOutput[i].unit,
-                            CurrentUpgrade().unitOutput[i].amount);
+                        if (CurrentUpgrade().unitOutput[i].unit != UnitEnum.None)
+                        {
+                            PlayerData.Instance().Add(CurrentUpgrade().unitOutput[i].unit, CurrentUpgrade().unitOutput[i].amount);
+                        }
                     }
                 }
-            }
 
-            productionTimer = CurrentUpgrade().producingTime;
+                finishedProducing = true;
+            }
 
             StartProduction();
         }
