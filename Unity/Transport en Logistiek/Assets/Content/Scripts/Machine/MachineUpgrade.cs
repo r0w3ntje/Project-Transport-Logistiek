@@ -18,17 +18,17 @@ namespace TransportLogistiek
         private void Start()
         {
             machine = GetComponent<Machine>();
-            Load();
+            //Load();
         }
 
-        private void Load()
-        {
-            machineLevel = PlayerData.Instance().LoadInt(machine.uniqueID);
-        }
-        private void Save()
-        {
-            PlayerData.Instance().SaveInt(machine.uniqueID, machineLevel);
-        }
+        //private void Load()
+        //{
+        //    machineLevel = PlayerData.Instance().LoadInt(machine.uniqueID);
+        //}
+        //private void Save()
+        //{
+        //    PlayerData.Instance().SaveInt(machine.uniqueID, machineLevel);
+        //}
 
         public void Upgrade()
         {
@@ -40,7 +40,7 @@ namespace TransportLogistiek
                     machineLevel = upgrades.Count - 1;
                     return;
                 }
-                Save();
+                //Save();
 
                 PlayerData.Instance().Add(UnitEnum.Iron, -upgrades[machineLevel - 1].ironUpgradeCosts);
                 MachineMenu.Instance().SetData(MachineMenu.Instance().machine);

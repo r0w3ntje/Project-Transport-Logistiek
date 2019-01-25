@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Systems.PointSystem;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace TransportLogistiek
 {
@@ -18,9 +16,6 @@ namespace TransportLogistiek
 
         [Header("Name")]
         public string name;
-
-        //[Header("Machine")]
-        //public MachineEnum machineType;
 
         [HideInInspector] public MachineProduction machineProduction;
         [HideInInspector] public MachineUpgrade machineUpgrade;

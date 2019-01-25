@@ -6,7 +6,6 @@ namespace TransportLogistiek
 {
     public class MachineProduction : MonoBehaviour
     {
-        [Header("Machine Production")]
         public MachineStateEnum machineState;
 
         [HideInInspector] public float productionTimer;
