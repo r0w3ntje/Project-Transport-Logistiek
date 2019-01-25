@@ -64,8 +64,7 @@ namespace TransportLogistiek
         {
             machine.machineProduction.machineState = machineStateToggle.isOn ? MachineStateEnum.On : MachineStateEnum.Off;
 
-            if (machine.machineProduction.machineState == MachineStateEnum.On)
-                machine.machineProduction.StartProduction();
+            MachineStateChangeEvent.CallEvent();
         }
 
         public void Upgrade()

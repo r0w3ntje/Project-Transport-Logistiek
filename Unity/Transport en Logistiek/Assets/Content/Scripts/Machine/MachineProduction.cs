@@ -10,13 +10,15 @@ namespace TransportLogistiek
         public MachineStateEnum machineState;
 
         [HideInInspector] public float productionTimer;
-        private bool finishedProducing;
+        private bool finishedProducing = true;
 
         private MachineUpgrade machineUpgrade;
 
         private void Awake()
         {
             machineUpgrade = GetComponent<MachineUpgrade>();
+
+            MachineStateChangeEvent.OnMachineStateChange += StartProduction;
         }
 
         private void Start()
@@ -44,11 +46,7 @@ namespace TransportLogistiek
                 {
                     if (CurrentUpgrade().unitInput[i].unit != UnitEnum.None)
                     {
-                        // If there's enough input resources to start production
                         hasEnoughUnits = PlayerData.Instance().HasSufficientUnits(CurrentUpgrade().unitInput[i].unit, CurrentUpgrade().unitInput[i].amount);
-
-                        //Debug.Log("A: " + CurrentUpgrade().unitInput[i].unit.ToString() + ", B: " + CurrentUpgrade().unitInput[i].amount);
-                        //Debug.Log("C: " + hasEnoughUnits);
                     }
                 }
             }
@@ -62,9 +60,10 @@ namespace TransportLogistiek
             bool canProduce = HasSufficientInputUnits();
 
             if (canProduce == false)
-            {
                 return;
-            }
+
+            if (finishedProducing == false)
+                return;
 
             if (CurrentUpgrade().unitInput.Length != 0)
             {
@@ -73,14 +72,13 @@ namespace TransportLogistiek
                     if (CurrentUpgrade().unitInput[i].unit != UnitEnum.None)
                     {
                         PlayerData.Instance().Add(CurrentUpgrade().unitInput[i].unit, -CurrentUpgrade().unitInput[i].amount);
-                        //Debug.Log("C: " + CurrentUpgrade().unitInput[i].unit.ToString() + ", D: " + -CurrentUpgrade().unitInput[i].amount);
-                        productionTimer = CurrentUpgrade().producingTime;
-                        Debug.Log("New Production");
-                        finishedProducing = false;
                     }
                 }
             }
 
+            Debug.Log("New Production");
+            finishedProducing = false;
+            productionTimer = CurrentUpgrade().producingTime;
             MachineMenu.Instance().SetData(MachineMenu.Instance().machine);
         }
 
@@ -88,7 +86,7 @@ namespace TransportLogistiek
         {
             if (machineState == MachineStateEnum.On)
             {
-                if (productionTimer >= 0f)
+                if (productionTimer >= 0f && finishedProducing == false)
                 {
                     if (PlayerData.Instance().unitData[UnitEnum.Energy] >= 0f)
                     {
@@ -121,6 +119,7 @@ namespace TransportLogistiek
                     }
                 }
 
+                MachineStateChangeEvent.CallEvent();
                 finishedProducing = true;
             }
 
