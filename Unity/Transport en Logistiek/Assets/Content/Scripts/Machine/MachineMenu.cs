@@ -72,16 +72,52 @@ namespace TransportLogistiek
             machine.machineUpgrade.Upgrade();
         }
 
+        private MachineUpgrade.MachineUpgrades CurrentUpgrade(int addIndex = 0)
+        {
+            return machine.machineUpgrade.upgrades[machine.machineUpgrade.machineLevel];
+        }
+
         private void UpdateTexts()
         {
             nameText.text = machine.name;
 
-            var upgrade = machine.machineUpgrade.upgrades[machine.machineUpgrade.machineLevel];
-
             //Upgrade
-            //upgradeInfoText.text = upgrade.unitOutputAmount + " " + machine.machineProduction.unitOutput.ToString() + " per production \nRequires " + upgrade.ironUpgradeCosts + " Iron";
 
-            infoText.text = machine.infoText;
+            upgradeInfoText.text = "Current level: " + (machine.machineUpgrade.machineLevel + 1) + "\nUpgrade costs: " + CurrentUpgrade().ironUpgradeCosts + " Iron";
+
+            string _infoText = "";
+
+            // Needs
+            _infoText += "Requires: ";
+
+            if (CurrentUpgrade().energyConsumptionPerSec > 0f)
+                _infoText += "\n- Energy";
+
+            if (CurrentUpgrade().unitInput.Length != 0)
+            {
+                for (int i = 0; i < CurrentUpgrade().unitInput.Length; i++)
+                {
+                    _infoText += ("\n- " + CurrentUpgrade().unitInput[i].amount + " " + CurrentUpgrade().unitInput[i].unit);
+                }
+            }
+            else
+            {
+                if (CurrentUpgrade().energyConsumptionPerSec == 0f)
+                    _infoText += "\n- Nothing";
+            }
+
+            // Produces
+            if (CurrentUpgrade().unitOutput.Length != 0)
+            {
+                _infoText += "\nProduces: ";
+
+                for (int i = 0; i < CurrentUpgrade().unitOutput.Length; i++)
+                {
+                    _infoText += ("\n- " + CurrentUpgrade().unitOutput[i].amount + " " + CurrentUpgrade().unitOutput[i].unit);
+                }
+            }
+
+            infoText.text = machine.infoText + "\n\n" + _infoText;
         }
     }
 }
