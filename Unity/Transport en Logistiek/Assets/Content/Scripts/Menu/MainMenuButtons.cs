@@ -16,13 +16,13 @@ public class MainMenuButtons : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("BlockOutMaan");
+            SceneManager.LoadScene("BlockOutMaan Rowen");
         }
     }
 
     public void StartGame()
     {
-        SceneManager.LoadScene("BlockOutMaan");
+        SceneManager.LoadScene("BlockOutMaan Rowen");
     }
 
     public void StopGame()

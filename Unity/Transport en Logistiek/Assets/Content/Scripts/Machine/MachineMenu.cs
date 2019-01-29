@@ -28,10 +28,23 @@ namespace TransportLogistiek
         [SerializeField] private Color active;
         [SerializeField] private Color inActive;
 
+        [Header("Audio")]
+        [FMODUnity.EventRef]
+        public string iron = "event:/Machines/IronRefinery_Producing";
+
+        [FMODUnity.EventRef]
+        public string power = "event:/Machines/Power";
+
+        FMOD.Studio.EventInstance producingIron;
+        FMOD.Studio.EventInstance producingPower;
+
         [HideInInspector] public Machine machine;
 
         private void Start()
         {
+            producingIron = FMODUnity.RuntimeManager.CreateInstance(iron);
+            producingPower = FMODUnity.RuntimeManager.CreateInstance(power);
+
             Close();
         }
 
@@ -45,10 +58,23 @@ namespace TransportLogistiek
         {
             SetData(_machine);
             menuPanel.SetActive(true);
+
+            if (this.gameObject.tag == "Iron_Refinery")
+            {
+                Debug.Log("Sound");
+                producingIron.start();
+            }else if(this.gameObject.tag == "Power_Generator")
+            {
+                Debug.Log("Sound");
+                producingPower.start();
+            }
+          
         }
 
         public void Close()
         {
+            producingPower.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            producingIron.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             menuPanel.SetActive(false);
         }
 

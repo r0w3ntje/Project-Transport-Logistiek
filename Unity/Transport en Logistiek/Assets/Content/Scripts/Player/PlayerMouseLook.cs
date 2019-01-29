@@ -10,6 +10,8 @@ public class PlayerMouseLook : MonoBehaviour
     [Range(70, 90)]
     public int FOV;
 
+    
+
     private float currentRotY;
 
     private void Start()
