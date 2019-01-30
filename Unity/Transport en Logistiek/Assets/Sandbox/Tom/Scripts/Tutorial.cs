@@ -12,18 +12,30 @@ public enum TutorialState
     MOVEMENT,
     CAMERAROTATION,
     CAMERASCROLLING,
-    INTERACTIE
+    INTERACTIE,
+    UPGRADEREPAIR,
+    MACHINEONOFF
 }
 
 public class Tutorial : MonoBehaviour
 {
+    [Header("Tutorial Panel/Button")]
     public GameObject tutorialPanel;
+    public GameObject smallerTutorialPanel;
     public Button tutorialButton;
+    public Button smallTutorialPanelButton;
 
+    public GameObject machinePanel;
+
+    [Header("Normal Tutorial Texts")]
     public GameObject movementText;
     public GameObject cameraRotationText;
     public GameObject cameraScrollingText;
     public GameObject interactieText;
+
+    [Header("Small Tutorial Texts")]
+    public GameObject upgrade_repairText;
+    public GameObject machineOnOffText;
 
     public GameObject[] _machines;
 
@@ -31,14 +43,6 @@ public class Tutorial : MonoBehaviour
     {
         tutorialButton.onClick.AddListener(delegate { ChangeState(1); });
         currentState = TutorialState.CLEAR;
-        for (int i = 0; i < _machines.Length; i++)
-        {
-            Debug.Log("Hello");
-            _machines[i].GetComponent<Machine>().enabled = false;
-            _machines[i].GetComponent<MachineInteraction>().enabled = false;
-            _machines[i].GetComponent<MachineUpgrade>().enabled = false;
-            _machines[i].GetComponent<MachineProduction>().enabled = false;
-        }
     }
 
     private bool forwardMovement = false;
@@ -93,6 +97,13 @@ public class Tutorial : MonoBehaviour
         }
     }
 
+    private void MachineOnOffText()
+    {
+        upgrade_repairText.SetActive(false);
+        machineOnOffText.SetActive(true);
+        currentState = TutorialState.UPGRADEREPAIR;
+    }
+
     [System.NonSerialized]
     public static TutorialState currentState;
     public void ChangeState(int newState)
@@ -102,7 +113,6 @@ public class Tutorial : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(currentState);
         if (currentState == TutorialState.MOVEMENT)
         {
             CheckMovement();
@@ -117,13 +127,18 @@ public class Tutorial : MonoBehaviour
         }
         if (currentState == TutorialState.INTERACTIE)
         {
-            for (int i = 0; i < _machines.Length; i++)
+            if (machinePanel.activeSelf)
             {
-                _machines[i].GetComponent<Machine>().enabled = true;
-                _machines[i].GetComponent<MachineInteraction>().enabled = true;
-                _machines[i].GetComponent<MachineUpgrade>().enabled = true;
-                _machines[i].GetComponent<MachineProduction>().enabled = true;
+                smallerTutorialPanel.SetActive(true);
+                smallTutorialPanelButton.onClick.AddListener(MachineOnOffText);
             }
+            else
+            {
+                smallerTutorialPanel.SetActive(false);
+            }
+        }
+        if(currentState == TutorialState.MACHINEONOFF)
+        {
             currentState = TutorialState.CLEAR;
         }
     }
