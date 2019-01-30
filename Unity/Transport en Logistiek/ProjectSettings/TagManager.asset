@@ -10,6 +10,7 @@ TagManager:
   - Iron_Refinery
   - Miner
   - AI
+  - Power_Generator
   layers:
   - Default
   - TransparentFX

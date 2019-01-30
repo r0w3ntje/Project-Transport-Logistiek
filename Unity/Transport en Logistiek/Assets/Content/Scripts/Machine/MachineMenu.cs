@@ -13,35 +13,68 @@ namespace TransportLogistiek
 
         [SerializeField] private Text nameText;
 
-        [Header("Is On")]
-        [SerializeField] private Toggle isOnToggle;
-
-        [Header("Produce")]
-        [SerializeField] private Text produceText;
-        [SerializeField] private Image produceButtonImage;
+        [Header("Toggle")]
+        [SerializeField] private Toggle machineStateToggle;
+        [SerializeField] private Slider progressBar;
 
         [Header("Upgrade")]
-        [SerializeField] private Text upgradeText;
+        [SerializeField] private Text upgradeInfoText;
         [SerializeField] private Image upgradeButtonImage;
+
+        [Header("Info")]
+        [SerializeField] private Text infoText;
 
         [Header("Colors")]
         [SerializeField] private Color active;
         [SerializeField] private Color inActive;
 
+        [Header("Audio")]
+        [FMODUnity.EventRef]
+        public string iron = "event:/Machines/IronRefinery_Producing";
+
+        [FMODUnity.EventRef]
+        public string power = "event:/Machines/Power";
+
+        FMOD.Studio.EventInstance producingIron;
+        FMOD.Studio.EventInstance producingPower;
+
         [HideInInspector] public Machine machine;
 
         private void Start()
         {
+            producingIron = FMODUnity.RuntimeManager.CreateInstance(iron);
+            producingPower = FMODUnity.RuntimeManager.CreateInstance(power);
+
             Close();
+        }
+
+        private void Update()
+        {
+            if (machine != null)
+                progressBar.value = 1f - (machine.machineProduction.productionTimer / machine.machineProduction.CurrentUpgrade().producingTime);
         }
 
         public void Open(Machine _machine)
         {
             SetData(_machine);
             menuPanel.SetActive(true);
+
+            if (this.gameObject.tag == "Iron_Refinery")
+            {
+                Debug.Log("Sound");
+                producingIron.start();
+            }else if(this.gameObject.tag == "Power_Generator")
+            {
+                Debug.Log("Sound");
+                producingPower.start();
+            }
+          
         }
+
         public void Close()
         {
+            producingPower.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            producingIron.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             menuPanel.SetActive(false);
         }
 
@@ -49,56 +82,15 @@ namespace TransportLogistiek
         {
             machine = _machine;
 
-            isOnToggle.isOn = machine.machineProduction.isOn;
+            machineStateToggle.isOn = machine.machineProduction.machineState == MachineStateEnum.On;
             UpdateTexts();
         }
 
-        //private void FixedUpdate()
-        //{
-        //    if (machine == null) return;
-
-        //    //CheckProduction();
-        //    CheckUpgrade();
-        //}
-
-        //private void CheckProduction()
-        //{
-        //    // Not producing at the moment
-        //    if (machine.producing == null)
-        //    {
-        //        // Has enough resources for the production
-        //        if (PlayerData.Instance().HasSufficientUnits(machine.unitInput, machine.upgrades[machine.machineLevel].neededAmount))
-        //        {
-        //            produceButtonImage.color = active;
-        //            return;
-        //        }
-
-        //        produceButtonImage.color = inActive;
-        //    }
-        //    else produceButtonImage.color = inActive;
-        //}
-
-        //private void CheckUpgrade()
-        //{
-        //    // Has enough resources for the production
-        //    if (PlayerData.Instance().HasSufficientUnits(UnitEnum.Ijzer, machine.upgrades[machine.machineLevel].ironUpgradeCosts))
-        //    {
-        //        upgradeButtonImage.color = active;
-        //        return;
-        //    }
-
-        //    upgradeButtonImage.color = inActive;
-        //}
-
-
-        //public void Produce()
-        //{
-        //    machine.StartProduction();
-        //}
-
-        public void MachineOnOff()
+        public void MachineState()
         {
-            machine.machineProduction.isOn = isOnToggle.isOn;
+            machine.machineProduction.machineState = machineStateToggle.isOn ? MachineStateEnum.On : MachineStateEnum.Off;
+
+            MachineStateChangeEvent.CallEvent();
         }
 
         public void Upgrade()
@@ -106,22 +98,52 @@ namespace TransportLogistiek
             machine.machineUpgrade.Upgrade();
         }
 
+        private MachineUpgrade.MachineUpgrades CurrentUpgrade(int addIndex = 0)
+        {
+            return machine.machineUpgrade.upgrades[machine.machineUpgrade.machineLevel];
+        }
+
         private void UpdateTexts()
         {
-            nameText.text = machine.machineType.ToString();
-
-            var upgrade = machine.machineUpgrade.upgrades[machine.machineUpgrade.machineLevel];
-
-            //Produce
-            produceText.text = "Produces " + upgrade.unitOutputAmount + " " + machine.machineProduction.unitOutput.ToString() + " using\n" + upgrade.unitInputAmount + " " + machine.machineProduction.unitInput.ToString()+ " and " + (upgrade.energyConsumptionPerSec * upgrade.producingTime).ToString("F1") + " energy";
-
-            //if (machine.machineProduction.unitInput != UnitEnum.Geen)
-            //{
-            //    produceText.text += "\nRequires: " + upgrade.unitInputAmount + " '" + machine.machineProduction.unitInput.ToString() + "'";
-            //}
+            nameText.text = machine.name;
 
             //Upgrade
-            upgradeText.text = upgrade.unitOutputAmount + " " + machine.machineProduction.unitOutput.ToString() + " per production \nRequires " + upgrade.ironUpgradeCosts + " Iron";
+
+            upgradeInfoText.text = "Current level: " + (machine.machineUpgrade.machineLevel + 1) + "\nUpgrade costs: " + CurrentUpgrade().ironUpgradeCosts + " Iron";
+
+            string _infoText = "";
+
+            // Needs
+            _infoText += "Requires: ";
+
+            if (CurrentUpgrade().energyConsumptionPerSec > 0f)
+                _infoText += "\n- Energy";
+
+            if (CurrentUpgrade().unitInput.Length != 0)
+            {
+                for (int i = 0; i < CurrentUpgrade().unitInput.Length; i++)
+                {
+                    _infoText += ("\n- " + CurrentUpgrade().unitInput[i].amount + " " + CurrentUpgrade().unitInput[i].unit);
+                }
+            }
+            else
+            {
+                if (CurrentUpgrade().energyConsumptionPerSec == 0f)
+                    _infoText += "\n- Nothing";
+            }
+
+            // Produces
+            if (CurrentUpgrade().unitOutput.Length != 0)
+            {
+                _infoText += "\nProduces: ";
+
+                for (int i = 0; i < CurrentUpgrade().unitOutput.Length; i++)
+                {
+                    _infoText += ("\n- " + CurrentUpgrade().unitOutput[i].amount + " " + CurrentUpgrade().unitOutput[i].unit);
+                }
+            }
+
+            infoText.text = machine.infoText + "\n\n" + _infoText;
         }
     }
 }
